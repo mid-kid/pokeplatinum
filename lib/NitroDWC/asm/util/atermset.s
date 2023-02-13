@@ -1,12 +1,10 @@
 	.include "macros/function.inc"
 	.include "include/atermset.inc"
 
-	
-
 	.extern WCM_Bssid_Any
 	.extern WCM_Essid_Any
-	.text
 
+	.text
 
 	thumb_func_start ov18_0222754C
 ov18_0222754C: ; 0x0222754C

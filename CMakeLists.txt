@@ -49,11 +49,21 @@ add_library(game_c OBJECT ${GAME_C_SOURCES})
 file(GLOB_RECURSE GAME_ASM_SOURCES LIST_DIRECTORIES true asm/*.s)
 add_library(game_asm OBJECT ${GAME_ASM_SOURCES})
 
+# lib files
+add_subdirectory(lib/gamespy)
+add_subdirectory(lib/libVCT)
+add_subdirectory(lib/NitroDWC)
+add_subdirectory(lib/NitroSDK)
+add_subdirectory(lib/NitroSystem)
+add_subdirectory(lib/NitroWiFi)
+add_subdirectory(lib/syscall)
+
 # ================== INCLUDE PATHS ========================
 
 include_directories(
     include
     include/global
+    asm
 )
 
 include_directories(
@@ -68,4 +78,4 @@ include_directories(
     lib/libVCT/include
 )
 
-target_include_directories(game_asm PRIVATE asm)
+#target_include_directories(game_asm PRIVATE asm)
