@@ -3,6 +3,9 @@
 cmake_minimum_required(VERSION 3.13)
 project(pokeplatinum C ASM)
 
+# Import ExternalProject module for superbuilds
+include(ExternalProject)
+
 # ==================== COMPILER FLAGS =====================
 
 set(OPT_FLAGS "-O4,p")
@@ -59,17 +62,18 @@ include_directories(
 
 # ================== SOURCE PATHS ========================
 
-# The game's source files have to be configured as object
-# libraries, because the linker is invoked separately
+## The game's source files have to be configured as object
+## libraries, because the linker is invoked separately
 
-## Game C files
+# Game C files
 file(GLOB_RECURSE GAME_C_SOURCES LIST_DIRECTORIES true src/*.c)
 add_library(game_c OBJECT ${GAME_C_SOURCES})
 
-## Game ASM files
+# Game ASM files
 file(GLOB_RECURSE GAME_ASM_SOURCES LIST_DIRECTORIES true asm/*.s)
 add_library(game_asm OBJECT ${GAME_ASM_SOURCES})
 
+# Additional flag for compiling game c sources - forces thumb code
 target_compile_options(game_c PUBLIC -include global/thumb.h)
 
 # ================== SUBDIRECTORIES ======================
@@ -84,6 +88,17 @@ add_subdirectory(lib/NitroWiFi)
 add_subdirectory(lib/syscall)
 
 # ================== TOOLS ========================
+
+# Build tools
+ExternalProject_Add(pokeplatinum_tools
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/tools
+    BINARY_DIR ${CMAKE_SOURCE_DIR}/tools/bin
+    CMAKE_GENERATOR Ninja
+    CMAKE_ARGS
+        -DCMAKE_C_COMPILER=gcc
+    INSTALL_COMMAND true
+    BUILD_ALWAYS ON
+)
 
 set(TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tools)
 
@@ -104,29 +119,26 @@ set(MWLDARM_RESPONSE_TEMPLATE ${CMAKE_CURRENT_SOURCE_DIR}/mwldarm.response.templ
 set(MAIN_LCF ${CMAKE_CURRENT_BINARY_DIR}/main.lcf)
 set(MAIN_RESPONSE ${CMAKE_CURRENT_BINARY_DIR}/main.response)
 
-# Run makelcf.exe
-
-## Build main.lcf
+# Run makelcf.exe to build main.lcf
 add_custom_target(
     main.lcf ALL
     ${WINE} ${MAKELCF} ${MAIN_LSF} ${ARM9_LCF_TEMPLATE} ${MAIN_LCF}
     COMMENT "Generating main.lcf"
 )
 
-## Build main.response
+# Run makelcf.exe to build main.response
 add_custom_target(
     main.response ALL
     ${WINE} ${MAKELCF} ${MAIN_LSF} ${MWLDARM_RESPONSE_TEMPLATE} ${MAIN_RESPONSE}
     COMMENT "Generating main.response"
 )
 
-# Run mwldarm to create main.sbin and response
 set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Exception_Table_Index, Unk_02101B00, Unk_02101CE4")
-#set(MWLD_FLAGS "-w on -proc arm946e -nopic -nopid -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc -force_active ${FORCE_ACTIVE_SYMBOLS} -Llib -lsyscall -nostdlib")
 set(MWLDARM ${toolchain_dir}/mwldarm.exe)
 set(MAIN_NEF ${CMAKE_CURRENT_BINARY_DIR}/main/main.nef)
 set(CRT0_OBJ "lib/NitroSDK/CMakeFiles/NitroSDK.dir/src/init/crt0.c.obj")
 
+# Run mwldarm to create main.sbin and response
 add_custom_target(
     main.nef ALL
     mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/main
@@ -147,10 +159,10 @@ add_custom_target(
 # Import filesystem names
 include(files/CMakeLists.txt)
 
-# Run makerom.exe
 set(ROM_RSF ${CMAKE_CURRENT_SOURCE_DIR}/platinum.us/rom.rsf)
 set(POKEPLATINUM_NDS ${CMAKE_CURRENT_BINARY_DIR}/pokeplatinum.us.nds)
 
+# Run makerom.exe
 add_custom_target(
     pokeplatinum.us.nds ALL
     cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH ${LIB_FLAGS} -DBUILD_DIR=build/main -DNITROFS_FILES=${NITROFS_FILES} -DTITLE_NAME=\"POKEMON;PL\" -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
@@ -162,11 +174,11 @@ add_custom_target(
 add_custom_target(
     fixrom ALL
     cd ${CMAKE_CURRENT_SOURCE_DIR} && tools/bin/fixrom/fixrom build/pokeplatinum.us.nds --secure-crc 0xF8B8 --game-code CPUE
-    DEPENDS pokeplatinum.us.nds
+    DEPENDS pokeplatinum.us.nds pokeplatinum_tools
     COMMENT "Running fixrom"
 )
 
-# Check sha1
+# sha1 checks
 add_custom_target(
     sha1check ALL
     cd ${CMAKE_CURRENT_SOURCE_DIR} && sha1sum -c platinum.us/sbin.sha1

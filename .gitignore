@@ -1,9 +1,6 @@
 # Object files
 *.nds
 
-# Compilers
-tools/mwccarm/**
-
 # SDK
 tools/bin/**
 
@@ -20,6 +17,10 @@ cmake-build-debug/
 
 # Tool executables
 *.exe
+!tools/cw/*
+!makebanner.exe
+!makelcf.exe
+!makerom.exe
 
 # Generated files
 *.4bpp
