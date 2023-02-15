@@ -163,3 +163,11 @@ add_custom_target(
     DEPENDS pokeplatinum.us.nds
     COMMENT "Running fixrom"
 )
+
+# Check sha1
+add_custom_target(
+    sha1check ALL
+    cd ${CMAKE_CURRENT_SOURCE_DIR} && sha1sum -c platinum.us/sbin.sha1
+    COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR} && sha1sum -c platinum.us/rom.sha1
+    DEPENDS fixrom
+)
