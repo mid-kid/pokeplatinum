@@ -22,7 +22,7 @@ set(
 
 set(
     GAME_FLAGS
-    "-DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH -include global/thumb.h -prefix global.mch"
+    "-DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH -prefix global.mch"
 )
 
 set(
@@ -34,12 +34,33 @@ set(
 set(CMAKE_C_FLAGS "${C_FLAGS} ${GAME_FLAGS} ${LIB_FLAGS}")
 set(CMAKE_ASM_FLAGS "${ASM_FLAGS}")
 
+# ================== INCLUDE PATHS ========================
+
+# Game include paths
+include_directories(
+    include
+    include/global
+    asm
+)
+
+# Lib include paths
+include_directories(
+    lib/msl/include
+    lib/msl/include/MSL_C
+    lib/msl/include/MSL_Extras
+    lib/NitroSDK/include
+    lib/NitroSystem/include
+    lib/NitroDWC/include
+    lib/NitroDWC/include/base
+    lib/NitroWiFi/include
+    lib/gamespy/include
+    lib/libVCT/include
+)
+
 # ================== SOURCE PATHS ========================
 
-#########################  NOTE  #########################
 # The game's source files have to be configured as object
-# libraries, because the linker is invoked by 'makerom'
-##########################################################
+# libraries, because the linker is invoked separately
 
 ## Game C files
 file(GLOB_RECURSE GAME_C_SOURCES LIST_DIRECTORIES true src/*.c)
@@ -49,7 +70,10 @@ add_library(game_c OBJECT ${GAME_C_SOURCES})
 file(GLOB_RECURSE GAME_ASM_SOURCES LIST_DIRECTORIES true asm/*.s)
 add_library(game_asm OBJECT ${GAME_ASM_SOURCES})
 
-# lib files
+target_compile_options(game_c PUBLIC -include global/thumb.h)
+
+# ================== SUBDIRECTORIES ======================
+
 add_subdirectory(lib/msl)
 add_subdirectory(lib/gamespy)
 add_subdirectory(lib/libVCT)
@@ -58,28 +82,6 @@ add_subdirectory(lib/NitroSDK)
 add_subdirectory(lib/NitroSystem)
 add_subdirectory(lib/NitroWiFi)
 add_subdirectory(lib/syscall)
-
-# ================== INCLUDE PATHS ========================
-
-include_directories(
-    include
-    include/global
-    asm
-)
-
-include_directories(
-    lib/NitroDWC/include
-    lib/NitroDWC/include/base
-    lib/NitroSDK/include
-    lib/NitroSystem/include
-    lib/NitroWiFi/include
-    lib/msl/include
-    lib/msl/include/MSL_C
-    lib/gamespy/include
-    lib/libVCT/include
-)
-
-#target_include_directories(game_asm PRIVATE asm)
 
 # ================== TOOLS ========================
 
