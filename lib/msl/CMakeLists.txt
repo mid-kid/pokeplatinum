@@ -4,6 +4,14 @@ file(GLOB_RECURSE C_SOURCES LIST_DIRECTORIES true src/*.c)
 
 add_library(msl OBJECT ${C_SOURCES} ${ASM_SOURCES})
 
+string(
+    REPLACE
+    "-include global/thumb.h"
+    ""
+    CMAKE_C_FLAGS
+    ${CMAKE_C_FLAGS}
+)
+
 target_include_directories(
     msl PRIVATE
     ${CMAKE_SOURCE_DIR}/asm

@@ -121,7 +121,7 @@ add_custom_target(
 # Run mwldarm to create main.sbin and response
 set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Exception_Table_Index, Unk_02101B00, Unk_02101CE4")
 #set(MWLD_FLAGS "-w on -proc arm946e -nopic -nopid -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc -force_active ${FORCE_ACTIVE_SYMBOLS} -Llib -lsyscall -nostdlib")
-set(MWLDARM ${toolchain_dir}/ARM_Tools/mwldarm.exe)
+set(MWLDARM ${toolchain_dir}/mwldarm.exe)
 set(MAIN_NEF ${CMAKE_CURRENT_BINARY_DIR}/main/main.nef)
 set(CRT0_OBJ "lib/NitroSDK/CMakeFiles/NitroSDK.dir/src/init/crt0.c.obj")
 
@@ -151,10 +151,9 @@ set(POKEPLATINUM_NDS ${CMAKE_CURRENT_BINARY_DIR}/pokeplatinum.us.nds)
 
 add_custom_target(
     pokeplatinum.us.nds ALL
-    cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH -DBUILD_DIR=build/main -DNITROFS_FILES=${NITROFS_FILES} -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
+    cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH ${LIB_FLAGS} -DBUILD_DIR=build/main -DNITROFS_FILES=${NITROFS_FILES} -DTITLE_NAME=\"POKEMON;PL\" -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
     DEPENDS main.nef
     COMMENT "Building ROM image"
-    VERBATIM
 )
 
 # Run fixrom
