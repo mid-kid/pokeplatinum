@@ -10,6 +10,7 @@ endif()
 
 set(toolchain_dir "${CMAKE_CURRENT_LIST_DIR}")
 
+
 # Set mwccarm as the compiler and mwasmarm as the assembler
 set(CMAKE_C_COMPILER "${toolchain_dir}/mwccarm.exe")
 set(CMAKE_CXX_COMPILER "${toolchain_dir}/mwccarm.exe")
@@ -17,9 +18,7 @@ set(CMAKE_ASM_COMPILER "${toolchain_dir}/mwasmarm.exe")
 
 # This has to be set to avoid CMake compaining about
 # mwccarm not being able to compile a simple C program
-set(CMAKE_C_COMPILER_WORKS 1)
-set(CMAKE_CXX_COMPILER_WORKS 1)
-set(CMAKE_ASM_COMPILER_WORKS 1)
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # Prefix tool calls with wine
 set(CMAKE_C_COMPILER_LAUNCHER   ${WINE})
