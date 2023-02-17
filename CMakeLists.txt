@@ -6,6 +6,9 @@ project(pokeplatinum C ASM)
 # Import ExternalProject module for superbuilds
 include(ExternalProject)
 
+# Output sbin files to build/main
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/main)
+
 # ==================== COMPILER FLAGS =====================
 
 set(OPT_FLAGS "-O4,p")
@@ -60,21 +63,35 @@ include_directories(
     lib/libVCT/include
 )
 
-# ================== SOURCE PATHS ========================
+# ================== MAIN EXECUTABLE ========================
 
-## The game's source files have to be configured as object
-## libraries, because the linker is invoked separately
-
-# Game C files
 file(GLOB_RECURSE GAME_C_SOURCES LIST_DIRECTORIES true src/*.c)
-add_library(game_c OBJECT ${GAME_C_SOURCES})
-
-# Game ASM files
 file(GLOB_RECURSE GAME_ASM_SOURCES LIST_DIRECTORIES true asm/*.s)
-add_library(game_asm OBJECT ${GAME_ASM_SOURCES})
+add_executable(main ${GAME_C_SOURCES} ${GAME_ASM_SOURCES})
 
-# Additional flag for compiling game c sources - forces thumb code
-target_compile_options(game_c PUBLIC -include global/thumb.h)
+# Additional flag for compiling game c sources - forces thumb codegen
+target_compile_options(main PUBLIC -include global/thumb.h)
+
+# Linker flags
+target_link_options(
+    main
+    PUBLIC -w on
+    PUBLIC -proc arm946e
+    PUBLIC -nopic
+    PUBLIC -nopid
+    PUBLIC -interworking
+    PUBLIC -map closure,unused
+    PUBLIC -symtab sort
+    PUBLIC -msgstyle gcc
+    PUBLIC -nostdlib
+    PUBLIC -m _start
+)
+
+target_link_directories(main PUBLIC build/lib/syscall)
+target_link_libraries(main PUBLIC libsyscall.a)
+
+set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Exception_Table_Index, Unk_02101B00, Unk_02101CE4")
+target_link_options(main PUBLIC -force_active ${FORCE_ACTIVE_SYMBOLS})
 
 # ================== SUBDIRECTORIES ======================
 
@@ -101,14 +118,13 @@ ExternalProject_Add(pokeplatinum_tools
 )
 
 set(TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tools)
-
 set(MAKEBANNER "${TOOLS_DIR}/maketools/makebanner.exe")
 set(MAKELCF "${TOOLS_DIR}/maketools/makelcf.exe")
 set(MAKEROM "${TOOLS_DIR}/maketools/makerom.exe")
 set(FIXROM "${TOOLS_DIR}/maketools/fixrom")
 set(NTR_MERGE_ELF_SH "${TOOLS_DIR}/ntr_merge_elf/ntr_merge_elf.sh")
 
-# =============== CUSTOM TARGETS ==================
+# =============== CUSTOM TARGETS ===================
 
 set(PLATINUM_US_DIR ${CMAKE_CURRENT_SOURCE_DIR}/platinum.us)
 
@@ -133,20 +149,17 @@ add_custom_target(
     COMMENT "Generating main.response"
 )
 
-set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Exception_Table_Index, Unk_02101B00, Unk_02101CE4")
-set(MWLDARM ${toolchain_dir}/mwldarm.exe)
-set(MAIN_NEF ${CMAKE_CURRENT_BINARY_DIR}/main/main.nef)
+# Set main.lcf and main.response as dependencies for the 'main' executable
+add_dependencies(main gamespy libVCT NitroSDK NitroDWC NitroSystem NitroWiFi syscall)
+set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.lcf)
+set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.response)
+
 set(CRT0_OBJ "lib/NitroSDK/CMakeFiles/NitroSDK.dir/src/init/crt0.c.obj")
 
-# Run mwldarm to create main.sbin and response
-add_custom_target(
-    main.nef ALL
-    mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/main
-    COMMAND ${WINE} ${MWLDARM} -w on -proc arm946e -nopic -nopid -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc -force_active ${FORCE_ACTIVE_SYMBOLS} -Llib/syscall -lsyscall -nostdlib -o ${MAIN_NEF} ${MAIN_LCF} @${MAIN_RESPONSE} ${CRT0_OBJ}
-    DEPENDS main.lcf main.response game_c game_asm msl gamespy libVCT NitroSDK NitroDWC NitroSystem NitroWiFi syscall
-    COMMENT "Building sbin files"
-    VERBATIM
-)
+# Pass main.lcf, main.response and crt0.obj to the linker
+target_link_options(main PUBLIC ${MAIN_LCF})
+target_link_options(main PUBLIC @${MAIN_RESPONSE})
+target_link_options(main PUBLIC ${CRT0_OBJ})
 
 # Run ntr_merge_elf.sh
 #add_custom_target(
@@ -166,7 +179,7 @@ set(POKEPLATINUM_NDS ${CMAKE_CURRENT_BINARY_DIR}/pokeplatinum.us.nds)
 add_custom_target(
     pokeplatinum.us.nds ALL
     cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH ${LIB_FLAGS} -DBUILD_DIR=build/main -DNITROFS_FILES=${NITROFS_FILES} -DTITLE_NAME=\"POKEMON;PL\" -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
-    DEPENDS main.nef
+    DEPENDS main
     COMMENT "Building ROM image"
 )
 

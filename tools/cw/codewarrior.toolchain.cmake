@@ -15,6 +15,7 @@ set(toolchain_dir "${CMAKE_CURRENT_LIST_DIR}")
 set(CMAKE_C_COMPILER "${toolchain_dir}/mwccarm.exe")
 set(CMAKE_CXX_COMPILER "${toolchain_dir}/mwccarm.exe")
 set(CMAKE_ASM_COMPILER "${toolchain_dir}/mwasmarm.exe") 
+set(CMAKE_C_LINKER "${toolchain_dir}/mwldarm.exe")
 
 # This has to be set to avoid CMake compaining about
 # mwccarm not being able to compile a simple C program
@@ -27,6 +28,9 @@ set(CMAKE_CXX_COMPILER_LAUNCHER ${WINE})
 # Need to hardcode ${WINE} in assembler build definition since
 # CMAKE_<LANG>_COMPILER_LAUNCHER is not supported for ASM 
 set(CMAKE_ASM_COMPILE_OBJECT "${WINE} ${CMAKE_ASM_COMPILER} <DEFINES> <INCLUDES> -o <OBJECT> -c <FLAGS> <SOURCE>")
+
+# Configure executable linking behavior
+set(CMAKE_C_LINK_EXECUTABLE "${WINE} ${CMAKE_C_LINKER} <LINK_LIBRARIES> <LINK_FLAGS> -o <TARGET>.nef")
  
 # Set mwldarm as archiver tool
 #set(CMAKE_AR "${toolchain_dir}/ARM_Tools/mwldarm.exe")
