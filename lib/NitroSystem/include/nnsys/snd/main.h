@@ -22,11 +22,12 @@ BOOL NNS_SndReadDriverChannelInfo(int chNo, SNDChannelInfo * info);
 BOOL NNSi_SndReadDriverPlayerInfo(int playerNo, SNDPlayerInfo * info);
 BOOL NNSi_SndReadDriverTrackInfo(int playerNo, int trackNo, SNDTrackInfo * info);
 
-NNS_SND_INLINE void NNS_SndBeginSleep (void)
-{
+NNS_SND_INLINE void NNS_SndBeginSleep(void) {
+
 }
-NNS_SND_INLINE void NNS_SndEndSleep (void)
-{
+
+NNS_SND_INLINE void NNS_SndEndSleep(void) {
+
 }
 
 #ifdef __cplusplus

@@ -37,25 +37,13 @@ typedef struct {
     u32 fileImage;
 } NNSFndArchive;
 
-BOOL NNS_FndMountArchive(
-    NNSFndArchive * archive,
-    const char * arcName,
-    void * arcBinary);
+BOOL NNS_FndMountArchive(NNSFndArchive * archive, const char * arcName, void * arcBinary);
+BOOL NNS_FndUnmountArchive(NNSFndArchive * archive);
 
-BOOL NNS_FndUnmountArchive(
-    NNSFndArchive * archive);
+void * NNS_FndGetArchiveFileByName(const char * path);
+void * NNS_FndGetArchiveFileByIndex(NNSFndArchive * archive, u32 index);
 
-void * NNS_FndGetArchiveFileByName(
-    const char * path);
-
-void * NNS_FndGetArchiveFileByIndex(
-    NNSFndArchive * archive,
-    u32 index);
-
-BOOL NNS_FndOpenArchiveFileByIndex(
-    FSFile * file,
-    NNSFndArchive * archive,
-    u32 index);
+BOOL NNS_FndOpenArchiveFileByIndex(FSFile * file, NNSFndArchive * archive, u32 index);
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,6 @@
 #ifndef NNS_G2D_OAM_TYPES_H_
 #define NNS_G2D_OAM_TYPES_H_
+
 #include <nitro.h>
 
 #ifdef __cplusplus
@@ -23,4 +24,4 @@ typedef struct NNSG2dOamDataChunk {
 }
 #endif
 
-#endif
+#endif // NNS_G2D_OAM_TYPES_H_

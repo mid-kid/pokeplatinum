@@ -6,11 +6,9 @@
 #include <nnsys/snd/seqdata.h>
 
 #ifndef NNS_FROM_TOOL
-
-#include <nitro/os.h>
-#include <nitro/fs.h>
-#include <nnsys/snd/heap.h>
-
+    #include <nitro/os.h>
+    #include <nitro/fs.h>
+    #include <nnsys/snd/heap.h>
 #endif
 
 #ifdef __cplusplus
@@ -19,38 +17,33 @@ extern "C" {
 
 #define NNS_SND_ARC_SUPPORTED_FILE_VERSION 0x0006
 
-#define NNS_SND_ARC_LOAD_SEQ (1 << 0)
-#define NNS_SND_ARC_LOAD_BANK (1 << 1)
-#define NNS_SND_ARC_LOAD_WAVE (1 << 2)
-#define NNS_SND_ARC_LOAD_SEQARC (1 << 3)
-#define NNS_SND_ARC_LOAD_ALL 0xff
+#define NNS_SND_ARC_LOAD_SEQ             (1 << 0)
+#define NNS_SND_ARC_LOAD_BANK            (1 << 1)
+#define NNS_SND_ARC_LOAD_WAVE            (1 << 2)
+#define NNS_SND_ARC_LOAD_SEQARC          (1 << 3)
+#define NNS_SND_ARC_LOAD_ALL             0xff
 
-#define NNS_SND_ARC_SIGNATURE_HEAD 'TADS'
-#define NNS_SND_ARC_SIGNATURE_INFO 'OFNI'
-#define NNS_SND_ARC_SIGNATURE_FAT ' TAF'
-#define NNS_SND_ARC_SIGNATURE_SYMB 'BMYS'
+#define NNS_SND_ARC_SIGNATURE_HEAD       'TADS'
+#define NNS_SND_ARC_SIGNATURE_INFO       'OFNI'
+#define NNS_SND_ARC_SIGNATURE_FAT        ' TAF'
+#define NNS_SND_ARC_SIGNATURE_SYMB       'BMYS'
 
-#define NNS_SND_ARC_INVALID_FILE_ID 0xffffffff
-
-#define NNS_SND_ARC_INVALID_WAVEARC_NO 0xffff
-
-#define NNS_SND_ARC_BANK_TO_WAVEARC_NUM 4
-
-#define NNS_SND_ARC_STRM_FORCE_STEREO (1 << 0)
-
-#define NNS_SND_ARC_WAVEARC_SINGLE_LOAD (1 << 0)
+#define NNS_SND_ARC_INVALID_FILE_ID      0xffffffff
+#define NNS_SND_ARC_INVALID_WAVEARC_NO   0xffff
+#define NNS_SND_ARC_BANK_TO_WAVEARC_NUM  4
+#define NNS_SND_ARC_STRM_FORCE_STEREO    (1 << 0)
+#define NNS_SND_ARC_WAVEARC_SINGLE_LOAD  (1 << 0)
 
 typedef enum NNSSndArcSndType {
     NNS_SNDARC_SNDTYPE_SEQ,
     NNS_SNDARC_SNDTYPE_BANK,
     NNS_SNDARC_SNDTYPE_WAVEARC,
     NNS_SNDARC_SNDTYPE_SEQARC,
-
     NNS_SNDARC_SNDTYPE_INVALID = 0xff
 } NNSSndArcSndType;
 
 #ifdef _MSC_VER
-#pragma warning( disable : 4200 )
+    #pragma warning( disable : 4200 )
 #endif
 
 typedef struct NNSSndArcSeqInfo {
@@ -64,7 +57,7 @@ typedef struct NNSSndArcSeqArcInfo {
 
 typedef struct NNSSndArcBankInfo {
     u32 fileId;
-    u16 waveArcNo[NNS_SND_ARC_BANK_TO_WAVEARC_NUM];
+    u16 waveArcNo[ NNS_SND_ARC_BANK_TO_WAVEARC_NUM ];
 } NNSSndArcBankInfo;
 
 typedef struct NNSSndArcWaveArcInfo {
@@ -89,7 +82,7 @@ typedef struct NNSSndArcPlayerInfo {
 
 typedef struct NNSSndArcStrmPlayerInfo {
     u8 numChannels;
-    u8 chNoList[2];
+    u8 chNoList[ 2 ];
 } NNSSndArcStrmPlayerInfo;
 
 typedef struct NNSSndArcGroupItem {
@@ -101,7 +94,7 @@ typedef struct NNSSndArcGroupItem {
 
 typedef struct NNSSndArcGroupInfo {
     u32 count;
-    struct NNSSndArcGroupItem item[0];
+    struct NNSSndArcGroupItem item[ 0 ];
 } NNSSndArcGroupInfo;
 
 typedef struct NNSSndArcSeqArcOffset {
@@ -128,14 +121,12 @@ typedef struct NNSSndArcFileInfo {
 
 typedef struct NNSSndArcFat {
     struct SNDBinaryBlockHeader blockHeader;
-
     u32 count;
     NNSSndArcFileInfo files[0];
 } NNSSndArcFat;
 
 typedef struct NNSSndArcInfo {
     struct SNDBinaryBlockHeader blockHeader;
-
     u32 seqOffset;
     u32 seqArcOffset;
     u32 bankOffset;
@@ -148,7 +139,6 @@ typedef struct NNSSndArcInfo {
 
 typedef struct NNSSndArcSymbol {
     struct SNDBinaryBlockHeader blockHeader;
-
     u32 seqOffset;
     u32 seqArcOffset;
     u32 bankOffset;
@@ -172,7 +162,7 @@ typedef struct NNSSndArcHeader {
 } NNSSndArcHeader;
 
 #ifdef _MSC_VER
-#pragma warning( default : 4200 )
+    #pragma warning( default : 4200 )
 #endif
 
 typedef struct NNSSndArc {
@@ -189,10 +179,11 @@ typedef struct NNSSndArc {
 } NNSSndArc;
 
 #ifndef NNS_FROM_TOOL
-void NNS_SndArcInit(NNSSndArc * arc, const char * filePath, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
-BOOL NNS_SndArcInitWithResult(NNSSndArc * arc, const char * filePath, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
-BOOL NNS_SndArcSetup(NNSSndArc * arc, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
+    void NNS_SndArcInit(NNSSndArc * arc, const char * filePath, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
+    BOOL NNS_SndArcInitWithResult(NNSSndArc * arc, const char * filePath, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
+    BOOL NNS_SndArcSetup(NNSSndArc * arc, NNSSndHeapHandle heap, BOOL symbolLoadFlag);
 #endif
+
 void NNS_SndArcInitOnMemory(NNSSndArc * arc, void * data);
 
 NNSSndArc * NNS_SndArcSetCurrent(NNSSndArc * arc);
@@ -219,9 +210,10 @@ u32 NNS_SndArcGetGroupCount(void);
 u32 NNS_SndArcGetSeqArcSeqCount(int seqArcNo);
 
 #ifndef NNS_FROM_TOOL
-s32 NNS_SndArcReadFile(u32 fileId, void * buffer, s32 size, s32 offset);
-FSFileID NNS_SndArcGetFileID(void);
+    s32 NNS_SndArcReadFile(u32 fileId, void * buffer, s32 size, s32 offset);
+    FSFileID NNS_SndArcGetFileID(void);
 #endif
+
 u32 NNS_SndArcGetFileSize(u32 fileId);
 u32 NNS_SndArcGetFileOffset(u32 fileId);
 void * NNS_SndArcGetFileAddress(u32 fileId);

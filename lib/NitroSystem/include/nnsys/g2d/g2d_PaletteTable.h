@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#define NNS_G2D_NUM_COLOR_PALETTE 16
+#define NNS_G2D_NUM_COLOR_PALETTE   16
 
 typedef struct NNSG2dPaletteSwapTable {
     u16 paletteIndex[NNS_G2D_NUM_COLOR_PALETTE];
@@ -22,4 +22,4 @@ u16 NNS_G2dGetPaletteTableValue(const NNSG2dPaletteSwapTable * pPlttTbl, u16 bef
 }
 #endif
 
-#endif
+#endif // NNS_G2D_PALETTETABLE_H_

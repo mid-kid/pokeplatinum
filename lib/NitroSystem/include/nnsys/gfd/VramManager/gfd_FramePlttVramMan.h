@@ -12,11 +12,10 @@ typedef struct NNSGfdFrmPlttVramState {
     u32 address[2];
 } NNSGfdFrmPlttVramState;
 
-typedef void (* NNSGfdFrmPlttVramDebugDumpCallBack)(u32 loAddr, u32 hiAddr, u32 szFree, u32 szTotal);
+typedef void (*NNSGfdFrmPlttVramDebugDumpCallBack)(u32 loAddr, u32 hiAddr, u32 szFree, u32 szTotal);
 
 void NNS_GfdDumpFrmPlttVramManager();
 void NNS_GfdDumpFrmPlttVramManagerEx(NNSGfdFrmPlttVramDebugDumpCallBack pFunc);
-
 void NNS_GfdInitFrmPlttVramManager(u32 szByte, BOOL useAsDefault);
 
 NNSGfdPlttKey NNS_GfdAllocFrmPlttVram(u32 szByte, BOOL b4Pltt, u32 bAllocFromLo);

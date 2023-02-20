@@ -3,6 +3,6 @@
 
 #include <nnsys/inline.h>
 
-#define NNS_SND_INLINE NNS_INLINE
+#define NNS_SND_INLINE  NNS_INLINE
 
 #endif

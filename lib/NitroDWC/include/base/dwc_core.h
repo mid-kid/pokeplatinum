@@ -1,9 +1,11 @@
+
 #ifndef DWC_CORE_H_
 #define DWC_CORE_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 
 #include <base/dwc_connectinet.h>
 #include <base/dwc_error.h>
@@ -24,8 +26,10 @@ extern "C" {
 #include <base/dwc_main.h>
 #endif
 
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+
+#endif 

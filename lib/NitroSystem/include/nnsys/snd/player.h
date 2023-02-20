@@ -19,14 +19,14 @@ extern "C" {
 #define NNS_SND_PLAYER_NO_MAX (NNS_SND_PLAYER_NUM - 1)
 
 #define NNS_SND_PLAYER_TRACK_PITCH_MIN -32768
-#define NNS_SND_PLAYER_TRACK_PITCH_MAX 32767
+#define NNS_SND_PLAYER_TRACK_PITCH_MAX  32767
 #define NNS_SND_PLAYER_TRACK_PAN_MIN -128
-#define NNS_SND_PLAYER_TRACK_PAN_MAX 127
-#define NNS_SND_PLAYER_TRACK_PAN_RANGE_MIN 0
-#define NNS_SND_PLAYER_TRACK_PAN_RANGE_MAX 127
+#define NNS_SND_PLAYER_TRACK_PAN_MAX  127
+#define NNS_SND_PLAYER_TRACK_PAN_RANGE_MIN    0
+#define NNS_SND_PLAYER_TRACK_PAN_RANGE_MAX  127
 #define NNS_SND_PLAYER_PRIO_MAX 127
 
-#define NNS_SND_PLAYER_SEQ_NO_MAX 0xffff
+#define NNS_SND_PLAYER_SEQ_NO_MAX       0xffff
 #define NNS_SND_PLAYER_SEQARC_INDEX_MAX 0xffff
 
 struct SNDBankData;
@@ -52,12 +52,12 @@ typedef enum NNSSndPlayerSeqType {
 } NNSSndPlayerSeqType;
 
 #if SDK_CURRENT_VERSION_NUMBER >= SDK_VERSION_NUMBER(3, 1, 0)
-typedef enum NNSSndSeqMute {
-    NNS_SND_SEQ_MUTE_OFF     = SND_SEQ_MUTE_OFF,
-    NNS_SND_SEQ_MUTE_NO_STOP = SND_SEQ_MUTE_NO_STOP,
-    NNS_SND_SEQ_MUTE_RELEASE = SND_SEQ_MUTE_RELEASE,
-    NNS_SND_SEQ_MUTE_STOP    = SND_SEQ_MUTE_STOP
-} NNSSndSeqMute;
+    typedef enum NNSSndSeqMute {
+        NNS_SND_SEQ_MUTE_OFF = SND_SEQ_MUTE_OFF,
+        NNS_SND_SEQ_MUTE_NO_STOP = SND_SEQ_MUTE_NO_STOP,
+        NNS_SND_SEQ_MUTE_RELEASE = SND_SEQ_MUTE_RELEASE,
+        NNS_SND_SEQ_MUTE_STOP = SND_SEQ_MUTE_STOP
+    } NNSSndSeqMute;
 #endif
 
 typedef struct NNSSndHandle {
@@ -71,23 +71,18 @@ typedef struct NNSSndSeqPlayer {
     NNSFndLink playerLink;
     NNSFndLink prioLink;
     NNSSndFader fader;
-
     u8 status;
     u8 startFlag;
     u8 pauseFlag;
     u8 prepareFlag;
-
     u32 commandTag;
-
     u16 seqType;
     u16 pad2;
     u16 seqNo;
     u16 seqArcIndex;
-
     u8 playerNo;
     u8 prio;
     s16 volume;
-
     u8 initVolume;
     u8 extVolume;
     u16 pad3_;
@@ -103,8 +98,7 @@ typedef struct NNSSndPlayer {
     u16 pad2_;
 } NNSSndPlayer;
 
-NNS_SND_INLINE BOOL NNS_SndHandleIsValid (const struct NNSSndHandle * handle)
-{
+NNS_SND_INLINE BOOL NNS_SndHandleIsValid(const struct NNSSndHandle * handle) {
     NNS_NULL_ASSERT(handle);
     return handle->player != NULL;
 }
@@ -128,9 +122,11 @@ void NNS_SndPlayerSetPlayerPriority(NNSSndHandle * handle, int priority);
 void NNS_SndPlayerSetChannelPriority(NNSSndHandle * handle, int priority);
 
 void NNS_SndPlayerSetTrackMute(NNSSndHandle * handle, u16 trackBitMask, BOOL flag);
+
 #if SDK_CURRENT_VERSION_NUMBER >= SDK_VERSION_NUMBER(3, 1, 0)
-void NNS_SndPlayerSetTrackMuteEx(NNSSndHandle * handle, u16 trackBitMask, NNSSndSeqMute mute);
+    void NNS_SndPlayerSetTrackMuteEx(NNSSndHandle * handle, u16 trackBitMask, NNSSndSeqMute mute);
 #endif
+
 void NNS_SndPlayerSetTrackVolume(NNSSndHandle * handle, u16 trackBitMask, int volume);
 void NNS_SndPlayerSetTrackPitch(NNSSndHandle * handle, u16 trackBitMask, int pitch);
 void NNS_SndPlayerSetTrackPan(NNSSndHandle * handle, u16 trackBitMask, int pan);
@@ -171,12 +167,7 @@ void NNS_SndHandleReleaseSeq(NNSSndHandle * handle);
 void NNSi_SndPlayerInit(void);
 void NNSi_SndPlayerMain(void);
 
-void NNSi_SndPlayerStartSeq(
-    NNSSndSeqPlayer * seqPlayer,
-    const void * seqDataBase,
-    u32 seqDataOffset,
-    const struct SNDBankData * bank
-);
+void NNSi_SndPlayerStartSeq(NNSSndSeqPlayer * seqPlayer, const void * seqDataBase, u32 seqDataOffset, const struct SNDBankData * bank);
 
 NNSSndSeqPlayer * NNSi_SndPlayerAllocSeqPlayer(NNSSndHandle * handle, int playerNo, int prio);
 void NNSi_SndPlayerFreeSeqPlayer(NNSSndSeqPlayer * seqPlayer);

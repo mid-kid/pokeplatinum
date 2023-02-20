@@ -1,16 +1,19 @@
+
 #ifndef NITRO_TYPES_H_
 #define NITRO_TYPES_H_
+
 
 #ifdef __MWERKS__
 #pragma enumsalwaysint on
 #endif
 
-#define SDK_LITTLE_ENDIAN
-#define SDK_IS_LITTLE_ENDIAN 1
-#define SDK_IS_BIG_ENDIAN 0
 
-#ifdef SDK_ASM
-#else
+#define SDK_LITTLE_ENDIAN
+#define SDK_IS_LITTLE_ENDIAN	1
+#define SDK_IS_BIG_ENDIAN	0
+
+#ifdef  SDK_ASM
+#else  
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,6 +52,8 @@ typedef volatile s64 vs64;
 typedef float f32;
 typedef volatile f32 vf32;
 
+
+
 typedef u8 REGType8;
 typedef u16 REGType16;
 typedef u32 REGType32;
@@ -59,54 +64,62 @@ typedef vu16 REGType16v;
 typedef vu32 REGType32v;
 typedef vu64 REGType64v;
 
+
 #ifndef SDK_BOOL_ALREADY_DEFINED_
 #ifndef BOOL
 typedef int BOOL;
-#endif
-#endif
+#endif 
+#endif 
 
 #ifndef TRUE
 
-#define TRUE 1
-#endif
+#define TRUE                    1
+#endif 
 
 #ifndef FALSE
-#define FALSE 0
-#endif
+#define FALSE                   0
+#endif 
 
-// already defined in an MSL header
+
 #ifndef NULL
-#ifdef __cplusplus
-#define NULL 0
-#else
-#define NULL ((void *)0)
-#endif
-#endif
+#ifdef  __cplusplus
+#define NULL                    0
+#else  
+#define NULL                ((void *)0)
+#endif 
+#endif 
 
-#if defined(SDK_CW) || defined(__MWERKS__)
+
+#if     defined(SDK_CW) || defined(__MWERKS__)
 #ifndef ATTRIBUTE_ALIGN
 #define ATTRIBUTE_ALIGN(num) __attribute__ ((aligned(num)))
 #endif
 #endif
 
-#if defined(SDK_CW) || defined(__MWERKS__)
-#define SDK_WEAK_SYMBOL __declspec(weak)
-#elif defined(SDK_PRODG)
+
+#if     defined(SDK_CW) || defined(__MWERKS__)
+#define SDK_WEAK_SYMBOL  __declspec(weak)
+#elif   defined(SDK_PRODG)
 #define SDK_WEAK_SYMBOL
 #endif
 
-#ifdef SDK_CW_FORCE_EXPORT_SUPPORT
-#define SDK_FORCE_EXPORT __declspec(force_export)
+
+#ifdef  SDK_CW_FORCE_EXPORT_SUPPORT
+#define SDK_FORCE_EXPORT   __declspec(force_export)
 #else
-#define SDK_FORCE_EXPORT
+#define SDK_FORCE_EXPORT   
 #endif
 
 #ifdef __cplusplus
-}
+} 
 #endif
-#endif
+#endif 
 
-#define SDK_INLINE static inline
+
+
+#define SDK_INLINE      static inline
 #define SDK_DECL_INLINE static
+
+
 
 #endif

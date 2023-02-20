@@ -1,5 +1,9 @@
+
 #ifndef NITRO_WIN32_H_
 #define NITRO_WIN32_H_
+
+
+
 
 #ifndef SDK_FROM_TOOL
 #define SDK_FROM_TOOL
@@ -13,12 +17,13 @@
 #define SDK_HAS_NO_LONG_LONG_INT_
 #endif
 
+
 #ifndef SDK_ARM7
 #define SDK_ARM9
 #endif
 
-#ifdef _MSC_VER
-#pragma warning(disable:4201)
+#ifdef  _MSC_VER
+#pragma warning(disable:4201)          
 #endif
 
 #include <nitro/gx.h>
@@ -31,8 +36,8 @@
 
 #include <nitro/os/ARM9/argument.h>
 
-#ifdef _MSC_VER
+#ifdef  _MSC_VER
 #pragma warning(default:4201)
 #endif
 
-#endif
+#endif 

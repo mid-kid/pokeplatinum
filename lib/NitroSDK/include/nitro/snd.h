@@ -1,5 +1,9 @@
+
+
 #ifndef NITRO_SND_H_
 #define NITRO_SND_H_
+
+
 
 #if !(defined(SDK_WIN32) || defined(SDK_FROM_TOOL))
 
@@ -12,9 +16,9 @@
 
 #include <nitro/snd/ARM9/interface.h>
 
-#endif
+#endif 
 
-#endif
+#endif 
 
 #include <nitro/snd/common/work.h>
 #include <nitro/snd/common/channel.h>
@@ -27,4 +31,4 @@
 #include <nitro/snd/common/midiplayer.h>
 #include <nitro/snd/common/util.h>
 
-#endif
+#endif 

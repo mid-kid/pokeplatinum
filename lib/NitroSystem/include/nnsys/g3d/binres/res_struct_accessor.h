@@ -2,7 +2,6 @@
 #define NNSG3D_BINRES_RES_STRUCT_ACCESSOR_H_
 
 #include <nnsys/g3d/binres/res_struct.h>
-
 #include <nnsys/g3d/binres/res_struct_accessor_anm.h>
 
 #ifdef __cplusplus
@@ -16,23 +15,18 @@ void * NNS_G3dGetResDataByName(const NNSG3dResDict * dict, const NNSG3dResName *
 int NNS_G3dGetResDictIdxByName(const NNSG3dResDict * dict, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetTexNameByIdx(const NNSG3dResTex * tex, u32 idx);
-NNS_G3D_RES_INLINE int NNS_G3dGetTexIdxByName(const NNSG3dResTex * tex,
-                                              const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetTexIdxByName(const NNSG3dResTex * tex, const NNSG3dResName * name);
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetPlttNameByIdx(const NNSG3dResTex * tex, u32 idx);
-NNS_G3D_RES_INLINE int NNS_G3dGetPlttIdxByName(const NNSG3dResTex * tex,
-                                               const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetPlttIdxByName(const NNSG3dResTex * tex, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetNodeNameByIdx(const NNSG3dResNodeInfo * nodeinfo, u32 idx);
-NNS_G3D_RES_INLINE int NNS_G3dGetNodeIdxByName(const NNSG3dResNodeInfo * nodeinfo,
-                                               const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetNodeIdxByName(const NNSG3dResNodeInfo * nodeinfo, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetMatNameByIdx(const NNSG3dResMat * mat, u32 idx);
-NNS_G3D_RES_INLINE int NNS_G3dGetMatIdxByName(const NNSG3dResMat * mat,
-                                              const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetMatIdxByName(const NNSG3dResMat * mat, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetShpNameByIdx(const NNSG3dResShp * shp, u32 idx);
-NNS_G3D_RES_INLINE int NNS_G3dGetShpIdxByName(const NNSG3dResShp * shp,
-                                              const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetShpIdxByName(const NNSG3dResShp * shp, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE NNSG3dResMdlInfo * NNS_G3dGetMdlInfo(const NNSG3dResMdl * mdl);
 NNS_G3D_RES_INLINE NNSG3dResNodeInfo * NNS_G3dGetNodeInfo(const NNSG3dResMdl * mdl);
@@ -42,10 +36,8 @@ NNS_G3D_RES_INLINE NNSG3dResShp * NNS_G3dGetShp(const NNSG3dResMdl * mdl);
 
 NNS_G3D_RES_INLINE NNSG3dResMdl * NNS_G3dGetMdlByIdx(const NNSG3dResMdlSet * mdlSet, u32 idx);
 NNS_G3D_RES_INLINE const NNSG3dResName * NNS_G3dGetMdlNameByIdx(const NNSG3dResMdlSet * mdlSet, u32 idx);
-NNS_G3D_RES_INLINE NNSG3dResMdl * NNS_G3dGetMdlByName(const NNSG3dResMdlSet * mdlSet,
-                                                      const NNSG3dResName * name);
-NNS_G3D_RES_INLINE int NNS_G3dGetMdlIdxByName(const NNSG3dResMdlSet * mdlSet,
-                                              const NNSG3dResName * name);
+NNS_G3D_RES_INLINE NNSG3dResMdl * NNS_G3dGetMdlByName(const NNSG3dResMdlSet * mdlSet, const NNSG3dResName * name);
+NNS_G3D_RES_INLINE int NNS_G3dGetMdlIdxByName(const NNSG3dResMdlSet * mdlSet, const NNSG3dResName * name);
 
 NNS_G3D_RES_INLINE NNSG3dResMdlSet * NNS_G3dCheckMdlSet(const NNSG3dResDataBlockHeader * dataBlkHeader);
 NNS_G3D_RES_INLINE NNSG3dResTex * NNS_G3dCheckTex(const NNSG3dResDataBlockHeader * dataBlkHeader);
@@ -53,8 +45,7 @@ NNS_G3D_RES_INLINE NNSG3dResTex * NNS_G3dCheckTex(const NNSG3dResDataBlockHeader
 NNSG3dResMdlSet * NNS_G3dGetMdlSet(const NNSG3dResFileHeader * header);
 NNSG3dResTex * NNS_G3dGetTex(const NNSG3dResFileHeader * header);
 
-NNSG3dResDataBlockHeader *
-NNS_G3dGetDataBlockHeaderByIdx(const NNSG3dResFileHeader * header, u32 idx);
+NNSG3dResDataBlockHeader * NNS_G3dGetDataBlockHeaderByIdx(const NNSG3dResFileHeader * header, u32 idx);
 
 NNS_G3D_RES_INLINE NNSG3dResNodeData * NNS_G3dGetNodeDataByIdx(const NNSG3dResNodeInfo * info, u32 idx);
 NNS_G3D_RES_INLINE NNSG3dResMatData * NNS_G3dGetMatDataByIdx(const NNSG3dResMat * mat, u32 idx);

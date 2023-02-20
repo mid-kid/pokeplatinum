@@ -1,5 +1,8 @@
+
+
 #ifndef NITRO_PXI_H_
 #define NITRO_PXI_H_
+
 
 #include <nitro/pxi/common/init.h>
 #include <nitro/pxi/common/compparam.h>
@@ -10,12 +13,12 @@
 extern "C" {
 #endif
 
-#ifdef SDK_ARM9
-#else
+#ifdef	SDK_ARM9
+#else  
 #endif
 
 #ifdef __cplusplus
-}
+} 
 #endif
 
 #endif

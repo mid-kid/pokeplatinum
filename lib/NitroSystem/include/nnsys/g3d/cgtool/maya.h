@@ -10,12 +10,9 @@ extern "C" {
 #endif
 
 #ifndef NNS_G3D_MAYA_DISABLE
-void NNSi_G3dSendJointSRTMaya(const NNSG3dJntAnmResult * result);
-void NNSi_G3dGetJointScaleMaya(NNSG3dJntAnmResult * pResult,
-                               const fx32 * p,
-                               const u8 * cmd,
-                               u32 srtflag);
-void NNSi_G3dSendTexSRTMaya(const NNSG3dMatAnmResult * anm);
+    void NNSi_G3dSendJointSRTMaya(const NNSG3dJntAnmResult * result);
+    void NNSi_G3dGetJointScaleMaya(NNSG3dJntAnmResult * pResult, const fx32 * p, const u8 * cmd, u32 srtflag);
+    void NNSi_G3dSendTexSRTMaya(const NNSG3dMatAnmResult * anm);
 #endif
 
 #ifdef __cplusplus

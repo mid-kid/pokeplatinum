@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_OS_H_
 #define NITRO_OS_H_
 
@@ -29,11 +31,12 @@ extern "C" {
 #include <nitro/os/common/entropy.h>
 #include <nitro/os/common/systemWork.h>
 
+
 #include <nitro/os/common/profile.h>
 #include <nitro/os/common/callTrace.h>
 #include <nitro/os/common/functionCost.h>
 
-#ifdef SDK_ARM9
+#ifdef	SDK_ARM9
 #include <nitro/os/ARM9/protectionRegion.h>
 #include <nitro/os/ARM9/tcm.h>
 #include <nitro/os/ARM9/cache.h>
@@ -41,11 +44,12 @@ extern "C" {
 #include <nitro/os/ARM9/vramExclusive.h>
 #include <nitro/os/ARM9/china.h>
 #include <nitro/os/ARM9/argument.h>
-#else
+#else  
 #endif
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

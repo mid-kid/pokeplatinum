@@ -1,3 +1,4 @@
+
 #ifndef EXT_H_
 #define EXT_H_
 
@@ -8,8 +9,9 @@ extern "C" {
 #include <nitro/ext/ext_scrntest.h>
 #include <nitro/ext/ext_keycontrol.h>
 
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif 

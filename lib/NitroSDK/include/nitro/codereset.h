@@ -1,5 +1,6 @@
-#ifdef SDK_CODE_ARM
+
+#ifdef	SDK_CODE_ARM                   
 #include <nitro/code32.h>
-#else
+#else  
 #include <nitro/code16.h>
 #endif

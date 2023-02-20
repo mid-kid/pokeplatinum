@@ -9,7 +9,6 @@ extern "C" {
 
 typedef struct NNSG3dGeBuffer_ {
     u32 idx;
-
     u32 data[NNS_G3D_SIZE_COMBUFFER];
 } NNSG3dGeBuffer;
 
@@ -33,38 +32,12 @@ NNS_G3D_INLINE void NNS_G3dGeVtxXY(fx16 x, fx16 y);
 NNS_G3D_INLINE void NNS_G3dGeVtxXZ(fx16 x, fx16 z);
 NNS_G3D_INLINE void NNS_G3dGeVtxYZ(fx16 y, fx16 z);
 NNS_G3D_INLINE void NNS_G3dGeVtxDiff(fx16 x, fx16 y, fx16 z);
-NNS_G3D_INLINE void NNS_G3dGePolygonAttr(
-    int light,
-    GXPolygonMode polyMode,
-    GXCull cullMode,
-    int polygonID,
-    int alpha,
-    int misc
-);
-NNS_G3D_INLINE void NNS_G3dGeTexImageParam(
-    GXTexFmt texFmt,
-    GXTexGen texGen,
-    GXTexSizeS s,
-    GXTexSizeT t,
-    GXTexRepeat repeat,
-    GXTexFlip flip,
-    GXTexPlttColor0 pltt0,
-    u32 addr
-);
+NNS_G3D_INLINE void NNS_G3dGePolygonAttr(int light, GXPolygonMode polyMode, GXCull cullMode, int polygonID, int alpha, int misc);
+NNS_G3D_INLINE void NNS_G3dGeTexImageParam(GXTexFmt texFmt, GXTexGen texGen, GXTexSizeS s, GXTexSizeT t, GXTexRepeat repeat, GXTexFlip flip, GXTexPlttColor0 pltt0, u32 addr);
 NNS_G3D_INLINE void NNS_G3dGeTexPlttBase(u32 addr, GXTexFmt texfmt);
-NNS_G3D_INLINE void NNS_G3dGeMaterialColorDiffAmb(
-    GXRgb diffuse,
-    GXRgb ambient,
-    BOOL IsSetVtxColor);
-NNS_G3D_INLINE void NNS_G3dGeMaterialColorSpecEmi(
-    GXRgb specular,
-    GXRgb emission,
-    BOOL IsShininess);
-NNS_G3D_INLINE void NNS_G3dGeLightVector(
-    GXLightId lightID,
-    fx16 x,
-    fx16 y,
-    fx16 z);
+NNS_G3D_INLINE void NNS_G3dGeMaterialColorDiffAmb(GXRgb diffuse, GXRgb ambient, BOOL IsSetVtxColor);
+NNS_G3D_INLINE void NNS_G3dGeMaterialColorSpecEmi(GXRgb specular, GXRgb emission, BOOL IsShininess);
+NNS_G3D_INLINE void NNS_G3dGeLightVector(GXLightId lightID, fx16 x, fx16 y, fx16 z);
 NNS_G3D_INLINE void NNS_G3dGeLightColor(GXLightId lightID, GXRgb rgb);
 NNS_G3D_INLINE void NNS_G3dGeBegin(GXBegin primitive);
 NNS_G3D_INLINE void NNS_G3dGeEnd(void);
@@ -98,4 +71,4 @@ void NNS_G3dGeUseFastDma(BOOL cond);
 
 #include <nnsys/g3d/gecom_inline.h>
 
-#endif
+#endif // NNSG3D_GECOM_H_

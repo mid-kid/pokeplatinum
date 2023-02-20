@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_GX_H_
 #define NITRO_GX_H_
 
@@ -5,7 +7,8 @@
 extern "C" {
 #endif
 
-#ifdef SDK_ARM9
+
+#ifdef  SDK_ARM9
 
 #include <nitro/gx/g3.h>
 #include <nitro/gx/g3x.h>
@@ -19,26 +22,35 @@ extern "C" {
 #include <nitro/gx/g3b.h>
 #include <nitro/gx/g3c.h>
 
+
+
 #if !(defined(SDK_WIN32) || defined(SDK_FROM_TOOL))
 
 #include <nitro/gx/g3imm.h>
 #include <nitro/gx/g3_util.h>
 #include <nitro/gx/gx_load.h>
 
-#endif
+#endif 
 
-#else
+
+#else  
+
+
 
 #if !(defined(SDK_WIN32) || defined(SDK_FROM_TOOL))
 
 #include <nitro/gx/gx_sp.h>
 
-#endif
+#endif 
 
 #endif
+
+
+
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

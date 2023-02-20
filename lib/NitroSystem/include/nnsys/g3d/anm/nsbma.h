@@ -11,13 +11,8 @@ extern "C" {
 #endif
 
 #ifndef NNS_G3D_NSBMA_DISABLE
-void NNSi_G3dAnmObjInitNsBma(NNSG3dAnmObj * pAnmObj,
-                             void * pResAnm,
-                             const NNSG3dResMdl * pResMdl);
-
-void NNSi_G3dAnmCalcNsBma(NNSG3dMatAnmResult * pResult,
-                          const NNSG3dAnmObj * pAnmObj,
-                          u32 dataIdx);
+    void NNSi_G3dAnmObjInitNsBma(NNSG3dAnmObj * pAnmObj, void * pResAnm, const NNSG3dResMdl * pResMdl);
+    void NNSi_G3dAnmCalcNsBma(NNSG3dMatAnmResult * pResult, const NNSG3dAnmObj * pAnmObj, u32 dataIdx);
 #endif
 
 #ifdef __cplusplus

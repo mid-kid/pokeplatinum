@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_STD_H_
 #define NITRO_STD_H_
 
@@ -8,8 +10,10 @@
 extern "C" {
 #endif
 
+
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

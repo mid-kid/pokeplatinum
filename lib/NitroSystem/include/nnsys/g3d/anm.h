@@ -11,9 +11,7 @@ extern "C" {
 
 struct NNSG3dResMdl_;
 
-typedef void (* NNSG3dAnimInitFunc)(NNSG3dAnmObj *,
-                                    void *,
-                                    const NNSG3dResMdl *);
+typedef void (*NNSG3dAnimInitFunc)(NNSG3dAnmObj *, void *, const NNSG3dResMdl *);
 
 typedef struct {
     u8 category0;
@@ -26,7 +24,6 @@ typedef enum {
     NNS_G3D_MATANM_RESULTFLAG_TEXMTX_SCALEONE  = 0x00000001,
     NNS_G3D_MATANM_RESULTFLAG_TEXMTX_ROTZERO   = 0x00000002,
     NNS_G3D_MATANM_RESULTFLAG_TEXMTX_TRANSZERO = 0x00000004,
-
     NNS_G3D_MATANM_RESULTFLAG_TEXMTX_SET       = 0x00000008,
     NNS_G3D_MATANM_RESULTFLAG_TEXMTX_MULT      = 0x00000010,
     NNS_G3D_MATANM_RESULTFLAG_WIREFRAME        = 0x00000020
@@ -39,22 +36,20 @@ typedef struct NNSG3dMatAnmResult_ {
     u32 prmPolygonAttr;
     u32 prmTexImage;
     u32 prmTexPltt;
-
     fx32 scaleS, scaleT;
     fx16 sinR, cosR;
     fx32 transS, transT;
-
     u16 origWidth, origHeight;
     fx32 magW, magH;
 } NNSG3dMatAnmResult;
 
 typedef enum {
-    NNS_G3D_JNTANM_RESULTFLAG_SCALE_ONE      = 0x00000001,
-    NNS_G3D_JNTANM_RESULTFLAG_ROT_ZERO       = 0x00000002,
-    NNS_G3D_JNTANM_RESULTFLAG_TRANS_ZERO     = 0x00000004,
-    NNS_G3D_JNTANM_RESULTFLAG_SCALEEX0_ONE   = 0x00000008,
-    NNS_G3D_JNTANM_RESULTFLAG_SCALEEX1_ONE   = 0x00000010,
-    NNS_G3D_JNTANM_RESULTFLAG_MAYA_SSC       = 0x00000020
+    NNS_G3D_JNTANM_RESULTFLAG_SCALE_ONE    = 0x00000001,
+    NNS_G3D_JNTANM_RESULTFLAG_ROT_ZERO     = 0x00000002,
+    NNS_G3D_JNTANM_RESULTFLAG_TRANS_ZERO   = 0x00000004,
+    NNS_G3D_JNTANM_RESULTFLAG_SCALEEX0_ONE = 0x00000008,
+    NNS_G3D_JNTANM_RESULTFLAG_SCALEEX1_ONE = 0x00000010,
+    NNS_G3D_JNTANM_RESULTFLAG_MAYA_SSC     = 0x00000020
 } NNSG3dJntAnmResultFlag;
 
 typedef struct NNSG3dJntAnmResult_ {
@@ -70,29 +65,13 @@ typedef struct NNSG3dVisAnmResult_ {
     BOOL isVisible;
 } NNSG3dVisAnmResult;
 
-typedef void (* NNSG3dFuncAnmMat)(NNSG3dMatAnmResult *,
-                                  const NNSG3dAnmObj *,
-                                  u32);
+typedef void (*NNSG3dFuncAnmMat)(NNSG3dMatAnmResult *, const NNSG3dAnmObj *, u32);
+typedef void (*NNSG3dFuncAnmJnt)(NNSG3dJntAnmResult *, const NNSG3dAnmObj *, u32);
+typedef void (*NNSG3dFuncAnmVis)(NNSG3dVisAnmResult *, const NNSG3dAnmObj *, u32);
 
-typedef void (* NNSG3dFuncAnmJnt)(NNSG3dJntAnmResult *,
-                                  const NNSG3dAnmObj *,
-                                  u32);
-
-typedef void (* NNSG3dFuncAnmVis)(NNSG3dVisAnmResult *,
-                                  const NNSG3dAnmObj *,
-                                  u32);
-
-BOOL NNSi_G3dAnmBlendMat(NNSG3dMatAnmResult * pResult,
-                         const NNSG3dAnmObj * pAnmObj,
-                         u32 matID);
-
-BOOL NNSi_G3dAnmBlendJnt(NNSG3dJntAnmResult *,
-                         const NNSG3dAnmObj *,
-                         u32);
-
-BOOL NNSi_G3dAnmBlendVis(NNSG3dVisAnmResult *,
-                         const NNSG3dAnmObj *,
-                         u32);
+BOOL NNSi_G3dAnmBlendMat(NNSG3dMatAnmResult * pResult, const NNSG3dAnmObj * pAnmObj, u32 matID);
+BOOL NNSi_G3dAnmBlendJnt(NNSG3dJntAnmResult *, const NNSG3dAnmObj *, u32);
+BOOL NNSi_G3dAnmBlendVis(NNSG3dVisAnmResult *, const NNSG3dAnmObj *, u32);
 
 extern NNSG3dFuncAnmBlendMat NNS_G3dFuncBlendMatDefault;
 extern NNSG3dFuncAnmBlendJnt NNS_G3dFuncBlendJntDefault;
@@ -111,4 +90,4 @@ extern NNSG3dAnmObjInitFunc NNS_G3dAnmObjInitFuncArray[NNS_G3D_ANMFMT_MAX];
 }
 #endif
 
-#endif
+#endif // NNSG3D_ANM_H_

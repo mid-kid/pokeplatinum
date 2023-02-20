@@ -1,8 +1,11 @@
+
+
 #ifndef NITRO_CARD_H_
 #define NITRO_CARD_H_
 
 #include <nitro/misc.h>
 #include <nitro/types.h>
+
 
 #include <nitro/card/common.h>
 #include <nitro/card/eeprom.h>

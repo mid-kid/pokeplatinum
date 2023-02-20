@@ -13,7 +13,7 @@ extern "C" {
 
 struct NNSSndHeap;
 
-typedef void (* NNSSndHeapDisposeCallback)(void * mem, u32 size, u32 data1, u32 data2);
+typedef void (*NNSSndHeapDisposeCallback)(void * mem, u32 size, u32 data1, u32 data2);
 typedef struct NNSSndHeap * NNSSndHeapHandle;
 
 NNSSndHeapHandle NNS_SndHeapCreate(void * startAddress, u32 size);

@@ -1,7 +1,7 @@
 # ===================== PROJECT INFO ======================
 
 cmake_minimum_required(VERSION 3.13)
-project(pokeplatinum C ASM)
+project(pokeplatinum C CXX ASM)
 
 # Import ExternalProject module for superbuilds
 include(ExternalProject)
@@ -18,7 +18,7 @@ set(PROC_S  "arm5TE")
 
 set(
     C_FLAGS
-    "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath"
+    "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath"
 )
 
 set(
@@ -51,16 +51,15 @@ include_directories(
 
 # Lib include paths
 include_directories(
-    lib/msl/include
-    lib/msl/include/MSL_C
-    lib/msl/include/MSL_Extras
     lib/NitroSDK/include
     lib/NitroSystem/include
     lib/NitroDWC/include
     lib/NitroDWC/include/base
+    lib/NitroDWC/include/gs
     lib/NitroWiFi/include
-    lib/gamespy/include
     lib/libVCT/include
+    lib/ppwlobby/include
+    lib/ilobby/include
 )
 
 # ================== MAIN EXECUTABLE ========================
@@ -87,22 +86,114 @@ target_link_options(
     PUBLIC -m _start
 )
 
-target_link_directories(main PUBLIC build/lib/syscall)
-target_link_libraries(main PUBLIC libsyscall.a)
-
-set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Exception_Table_Index, Unk_02101B00, Unk_02101CE4")
+set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Unk_02101B00, Unk_02101CE4")
 target_link_options(main PUBLIC -force_active ${FORCE_ACTIVE_SYMBOLS})
 
 # ================== SUBDIRECTORIES ======================
 
-add_subdirectory(lib/msl)
-add_subdirectory(lib/gamespy)
+add_subdirectory(lib/cw)
+target_link_libraries(
+    main PUBLIC
+    MSL_C_NITRO_Ai_LE
+	MSL_Extras_NITRO_Ai_LE
+	MSL_CPP_NITRO_Ai_LE
+	FP_fastI_v5t_LE
+	NITRO_Runtime_Ai_LE
+)
+
 add_subdirectory(lib/libVCT)
+target_link_libraries(
+    main PUBLIC
+    libvct
+)
+
 add_subdirectory(lib/NitroDWC)
+target_link_libraries(
+    main PUBLIC
+    libdwcac
+    libdwcaccount
+    libdwcauth
+    libdwcbase
+    libdwcbm
+    libdwcnd
+    libdwcnhttp
+    libdwcutil
+    libdwcgschat
+    libdwcgscommon
+    libdwcgsghttp
+    libdwcgsgp
+    libdwcgsgstats
+    libdwcgsgt2
+    libdwcgsnatneg
+    libdwcgspinger
+    libdwcgspt
+    libdwcgsqr2
+    libdwcgsserverbrowsing
+)
+
 add_subdirectory(lib/NitroSDK)
+target_link_libraries(
+    main PUBLIC
+    libcard
+    libcp
+    libctrdg
+    libdgt
+    libe3s
+    libenv
+    libext
+    libfs
+    libfx
+    libgx
+    libmath
+    libmb
+    libmi
+    libos
+    libprc
+    libpxi
+    librtc
+    libsnd
+    libspi
+    libstd
+    libstubscw
+    libutest
+    libwbt
+    libwfs
+    libwm
+    libwvr
+)
+
 add_subdirectory(lib/NitroSystem)
+target_link_libraries(
+    main PUBLIC
+	libnnsfnd
+	libnnsgfd
+	libnnsg2d
+	libnnsg3d
+	libnnssnd
+	libnnsmcs
+)
+
 add_subdirectory(lib/NitroWiFi)
+target_link_libraries(
+    main PUBLIC
+	libsoc
+	libcps
+	libssl
+	libwcm
+	libstubsmd5
+)
+
 add_subdirectory(lib/syscall)
+target_link_libraries(main PUBLIC libsyscall.a)
+
+add_subdirectory(lib/crypto)
+target_link_libraries(main PUBLIC libcrypto.a)
+
+add_subdirectory(lib/ilobby)
+target_link_libraries(main PUBLIC libdwcilobby.a)
+
+add_subdirectory(lib/ppwlobby)
+target_link_libraries(main PUBLIC libdwcpplobby.a)
 
 # ================== TOOLS ========================
 
@@ -150,7 +241,6 @@ add_custom_target(
 )
 
 # Set main.lcf and main.response as dependencies for the 'main' executable
-add_dependencies(main gamespy libVCT NitroSDK NitroDWC NitroSystem NitroWiFi syscall)
 set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.lcf)
 set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.response)
 

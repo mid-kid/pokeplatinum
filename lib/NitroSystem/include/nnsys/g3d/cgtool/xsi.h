@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 #ifndef NNS_G3D_XSI_DISABLE
-void NNSi_G3dSendTexSRTXsi(const NNSG3dMatAnmResult * anm);
+    void NNSi_G3dSendTexSRTXsi(const NNSG3dMatAnmResult * anm);
 #endif
 
 #ifdef __cplusplus

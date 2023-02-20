@@ -9,10 +9,7 @@ extern "C" {
 #endif
 
 void NNSi_G3dSendJointSRTBasic(const NNSG3dJntAnmResult * result);
-void NNSi_G3dGetJointScaleBasic(NNSG3dJntAnmResult * pResult,
-                                const fx32 * p,
-                                const u8 * cmd,
-                                u32 srtflag);
+void NNSi_G3dGetJointScaleBasic(NNSG3dJntAnmResult * pResult, const fx32 * p, const u8 * cmd, u32 srtflag);
 
 #ifdef __cplusplus
 }

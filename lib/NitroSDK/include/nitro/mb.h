@@ -1,3 +1,6 @@
+
+
+
 #ifndef NITRO_MB_H_
 #define NITRO_MB_H_
 
@@ -11,7 +14,8 @@ extern "C" {
 #include <nitro/mb/mb_fake_child.h>
 
 #ifdef __cplusplus
-}
+} 
 #endif
 
-#endif
+
+#endif 

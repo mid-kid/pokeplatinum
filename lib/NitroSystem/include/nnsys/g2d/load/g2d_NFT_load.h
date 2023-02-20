@@ -11,15 +11,14 @@ extern "C" {
 #endif
 
 BOOL NNSi_G2dGetUnpackedFont(void * pNftrFile, NNSG2dFontInformation ** ppFont);
-
 void NNSi_G2dUnpackNFT(NNSG2dBinaryFileHeader * pHeader);
 
 #ifdef SDK_FINALROM
-NNS_G2D_INLINE void NNS_G2dPrintFont (const NNSG2dFont *)
-{
-}
+    NNS_G2D_INLINE void NNS_G2dPrintFont(const NNSG2dFont *) {
+
+    }
 #else
-void NNS_G2dPrintFont(const NNSG2dFont * pFont);
+    void NNS_G2dPrintFont(const NNSG2dFont * pFont);
 #endif
 
 #ifdef __cplusplus

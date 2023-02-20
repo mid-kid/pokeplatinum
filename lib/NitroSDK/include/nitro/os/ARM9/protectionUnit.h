@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_OS_PROTECTIONUNIT_H_
 #define NITRO_OS_PROTECTIONUNIT_H_
 
@@ -8,12 +10,19 @@ extern "C" {
 #include <nitro/misc.h>
 #include <nitro/types.h>
 
-void OS_EnableProtectionUnit(void);
 
-void OS_DisableProtectionUnit(void);
+
+
+
+
+void    OS_EnableProtectionUnit(void);
+
+
+void    OS_DisableProtectionUnit(void);
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

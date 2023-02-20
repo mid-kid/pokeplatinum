@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_SND_COMMON_COMMAND_H_
 #define NITRO_SND_COMMON_COMMAND_H_
 
@@ -7,11 +9,16 @@
 extern "C" {
 #endif
 
-#define SND_COMMAND_NOBLOCK 0
-#define SND_COMMAND_BLOCK (1 << 0)
-#define SND_COMMAND_IMMEDIATE (1 << 1)
+	
 
-typedef enum SNDCommandID {
+#define SND_COMMAND_NOBLOCK     0
+#define SND_COMMAND_BLOCK     ( 1 << 0 )
+#define SND_COMMAND_IMMEDIATE ( 1 << 1 )
+
+	
+
+typedef enum SNDCommandID
+{
     SND_COMMAND_START_SEQ,
     SND_COMMAND_STOP_SEQ,
     SND_COMMAND_PREPARE_SEQ,
@@ -46,43 +53,51 @@ typedef enum SNDCommandID {
     SND_COMMAND_INVALIDATE_BANK,
     SND_COMMAND_INVALIDATE_WAVE,
     SND_COMMAND_READ_DRIVER_INFO
-} SNDCommandID;
+}
+SNDCommandID;
 
-typedef struct SNDCommand {
-    struct SNDCommand * next;
+	
+
+typedef struct SNDCommand
+{
+    struct SNDCommand *next;
     SNDCommandID id;
-    u32 arg[4];
-} SNDCommand;
+    u32     arg[4];
+}
+SNDCommand;
 
-void SND_CommandInit(void);
+	
+
+void    SND_CommandInit(void);
 
 #ifdef SDK_ARM9
 
-struct SNDCommand * SND_AllocCommand(u32 flags);
-void SND_PushCommand(struct SNDCommand * command);
+struct SNDCommand *SND_AllocCommand(u32 flags);
+void    SND_PushCommand(struct SNDCommand *command);
 
-const SNDCommand * SND_RecvCommandReply(u32 flags);
+const SNDCommand *SND_RecvCommandReply(u32 flags);
 
-BOOL SND_FlushCommand(u32 flags);
+BOOL    SND_FlushCommand(u32 flags);
 
-void SND_WaitForCommandProc(u32 tag);
-void SND_WaitForFreeCommand(int count);
+void    SND_WaitForCommandProc(u32 tag);
+void    SND_WaitForFreeCommand(int count);
 
-u32 SND_GetCurrentCommandTag(void);
-BOOL SND_IsFinishedCommandTag(u32 tag);
+u32     SND_GetCurrentCommandTag(void);
+BOOL    SND_IsFinishedCommandTag(u32 tag);
 
-int SND_CountFreeCommand(void);
-int SND_CountReservedCommand(void);
-int SND_CountWaitingCommand(void);
 
-#else
+int     SND_CountFreeCommand(void);
+int     SND_CountReservedCommand(void);
+int     SND_CountWaitingCommand(void);
 
-void SND_CommandProc(void);
+#else  
 
-#endif
+void    SND_CommandProc(void);
+
+#endif 
 
 #ifdef __cplusplus
-}
+} 
 #endif
 
-#endif
+#endif 

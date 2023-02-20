@@ -1,23 +1,31 @@
+
 #ifndef NITRO_H_
 #define NITRO_H_
 
-#ifdef SDK_ASM
+#ifdef  SDK_ASM
 #include <nitro/spec.h>
 #include <nitro/types.h>
 #include <nitro/memorymap.h>
 #include <nitro/hw/common/armArch.h>
-#else
-#ifdef __MWERKS__
-#  ifdef __cplusplus
-#    ifndef __embedded_cplusplus
+#else  
+
+
+
+
+
+
+
+#ifdef        __MWERKS__
+#  ifdef      __cplusplus
+#    ifndef   __embedded_cplusplus
 #      define __embedded_cplusplus 0
 #    endif
-#    ifndef __VEC__
-#      define __VEC__ 0
+#    ifndef   __VEC__
+#      define __VEC__			0
 #    endif
 #  endif
-#  if !defined(_MSL_USE_INLINE) && __option(dont_inline)
-#  define _MSL_USE_INLINE 0
+#  if         !defined(_MSL_USE_INLINE) && __option(dont_inline)
+#  define     _MSL_USE_INLINE		0
 #  endif
 #endif
 
@@ -41,12 +49,14 @@
 #include <nitro/rtc.h>
 #include <nitro/gx.h>
 #include <nitro/wm.h>
+#include <nitro/wvr.h>
 #include <nitro/ctrdg.h>
 #include <nitro/math.h>
 #include <nitro/utest.h>
 #include <nitro/std.h>
 
-#ifdef SDK_ARM9
+#ifdef  SDK_ARM9
+
 #include <nitro/fx/fx.h>
 #include <nitro/fx/fx_const.h>
 #include <nitro/fx/fx_trig.h>
@@ -60,9 +70,15 @@
 #include <nitro/wfs.h>
 #include <nitro/env.h>
 #include <nitro/vib.h>
-#else
+
+#else  
+
 #include <nitro/exi.h>
-#endif
+
+#endif 
+#endif 
+
+
 #endif
 
-#endif // NITRO_H_
+

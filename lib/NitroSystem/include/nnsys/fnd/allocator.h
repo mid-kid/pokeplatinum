@@ -8,15 +8,8 @@ extern "C" {
 #endif
 
 typedef struct NNSFndAllocator NNSFndAllocator;
-
-typedef void *   (* NNSFndFuncAllocatorAlloc)(
-    NNSFndAllocator * pAllocator,
-    u32 size);
-
-typedef void (* NNSFndFuncAllocatorFree)(
-    NNSFndAllocator * pAllocator,
-    void * memBlock);
-
+typedef void * (*NNSFndFuncAllocatorAlloc)(NNSFndAllocator * pAllocator, u32 size);
+typedef void (*NNSFndFuncAllocatorFree)(NNSFndAllocator * pAllocator, void * memBlock);
 typedef struct NNSFndAllocatorFunc NNSFndAllocatorFunc;
 
 struct NNSFndAllocatorFunc {
@@ -31,32 +24,12 @@ struct NNSFndAllocator {
     u32 heapParam2;
 };
 
-void * NNS_FndAllocFromAllocator(
-    NNSFndAllocator * pAllocator,
-    u32 size);
-
-void NNS_FndFreeToAllocator(
-    NNSFndAllocator * pAllocator,
-    void * memBlock);
-
-void NNS_FndInitAllocatorForExpHeap(
-    NNSFndAllocator * pAllocator,
-    NNSFndHeapHandle heap,
-    int alignment);
-
-void NNS_FndInitAllocatorForFrmHeap(
-    NNSFndAllocator * pAllocator,
-    NNSFndHeapHandle heap,
-    int alignment);
-
-void NNS_FndInitAllocatorForUnitHeap(
-    NNSFndAllocator * pAllocator,
-    NNSFndHeapHandle heap);
-
-void NNS_FndInitAllocatorForSDKHeap(
-    NNSFndAllocator * pAllocator,
-    OSArenaId id,
-    OSHeapHandle heap);
+void * NNS_FndAllocFromAllocator(NNSFndAllocator * pAllocator, u32 size);
+void NNS_FndFreeToAllocator(NNSFndAllocator * pAllocator, void * memBlock);
+void NNS_FndInitAllocatorForExpHeap(NNSFndAllocator * pAllocator, NNSFndHeapHandle heap, int alignment);
+void NNS_FndInitAllocatorForFrmHeap(NNSFndAllocator * pAllocator, NNSFndHeapHandle heap, int alignment);
+void NNS_FndInitAllocatorForUnitHeap(NNSFndAllocator * pAllocator, NNSFndHeapHandle heap);
+void NNS_FndInitAllocatorForSDKHeap(NNSFndAllocator * pAllocator, OSArenaId id, OSHeapHandle heap);
 
 #ifdef __cplusplus
 }

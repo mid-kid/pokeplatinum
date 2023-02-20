@@ -15,9 +15,7 @@ typedef enum {
     NNS_G3D_GLB_FLAG_INVPROJ_UPTODATE       = 0x00000010,
     NNS_G3D_GLB_FLAG_INVBASECAMERA_UPTODATE = 0x00000020,
     NNS_G3D_GLB_FLAG_INVCAMERAPROJ_UPTODATE = 0x00000040,
-
     NNS_G3D_GLB_FLAG_BASECAMERA_UPTODATE    = 0x00000080,
-
     NNS_G3D_GLB_FLAG_SRTCAMERA_UPTODATE     = NNS_G3D_GLB_FLAG_BASECAMERA_UPTODATE,
     NNS_G3D_GLB_FLAG_FLUSH_ALT              = NNS_G3D_GLB_FLAG_FLUSH_WVP
 } NNSG3dGlbFlag;
@@ -26,46 +24,35 @@ typedef struct {
     u32 cmd0;
     u32 mtxmode_proj;
     MtxFx44 projMtx;
-
     u32 mtxmode_posvec;
     MtxFx43 cameraMtx;
-
     u32 cmd1;
     u32 lightVec[4];
-
     u32 cmd2;
     u32 prmMatColor0;
     u32 prmMatColor1;
     u32 prmPolygonAttr;
     u32 prmViewPort;
-
     u32 cmd3;
     u32 lightColor[4];
-
     u32 cmd4;
     MtxFx33 prmBaseRot;
     VecFx32 prmBaseTrans;
     VecFx32 prmBaseScale;
     u32 prmTexImageParam;
-
     u32 flag;
     MtxFx43 invCameraMtx;
     MtxFx43 srtCameraMtx;
     MtxFx43 invSrtCameraMtx;
-
     MtxFx43 invBaseMtx;
-
     MtxFx44 invProjMtx;
     MtxFx44 invCameraProjMtx;
-
     VecFx32 camPos;
     VecFx32 camUp;
     VecFx32 camTarget;
 } NNSG3dGlb;
 
-NNS_G3D_INLINE void NNS_G3dGlbLookAt(const VecFx32 * camPos,
-                                     const VecFx32 * camUp,
-                                     const VecFx32 * target);
+NNS_G3D_INLINE void NNS_G3dGlbLookAt(const VecFx32 * camPos, const VecFx32 * camUp, const VecFx32 * target);
 NNS_G3D_INLINE void NNS_G3dGlbFrustum(fx32 t, fx32 b, fx32 l, fx32 r, fx32 n, fx32 f);
 NNS_G3D_INLINE void NNS_G3dGlbFrustumW(fx32 t, fx32 b, fx32 l, fx32 r, fx32 n, fx32 f, fx32 scaleW);
 NNS_G3D_INLINE void NNS_G3dGlbPerspective(fx32 fovySin, fx32 fovyCos, fx32 aspect, fx32 n, fx32 f);
@@ -101,13 +88,8 @@ void NNS_G3dGlbLightVector(GXLightId lightID, fx16 x, fx16 y, fx16 z);
 void NNS_G3dGlbLightColor(GXLightId lightID, GXRgb rgb);
 void NNS_G3dGlbMaterialColorDiffAmb(GXRgb diffuse, GXRgb ambient, BOOL IsSetVtxColor);
 void NNS_G3dGlbMaterialColorSpecEmi(GXRgb specular, GXRgb emission, BOOL IsShininess);
-void NNS_G3dGlbPolygonAttr(int light,
-                           GXPolygonMode polyMode,
-                           GXCull cullMode,
-                           int polygonID,
-                           int alpha,
-                           int misc
-);
+void NNS_G3dGlbPolygonAttr(int light, GXPolygonMode polyMode, GXCull cullMode, int polygonID, int alpha, int misc);
+
 const MtxFx43 * NNS_G3dGlbGetInvV(void);
 const MtxFx43 * NNS_G3dGlbGetInvW(void);
 const MtxFx44 * NNS_G3dGlbGetInvP(void);

@@ -16,9 +16,9 @@ void NNS_G2dUnpackNCL(NNSG2dPaletteData * pPlttData);
 void NNSi_G2dUnpackNCLCmpInfo(NNSG2dPaletteCompressInfo * pPlttCmpData);
 
 #ifdef __SNC__
-NNS_G2D_DEBUG_FUNC_DECL_BEGIN void NNS_G2dPrintPaletteData (const NNSG2dPaletteData * p1) NNS_G2D_DEBUG_FUNC_DECL_END
+    NNS_G2D_DEBUG_FUNC_DECL_BEGIN void NNS_G2dPrintPaletteData(const NNSG2dPaletteData * p1) NNS_G2D_DEBUG_FUNC_DECL_END
 #else
-NNS_G2D_DEBUG_FUNC_DECL_BEGIN void NNS_G2dPrintPaletteData (const NNSG2dPaletteData *) NNS_G2D_DEBUG_FUNC_DECL_END
+    NNS_G2D_DEBUG_FUNC_DECL_BEGIN void NNS_G2dPrintPaletteData(const NNSG2dPaletteData *) NNS_G2D_DEBUG_FUNC_DECL_END
 #endif
 
 #ifdef __cplusplus

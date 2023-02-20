@@ -17,26 +17,23 @@ extern "C" {
 #include <nnsys/g2d/fmt/g2d_Font_data.h>
 #include <nnsys/g2d/g2d_config.h>
 
-#define NNS_G2D_UNPACK_OFFSET_PTR(ptr, baseOffs) (ptr) = (void *)((u32)(ptr) + (u32)baseOffs)
+#define NNS_G2D_UNPACK_OFFSET_PTR(ptr, baseOffs)  (ptr) = (void *)((u32)(ptr) + (u32)baseOffs)
 
 #ifdef SDK_FINALROM
-
-#ifdef __SNC__
-#define NNS_G2D_DEBUG_FUNC_DECL_BEGIN static inline
+    #ifdef __SNC__
+        #define NNS_G2D_DEBUG_FUNC_DECL_BEGIN   static inline
+    #else
+        #define NNS_G2D_DEBUG_FUNC_DECL_BEGIN   NNS_G2D_INLINE
+    #endif
+    
+    #define NNS_G2D_DEBUG_FUNC_DECL_END {}
 #else
-#define NNS_G2D_DEBUG_FUNC_DECL_BEGIN NNS_G2D_INLINE
-#endif
-#define NNS_G2D_DEBUG_FUNC_DECL_END {}
-
-#else
-
-#define NNS_G2D_DEBUG_FUNC_DECL_BEGIN
-#define NNS_G2D_DEBUG_FUNC_DECL_END ;
-
+    #define NNS_G2D_DEBUG_FUNC_DECL_BEGIN
+    #define NNS_G2D_DEBUG_FUNC_DECL_END ;
 #endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif // NNS_G2D_DATA_H_

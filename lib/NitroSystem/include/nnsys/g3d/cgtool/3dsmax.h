@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 #ifndef NNS_G3D_3DSMAX_DISABLE
-void NNSi_G3dSendTexSRT3dsMax(const NNSG3dMatAnmResult * anm);
+    void NNSi_G3dSendTexSRT3dsMax(const NNSG3dMatAnmResult * anm);
 #endif
 
 #ifdef __cplusplus

@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_MI_INIT_H_
 #define NITRO_MI_INIT_H_
 
@@ -7,10 +9,14 @@ extern "C" {
 
 #include <nitro/misc.h>
 
-void MI_Init(void);
+
+
+void    MI_Init(void);
+
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

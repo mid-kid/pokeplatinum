@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_OS_ENTROPY_H_
 #define NITRO_OS_ENTROPY_H_
 
@@ -11,10 +13,14 @@ extern "C" {
 
 #define OS_LOW_ENTROPY_DATA_SIZE 32
 
-void OS_GetLowEntropyData(u32 buffer[OS_LOW_ENTROPY_DATA_SIZE / sizeof(u32)]);
+
+void    OS_GetLowEntropyData(u32 buffer[OS_LOW_ENTROPY_DATA_SIZE / sizeof(u32)]);
+
+
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

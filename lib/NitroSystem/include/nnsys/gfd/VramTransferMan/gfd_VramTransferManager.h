@@ -13,7 +13,6 @@ typedef enum NNS_GFD_DST_TYPE {
     NNS_GFD_DST_3D_TEX_PLTT,
     NNS_GFD_DST_3D_CLRIMG_COLOR,
     NNS_GFD_DST_3D_CLRIMG_DEPTH,
-
     NNS_GFD_DST_2D_BG0_CHAR_MAIN,
     NNS_GFD_DST_2D_BG1_CHAR_MAIN,
     NNS_GFD_DST_2D_BG2_CHAR_MAIN,
@@ -30,7 +29,6 @@ typedef enum NNS_GFD_DST_TYPE {
     NNS_GFD_DST_2D_BG_EXTPLTT_MAIN,
     NNS_GFD_DST_2D_OBJ_OAM_MAIN,
     NNS_GFD_DST_2D_OBJ_CHAR_MAIN,
-
     NNS_GFD_DST_2D_BG0_CHAR_SUB,
     NNS_GFD_DST_2D_BG1_CHAR_SUB,
     NNS_GFD_DST_2D_BG2_CHAR_SUB,
@@ -47,7 +45,6 @@ typedef enum NNS_GFD_DST_TYPE {
     NNS_GFD_DST_2D_BG_EXTPLTT_SUB,
     NNS_GFD_DST_2D_OBJ_OAM_SUB,
     NNS_GFD_DST_2D_OBJ_CHAR_SUB,
-
     NNS_GFD_DST_MAX
 } NNS_GFD_DST_TYPE;
 
@@ -61,7 +58,6 @@ typedef struct NNSGfdVramTransferTask {
 typedef struct NNSGfdVramTransferTaskQueue {
     NNSGfdVramTransferTask * pTaskArray;
     u32 lengthOfArray;
-
     u16 idxFront;
     u16 idxRear;
     u16 numTasks;
@@ -73,54 +69,19 @@ typedef struct NNSGfdVramTransferManager {
     NNSGfdVramTransferTaskQueue taskQueue;
 } NNSGfdVramTransferManager;
 
-BOOL
-NNSi_GfdPushVramTransferTaskQueue
-(
-    NNSGfdVramTransferTaskQueue * pQueue
-);
+BOOL NNSi_GfdPushVramTransferTaskQueue(NNSGfdVramTransferTaskQueue * pQueue);
 
-NNSGfdVramTransferTask *
-NNSi_GfdGetFrontVramTransferTaskQueue
-(
-    NNSGfdVramTransferTaskQueue * pQueue
-);
+NNSGfdVramTransferTask * NNSi_GfdGetFrontVramTransferTaskQueue(NNSGfdVramTransferTaskQueue * pQueue);
+NNSGfdVramTransferTask * NNSi_GfdGetEndVramTransferTaskQueue(NNSGfdVramTransferTaskQueue * pQueue);
 
-NNSGfdVramTransferTask *
-NNSi_GfdGetEndVramTransferTaskQueue
-(
-    NNSGfdVramTransferTaskQueue * pQueue
-);
+BOOL NNSi_GfdPopVramTransferTaskQueue(NNSGfdVramTransferTaskQueue * pQueue);
 
-BOOL
-NNSi_GfdPopVramTransferTaskQueue
-(
-    NNSGfdVramTransferTaskQueue * pQueue
-);
+void NNS_GfdInitVramTransferManager(NNSGfdVramTransferTask * pTaskArray, u32 lengthOfArray);
+void NNS_GfdClearVramTransferManagerTask( );
+void NNS_GfdDoVramTransfer(void);
 
-void
-NNS_GfdInitVramTransferManager
-(
-    NNSGfdVramTransferTask * pTaskArray,
-    u32 lengthOfArray
-);
-
-void
-NNS_GfdClearVramTransferManagerTask( );
-
-void
-NNS_GfdDoVramTransfer(void);
-
-BOOL
-NNS_GfdRegisterNewVramTransferTask
-(
-    NNS_GFD_DST_TYPE type,
-    u32 dstAddr,
-    void * pSrc,
-    u32 szByte
-);
-
-u32
-NNS_GfdGetVramTransferTaskTotalSize(void);
+BOOL NNS_GfdRegisterNewVramTransferTask(NNS_GFD_DST_TYPE type, u32 dstAddr, void * pSrc, u32 szByte);
+u32 NNS_GfdGetVramTransferTaskTotalSize(void);
 
 #ifdef __cplusplus
 }

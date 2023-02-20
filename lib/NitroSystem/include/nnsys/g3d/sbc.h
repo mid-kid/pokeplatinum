@@ -19,7 +19,6 @@ typedef enum {
     NNS_G3D_RSFLAG_CURRENT_NODEDESC_VALID = 0x00000010,
     NNS_G3D_RSFLAG_RETURN                 = 0x00000020,
     NNS_G3D_RSFLAG_SKIP                   = 0x00000040,
-
     NNS_G3D_RSFLAG_OPT_RECORD             = 0x00000080,
     NNS_G3D_RSFLAG_OPT_NOGECMD            = 0x00000100,
     NNS_G3D_RSFLAG_OPT_SKIP_SBCDRAW       = 0x00000200,
@@ -30,32 +29,20 @@ typedef struct NNSG3dRS_ {
     u8 * c;
     NNSG3dRenderObj * pRenderObj;
     u32 flag;
-
     NNSG3dSbcCallBackFunc cbVecFunc[NNS_G3D_SBC_COMMAND_NUM];
     u8 cbVecTiming[NNS_G3D_SBC_COMMAND_NUM];
-
     u8 currentNode;
-
     u8 currentMat;
-
     u8 currentNodeDesc;
-
     u8 dummy_;
-
     NNSG3dMatAnmResult * pMatAnmResult;
-
     NNSG3dJntAnmResult * pJntAnmResult;
-
     NNSG3dVisAnmResult * pVisAnmResult;
-
     u32 isMatCached[NNS_G3D_SIZE_MAT_MAX / 32];
-
     u32 isScaleCacheOne[NNS_G3D_SIZE_JNT_MAX / 32];
-
 #if (NNS_G3D_USE_EVPCACHE)
     u32 isEvpCached[NNS_G3D_SIZE_JNT_MAX / 32];
 #endif
-
     const NNSG3dResNodeInfo * pResNodeInfo;
     const NNSG3dResMat * pResMat;
     const NNSG3dResShp * pResShp;
@@ -64,7 +51,6 @@ typedef struct NNSG3dRS_ {
     NNSG3dGetJointScale funcJntScale;
     NNSG3dSendJointSRT funcJntMtx;
     NNSG3dSendTexSRT funcTexMtx;
-
     NNSG3dMatAnmResult tmpMatAnmResult;
     NNSG3dJntAnmResult tmpJntAnmResult;
     NNSG3dVisAnmResult tmpVisAnmResult;
@@ -72,12 +58,10 @@ typedef struct NNSG3dRS_ {
 
 typedef struct NNSG3dRSOnGlb_ {
     struct NNSG3dMatAnmResult_ matCache[NNS_G3D_SIZE_MAT_MAX];
-
     struct {
         VecFx32 s;
         VecFx32 inv;
     } scaleCache[NNS_G3D_SIZE_JNT_MAX];
-
 #if (NNS_G3D_USE_EVPCACHE)
     struct {
         MtxFx44 M;
@@ -86,12 +70,11 @@ typedef struct NNSG3dRSOnGlb_ {
 #endif
 } NNSG3dRSOnGlb;
 
-typedef void (* NNSG3dFuncSbc)(NNSG3dRS *, u32);
+typedef void (*NNSG3dFuncSbc)(NNSG3dRS *, u32);
+typedef void (*NNSG3dFuncSbc_MatInternal)(NNSG3dRS *, u32, const NNSG3dResMatData *, u32);
+typedef void (*NNSG3dFuncSbc_ShpInternal)(NNSG3dRS *, u32, const NNSG3dResShpData *, u32);
 
-typedef void (* NNSG3dFuncSbc_MatInternal)(NNSG3dRS *, u32, const NNSG3dResMatData *, u32);
-typedef void (* NNSG3dFuncSbc_ShpInternal)(NNSG3dRS *, u32, const NNSG3dResShpData *, u32);
-
-#define NNS_G3D_MTXSTACK_SYS (30)
+#define NNS_G3D_MTXSTACK_SYS  (30)
 #define NNS_G3D_MTXSTACK_USER (29)
 
 NNS_G3D_INLINE void NNS_G3dRSSetCallBack(NNSG3dRS * rs, NNSG3dSbcCallBackFunc func, u8 cmd, NNSG3dSbcCallBackTiming timing);
@@ -126,15 +109,8 @@ void NNSi_G3dFuncSbc_POSSCALE(NNSG3dRS *, u32);
 void NNSi_G3dFuncSbc_ENVMAP(NNSG3dRS *, u32);
 void NNSi_G3dFuncSbc_PRJMAP(NNSG3dRS *, u32);
 
-void NNSi_G3dFuncSbc_SHP_InternalDefault(NNSG3dRS * rs,
-                                         u32 opt,
-                                         const NNSG3dResShpData * shp,
-                                         u32 idxShp);
-
-void NNSi_G3dFuncSbc_MAT_InternalDefault(NNSG3dRS * rs,
-                                         u32 opt,
-                                         const NNSG3dResMatData * mat,
-                                         u32 idxMat);
+void NNSi_G3dFuncSbc_SHP_InternalDefault(NNSG3dRS * rs, u32 opt, const NNSG3dResShpData * shp, u32 idxShp);
+void NNSi_G3dFuncSbc_MAT_InternalDefault(NNSG3dRS * rs, u32 opt, const NNSG3dResMatData * mat, u32 idxMat);
 
 NNS_G3D_INLINE BOOL NNSi_G3dCallBackCheck_A(NNSG3dRS * rs, u8 cmd, NNSG3dSbcCallBackTiming * pTiming);
 NNS_G3D_INLINE BOOL NNSi_G3dCallBackCheck_B(NNSG3dRS * rs, u8 cmd, NNSG3dSbcCallBackTiming * pTiming);

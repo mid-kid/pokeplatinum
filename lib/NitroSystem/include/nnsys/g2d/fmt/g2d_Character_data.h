@@ -4,9 +4,9 @@
 #include <nitro/types.h>
 
 #ifndef SDK_ARM9
-#define SDK_ARM9
+    #define SDK_ARM9
     #include <nitro_win32.h>
-#undef SDK_ARM9
+    #undef  SDK_ARM9
 #endif
 
 #include <nnsys/g2d/fmt/g2d_Common_data.h>
@@ -16,33 +16,33 @@
 extern "C" {
 #endif
 
-#define NNS_G2D_BINFILE_SIG_CHARACTERDATA (u32)'NCGR'
+#define NNS_G2D_BINFILE_SIG_CHARACTERDATA          (u32)'NCGR'
 
-#define NNS_G2D_BINFILE_SIG_PALETTEDATA (u32)'NCLR'
-#define NNS_G2D_BINFILE_SIG_PALETTEDATA_OLD (u32)'NCPR'
+#define NNS_G2D_BINFILE_SIG_PALETTEDATA            (u32)'NCLR'
+#define NNS_G2D_BINFILE_SIG_PALETTEDATA_OLD        (u32)'NCPR'
 
-#define NNS_G2D_BINBLK_SIG_CHARACTERDATA (u32)'CHAR'
-#define NNS_G2D_BINBLK_SIG_CHAR_POSITION (u32)'CPOS'
+#define NNS_G2D_BINBLK_SIG_CHARACTERDATA          (u32)'CHAR'
+#define NNS_G2D_BINBLK_SIG_CHAR_POSITION          (u32)'CPOS'
 
-#define NNS_G2D_BINBLK_SIG_PALETTEDATA (u32)'PLTT'
-#define NNS_G2D_BINBLK_SIG_PALETTECOMPINFO (u32)'PCMP'
+#define NNS_G2D_BINBLK_SIG_PALETTEDATA            (u32)'PLTT'
+#define NNS_G2D_BINBLK_SIG_PALETTECOMPINFO        (u32)'PCMP'
 
-#define NNS_G2D_BINFILE_EXT_CHARACTERDATA "NCGR"
-#define NNS_G2D_BINFILE_EXT_CHARACTERDATA_BMP "NCBR"
-#define NNS_G2D_BINFILE_EXT_PALETTEDATA "NCLR"
+#define NNS_G2D_BINFILE_EXT_CHARACTERDATA          "NCGR"
+#define NNS_G2D_BINFILE_EXT_CHARACTERDATA_BMP      "NCBR"
+#define NNS_G2D_BINFILE_EXT_PALETTEDATA            "NCLR"
 
-#define NNS_G2D_NCGR_MAJOR_VER (u8)1
-#define NNS_G2D_NCGR_MINOR_VER (u8)1
+#define NNS_G2D_NCGR_MAJOR_VER             (u8)1
+#define NNS_G2D_NCGR_MINOR_VER             (u8)1
 
-#define NNS_G2D_NCLR_MAJOR_VER (u8)1
-#define NNS_G2D_NCLR_MINOR_VER (u8)0
+#define NNS_G2D_NCLR_MAJOR_VER             (u8)1
+#define NNS_G2D_NCLR_MINOR_VER             (u8)0
 
-#define NNS_G2D_1D_MAPPING_CHAR_SIZE (u16)0xFFFF
+#define NNS_G2D_1D_MAPPING_CHAR_SIZE      (u16)0xFFFF
 
-#define NNS_G2D_CHARACTER_FMT_MASK 0xFF
-#define NNS_G2D_VRAMTRANSFERDATA_FLAG_MASK 0x1
-#define NNS_G2D_CHARACTER_FMT_SHIFT 0
-#define NNS_G2D_VRAMTRANSFERDATA_FLAG_SHIFT 8
+#define NNS_G2D_CHARACTER_FMT_MASK              0xFF
+#define NNS_G2D_VRAMTRANSFERDATA_FLAG_MASK      0x1
+#define NNS_G2D_CHARACTER_FMT_SHIFT             0
+#define NNS_G2D_VRAMTRANSFERDATA_FLAG_SHIFT     8
 
 typedef enum NNSG2dCharacterPixelFmt {
     NNS_G2D_CHARACTER_PIXELFMT_16,
@@ -81,7 +81,6 @@ typedef struct NNSG2dPaletteCompressInfo {
 typedef struct NNSG2dPaletteData {
     GXTexFmt fmt;
     BOOL bExtendedPlt;
-
     u32 szByte;
     void * pRawData;
 } NNSG2dPaletteData;
@@ -99,12 +98,9 @@ typedef struct NNSG2dPaletteDataBlock {
 typedef struct NNSG2dCharacterData {
     u16 H;
     u16 W;
-
     GXTexFmt pixelFmt;
-
     GXOBJVRamModeChar mapingType;
     u32 characterFmt;
-
     u32 szByte;
     void * pRawData;
 } NNSG2dCharacterData;
@@ -126,24 +122,17 @@ typedef struct NNSG2dCharacterPosInfoBlock {
     NNSG2dCharacterPosInfo posInfo;
 } NNSG2dCharacterPosInfoBlock;
 
-NNS_G2D_INLINE u32 NNSi_G2dPackCharacterFmtData
-(
-    NNSG2dCharacterFmt charFmt,
-    BOOL bVramTransferData
-)
-{
+NNS_G2D_INLINE u32 NNSi_G2dPackCharacterFmtData(NNSG2dCharacterFmt charFmt, BOOL bVramTransferData) {
     return (u32)((charFmt << NNS_G2D_CHARACTER_FMT_SHIFT) |
                  (bVramTransferData << NNS_G2D_VRAMTRANSFERDATA_FLAG_SHIFT));
 }
 
-NNS_G2D_INLINE NNSG2dCharacterFmt NNSi_G2dGetCharacterFmtType (u32 characterFmt)
-{
+NNS_G2D_INLINE NNSG2dCharacterFmt NNSi_G2dGetCharacterFmtType(u32 characterFmt) {
     return (NNSG2dCharacterFmt)
            (NNS_G2D_CHARACTER_FMT_MASK & (characterFmt >> NNS_G2D_CHARACTER_FMT_SHIFT));
 }
 
-NNS_G2D_INLINE BOOL NNSi_G2dIsCharacterVramTransfered (u32 characterFmt)
-{
+NNS_G2D_INLINE BOOL NNSi_G2dIsCharacterVramTransfered(u32 characterFmt) {
     return (BOOL)
            (NNS_G2D_VRAMTRANSFERDATA_FLAG_MASK & (characterFmt >> NNS_G2D_VRAMTRANSFERDATA_FLAG_SHIFT));
 }

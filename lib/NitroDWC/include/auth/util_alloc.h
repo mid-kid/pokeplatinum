@@ -1,3 +1,4 @@
+
 #ifndef DWC_UTIL_ALLOC_H_
 #define DWC_UTIL_ALLOC_H_
 
@@ -5,13 +6,18 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif 
 
-typedef void *(* DWCAuthAlloc)(unsigned long name, long size);
-typedef void (* DWCAuthFree)(unsigned long name, void * ptr, long size);
+
+
+
+
+
+typedef void *(*DWCAuthAlloc)(unsigned long name, long size);
+typedef void (*DWCAuthFree)(unsigned long name, void *ptr, long size);
 
 #ifdef __cplusplus
 }
-#endif
+#endif 
 
-#endif
+#endif 

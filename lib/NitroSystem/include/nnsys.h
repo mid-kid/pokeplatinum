@@ -2,6 +2,7 @@
 #define NNSYS_H_
 
 #include <nnsys/misc.h>
+
 #include <nnsys/fnd.h>
 #include <nnsys/snd.h>
 #include <nnsys/gfd.h>

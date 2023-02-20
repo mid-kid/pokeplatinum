@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_PM_ARM7_H_
 #define NITRO_PM_ARM7_H_
 
@@ -11,12 +13,21 @@ extern "C" {
 #include <nitro/spi/common/type.h>
 #include <nitro/pxi/common/fifo.h>
 
-void PM_SetLEDPattern(PMLEDPattern pattern);
 
+
+
+
+void    PM_SetLEDPattern(PMLEDPattern pattern);
+
+
+
 PMLEDPattern PM_GetLEDPattern(void);
 
+
+
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

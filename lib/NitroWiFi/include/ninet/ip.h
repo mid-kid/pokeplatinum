@@ -1,3 +1,4 @@
+
 #ifndef NITROINET_IP_H_
 #define NITROINET_IP_H_
 
@@ -7,7 +8,8 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+
 }
 #endif
 
-#endif
+#endif 

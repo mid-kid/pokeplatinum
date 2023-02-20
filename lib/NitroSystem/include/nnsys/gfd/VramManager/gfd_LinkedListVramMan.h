@@ -7,10 +7,7 @@ extern "C" {
 
 #include <nitro.h>
 
-typedef void (* NNSGfdLnkDumpCallBack)(
-    u32 addr,
-    u32 szByte,
-    void * pUserData);
+typedef void (*NNSGfdLnkDumpCallBack)(u32 addr, u32 szByte, void * pUserData);
 
 #ifdef __cplusplus
 }

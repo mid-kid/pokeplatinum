@@ -11,17 +11,12 @@ extern "C" {
 #endif
 
 #ifndef NNS_G3D_NSBVA_DISABLE
-void NNSi_G3dAnmObjInitNsBva(NNSG3dAnmObj * pAnmObj,
-                             void * pResAnm,
-                             const NNSG3dResMdl * pResMdl);
-
-void NNSi_G3dAnmCalcNsBva(NNSG3dVisAnmResult * pResult,
-                          const NNSG3dAnmObj * pAnmObj,
-                          u32 dataIdx);
+    void NNSi_G3dAnmObjInitNsBva(NNSG3dAnmObj * pAnmObj, void * pResAnm, const NNSG3dResMdl * pResMdl);
+    void NNSi_G3dAnmCalcNsBva(NNSG3dVisAnmResult * pResult, const NNSG3dAnmObj * pAnmObj, u32 dataIdx);
 #endif
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif // NNSG3D_ANM_NSBVA_H_

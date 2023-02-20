@@ -1,5 +1,6 @@
-#ifdef SDK_ARM9
+
+#ifdef	SDK_ARM9
 #include <nitro/hw/ARM9/ioreg.h>
-#else
+#else  
 #include <nitro/hw/ARM7/ioreg.h>
 #endif

@@ -10,16 +10,16 @@ extern "C" {
 #endif
 
 typedef enum NNSG2dNodeType {
-    NNS_G2D_NODETYPE_INVALID       = 0,
+    NNS_G2D_NODETYPE_INVALID = 0,
     NNS_G2D_NODETYPE_CELL,
     NNS_G2D_NODETYPE_MULTICELL,
     NNS_G2D_NODETYPE_MAX
 } NNSG2dNodeType;
 
-#define NNS_G2D_ASSERT_NODETYPE_VALID(val)     \
+#define NNS_G2D_ASSERT_NODETYPE_VALID(val) \
     NNS_G2D_MINMAX_ASSERT(val, NNS_G2D_NODETYPE_CELL, NNS_G2D_NODETYPE_MULTICELL)
 
-#define NNS_G2D_NODE_AFFINE_IDX_NONE 0xFFFF
+#define NNS_G2D_NODE_AFFINE_IDX_NONE    0xFFFF
 
 typedef struct NNSG2dNode {
     void * pContent;
@@ -30,14 +30,12 @@ typedef struct NNSG2dNode {
 
 void NNSi_G2dInitializeNode(NNSG2dNode * pNode, NNSG2dNodeType type);
 
-NNS_G2D_INLINE void NNSi_G2dSetNodeVisibleFlag (NNSG2dNode * pNode, BOOL bVisible)
-{
+NNS_G2D_INLINE void NNSi_G2dSetNodeVisibleFlag(NNSG2dNode * pNode, BOOL bVisible) {
     NNS_G2D_NULL_ASSERT(pNode);
     pNode->bVisible = bVisible;
 }
 
-NNS_G2D_INLINE BOOL NNSi_G2dGetNodeVisibleFlag (NNSG2dNode * pNode)
-{
+NNS_G2D_INLINE BOOL NNSi_G2dGetNodeVisibleFlag(NNSG2dNode * pNode) {
     NNS_G2D_NULL_ASSERT(pNode);
     return pNode->bVisible;
 }
@@ -46,4 +44,4 @@ NNS_G2D_INLINE BOOL NNSi_G2dGetNodeVisibleFlag (NNSG2dNode * pNode)
 }
 #endif
 
-#endif
+#endif // NNS_G2D_NODE_H_

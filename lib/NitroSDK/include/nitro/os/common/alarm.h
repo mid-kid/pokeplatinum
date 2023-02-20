@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_OS_ALARM_H_
 #define NITRO_OS_ALARM_H_
 
@@ -9,50 +11,84 @@ extern "C" {
 #include <nitro/types.h>
 #include <nitro/os/common/thread.h>
 
-typedef void (* OSAlarmHandler) (void *);
 
-struct OSiAlarm {
+
+
+typedef void (*OSAlarmHandler) (void *);
+
+
+
+
+struct OSiAlarm
+{
     OSAlarmHandler handler;
-    void * arg;
+    void   *arg;
 
-    u32 tag;
-    OSTick fire;
-    OSAlarm * prev;
-    OSAlarm * next;
+    u32     tag;
+    OSTick  fire;
+    OSAlarm *prev;
+    OSAlarm *next;
 
-    OSTick period;
-    OSTick start;
+    
+    OSTick  period;
+    OSTick  start;
 };
 
-void OS_InitAlarm(void);
 
-void OS_EndAlarm(void);
+
+void    OS_InitAlarm(void);
 
-BOOL OS_IsAlarmAvailable(void);
 
-void OS_CreateAlarm(OSAlarm * alarm);
+
+void    OS_EndAlarm(void);
 
-void OS_SetAlarm(OSAlarm * alarm, OSTick tick, OSAlarmHandler handler, void * arg);
 
-void OS_SetPeriodicAlarm(OSAlarm * alarm, OSTick start, OSTick period, OSAlarmHandler handler,
-                         void * arg);
+
+BOOL    OS_IsAlarmAvailable(void);
 
-void OS_SetAlarmTag(OSAlarm * alarm, u32 tag);
 
-void OS_CancelAlarm(OSAlarm * alarm);
+
+void    OS_CreateAlarm(OSAlarm *alarm);
 
-void OS_CancelAlarms(u32 tag);
 
-void OS_CancelAllAlarms(void);
+
+void    OS_SetAlarm(OSAlarm *alarm, OSTick tick, OSAlarmHandler handler, void *arg);
 
-struct OSiAlarmQueue {
-    OSAlarm * head;
-    OSAlarm * tail;
+
+
+void    OS_SetPeriodicAlarm(OSAlarm *alarm, OSTick start, OSTick period, OSAlarmHandler handler,
+                            void *arg);
+
+
+
+void    OS_SetAlarmTag(OSAlarm *alarm, u32 tag);
+
+
+
+void    OS_CancelAlarm(OSAlarm *alarm);
+
+
+
+void    OS_CancelAlarms(u32 tag);
+
+
+
+void    OS_CancelAllAlarms(void);
+
+
+
+
+struct OSiAlarmQueue
+{
+    OSAlarm *head;
+    OSAlarm *tail;
 };
-struct OSiAlarmQueue * OSi_GetAlarmQueue(void);
+struct OSiAlarmQueue *OSi_GetAlarmQueue(void);
+
 
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif

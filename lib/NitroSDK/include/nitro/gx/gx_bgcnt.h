@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_GX_BGCNT_H_
 #define NITRO_GX_BGCNT_H_
 
@@ -11,172 +13,218 @@
 extern "C" {
 #endif
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 charBase : 4;
-        u16 mosaic : 1;
-        u16 colorMode : 1;
-        u16 screenBase : 5;
-        u16 bgExtPltt : 1;
-        u16 screenSize : 2;
-    };
-} GXBg01Control;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 charBase : 4;
-        u16 mosaic : 1;
-        u16 colorMode : 1;
-        u16 screenBase : 5;
-        u16 _reserve : 1;
-        u16 screenSize : 2;
-    };
-} GXBg23ControlText;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 charBase : 4;
-        u16 mosaic : 1;
-        u16 _reserve : 1;
-        u16 screenBase : 5;
-        u16 areaOver : 1;
-        u16 screenSize : 2;
-    };
-} GXBg23ControlAffine;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 _reserve1 : 1;
-        u16 charBase : 3;
-        u16 mosaic : 1;
-        u16 _reserve2 : 1;
-        u16 screenBase : 5;
-        u16 areaOver : 1;
-        u16 screenSize : 2;
-    };
-} GXBg23Control256x16Pltt;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 charBase : 4;
-        u16 mosaic : 1;
-        u16 _reserve : 1;
-        u16 screenBase : 5;
-        u16 areaOver : 1;
-        u16 screenSize : 2;
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     charBase:4;
+        u16     mosaic:1;
+        u16     colorMode:1;
+        u16     screenBase:5;
+        u16     bgExtPltt:1;
+        u16     screenSize:2;
     };
-} GXBg23Control256x16Affine;
+}
+GXBg01Control;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 _reserve1 : 4;
-        u16 mosaic : 1;
-        u16 _reserve2 : 1;
-        u16 screenBase : 5;
-        u16 areaOver : 1;
-        u16 screenSize : 2;
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     charBase:4;
+        u16     mosaic:1;
+        u16     colorMode:1;
+        u16     screenBase:5;
+        u16     _reserve:1;
+        u16     screenSize:2;
     };
-} GXBg23Control256Bmp, GXBg23ControlDCBmp;
+}
+GXBg23ControlText;
 
-typedef union {
-    u16 raw;
-    struct {
-        u16 priority : 2;
-        u16 _reserve1 : 4;
-        u16 mosaic : 1;
-        u16 _reserve2 : 6;
-        u16 areaOver : 1;
-        u16 screenSize : 2;
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     charBase:4;
+        u16     mosaic:1;
+        u16     _reserve:1;
+        u16     screenBase:5;
+        u16     areaOver:1;
+        u16     screenSize:2;
     };
-} GXBg2ControlLargeBmp;
+}
+GXBg23ControlAffine;
 
-typedef enum {
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     _reserve1:1;
+        u16     charBase:3;
+        u16     mosaic:1;
+        u16     _reserve2:1;
+        u16     screenBase:5;
+        u16     areaOver:1;
+        u16     screenSize:2;
+    };
+}
+GXBg23Control256x16Pltt;
+
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     charBase:4;
+        u16     mosaic:1;
+        u16     _reserve:1;
+        u16     screenBase:5;
+        u16     areaOver:1;
+        u16     screenSize:2;
+    };
+}
+GXBg23Control256x16Affine;
+
+
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     _reserve1:4;
+        u16     mosaic:1;
+        u16     _reserve2:1;
+        u16     screenBase:5;
+        u16     areaOver:1;
+        u16     screenSize:2;
+    };
+}
+GXBg23Control256Bmp, GXBg23ControlDCBmp;
+
+typedef union
+{
+    u16     raw;
+    struct
+    {
+        u16     priority:2;
+        u16     _reserve1:4;
+        u16     mosaic:1;
+        u16     _reserve2:6;
+        u16     areaOver:1;
+        u16     screenSize:2;
+    };
+}
+GXBg2ControlLargeBmp;
+
+
+
+typedef enum
+{
     GX_BG_SCRSIZE_TEXT_256x256 = 0,
     GX_BG_SCRSIZE_TEXT_512x256 = 1,
     GX_BG_SCRSIZE_TEXT_256x512 = 2,
     GX_BG_SCRSIZE_TEXT_512x512 = 3
-} GXBGScrSizeText;
+}
+GXBGScrSizeText;
 
 #define GX_BG_SCRSIZE_TEXT_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_TEXT_256x256, GX_BG_SCRSIZE_TEXT_512x512)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRSIZE_AFFINE_128x128 = 0,
     GX_BG_SCRSIZE_AFFINE_256x256 = 1,
     GX_BG_SCRSIZE_AFFINE_512x512 = 2,
     GX_BG_SCRSIZE_AFFINE_1024x1024 = 3
-} GXBGScrSizeAffine;
+}
+GXBGScrSizeAffine;
 
 #define GX_BG_SCRSIZE_AFFINE_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_AFFINE_128x128, GX_BG_SCRSIZE_AFFINE_1024x1024)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRSIZE_256x16PLTT_128x128 = 0,
     GX_BG_SCRSIZE_256x16PLTT_256x256 = 1,
     GX_BG_SCRSIZE_256x16PLTT_512x512 = 2,
     GX_BG_SCRSIZE_256x16PLTT_1024x1024 = 3
-} GXBGScrSize256x16Pltt;
+}
+GXBGScrSize256x16Pltt;
 
 #define GX_BG_SCRSIZE_256x16PLTT_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_256x16PLTT_128x128, GX_BG_SCRSIZE_256x16PLTT_1024x1024)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRSIZE_256BMP_128x128 = 0,
     GX_BG_SCRSIZE_256BMP_256x256 = 1,
     GX_BG_SCRSIZE_256BMP_512x256 = 2,
     GX_BG_SCRSIZE_256BMP_512x512 = 3
-} GXBGScrSize256Bmp;
+}
+GXBGScrSize256Bmp;
 
 #define GX_BG_SCRSIZE_256BMP_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_256BMP_128x128, GX_BG_SCRSIZE_256BMP_512x512)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRSIZE_DCBMP_128x128 = 0,
     GX_BG_SCRSIZE_DCBMP_256x256 = 1,
     GX_BG_SCRSIZE_DCBMP_512x256 = 2,
     GX_BG_SCRSIZE_DCBMP_512x512 = 3
-} GXBGScrSizeDcBmp;
+}
+GXBGScrSizeDcBmp;
 
 #define GX_BG_SCRSIZE_DCBMP_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_DCBMP_128x128, GX_BG_SCRSIZE_DCBMP_512x512)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRSIZE_LARGEBMP_512x1024 = 0,
     GX_BG_SCRSIZE_LARGEBMP_1024x512 = 1
-} GXBGScrSizeLargeBmp;
+}
+GXBGScrSizeLargeBmp;
 
 #define GX_BG_SCRSIZE_LARGEBMP_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRSIZE_LARGEBMP_512x1024, GX_BG_SCRSIZE_LARGEBMP_1024x512)
 
-typedef enum {
+typedef enum
+{
     GX_BG_COLORMODE_16 = 0,
     GX_BG_COLORMODE_256 = 1
-} GXBGColorMode;
+}
+GXBGColorMode;
 
 #define GX_BG_COLORMODE_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_COLORMODE_16, GX_BG_COLORMODE_256)
 
-typedef enum {
+
+typedef enum
+{
     GX_BG_AREAOVER_XLU = 0,
     GX_BG_AREAOVER_REPEAT = 1
-} GXBGAreaOver;
+}
+GXBGAreaOver;
 
 #define GX_BG_AREAOVER_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_AREAOVER_XLU, GX_BG_AREAOVER_REPEAT)
 
-typedef enum {
+typedef enum
+{
     GX_BG_CHARBASE_0x00000 = 0,
     GX_BG_CHARBASE_0x04000 = 1,
     GX_BG_CHARBASE_0x08000 = 2,
@@ -193,12 +241,14 @@ typedef enum {
     GX_BG_CHARBASE_0x34000 = 13,
     GX_BG_CHARBASE_0x38000 = 14,
     GX_BG_CHARBASE_0x3c000 = 15
-} GXBGCharBase;
+}
+GXBGCharBase;
 
 #define GX_BG_CHARBASE_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_CHARBASE_0x00000, GX_BG_CHARBASE_0x3c000)
 
-typedef enum {
+typedef enum
+{
     GX_BG_SCRBASE_0x0000 = 0,
     GX_BG_SCRBASE_0x0800 = 1,
     GX_BG_SCRBASE_0x1000 = 2,
@@ -231,12 +281,14 @@ typedef enum {
     GX_BG_SCRBASE_0xe800 = 29,
     GX_BG_SCRBASE_0xf000 = 30,
     GX_BG_SCRBASE_0xf800 = 31
-} GXBGScrBase;
+}
+GXBGScrBase;
 
 #define GX_BG_SCRBASE_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_SCRBASE_0x0000, GX_BG_SCRBASE_0xf800)
 
-typedef enum {
+typedef enum
+{
     GX_BG_BMPSCRBASE_0x00000 = 0,
     GX_BG_BMPSCRBASE_0x04000 = 1,
     GX_BG_BMPSCRBASE_0x08000 = 2,
@@ -269,39 +321,59 @@ typedef enum {
     GX_BG_BMPSCRBASE_0x74000 = 29,
     GX_BG_BMPSCRBASE_0x78000 = 30,
     GX_BG_BMPSCRBASE_0x7c000 = 31
-} GXBGBmpScrBase;
+}
+GXBGBmpScrBase;
 
 #define GX_BG_BMPSCRBASE_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_BMPSCRBASE_0x00000, GX_BG_BMPSCRBASE_0x7c000)
 
-typedef enum {
+typedef enum
+{
     GX_BG_EXTPLTT_01 = 0,
     GX_BG_EXTPLTT_23 = 1
-} GXBGExtPltt;
+}
+GXBGExtPltt;
 
 #define GX_BG_EXTPLTT_ASSERT(x) \
     SDK_MINMAX_ASSERT(x, GX_BG_EXTPLTT_01, GX_BG_EXTPLTT_23)
 
 #define GX_BG_PRIORITY_ASSERT(x) SDK_MINMAX_ASSERT(x, 0, 3)
 
-typedef enum {
+
+typedef enum
+{
     GX_BG_EXTMODE_256x16PLTT =
         (0 << REG_G2_BG2CNT_CHARBASE_SHIFT) | (0 << REG_G2_BG2CNT_COLORMODE_SHIFT),
     GX_BG_EXTMODE_256BITMAP =
         (0 << REG_G2_BG2CNT_CHARBASE_SHIFT) | (1 << REG_G2_BG2CNT_COLORMODE_SHIFT),
     GX_BG_EXTMODE_DCBITMAP =
         (1 << REG_G2_BG2CNT_CHARBASE_SHIFT) | (1 << REG_G2_BG2CNT_COLORMODE_SHIFT)
-} GXBGExtMode;
+}
+GXBGExtMode;
+
+
+
 
 #if !(defined(SDK_WIN32) || defined(SDK_FROM_TOOL))
+
+
+
+
+
+
+
+
+
 
 static void G2_SetBG0Control(GXBGScrSizeText screenSize,
                              GXBGColorMode colorMode,
                              GXBGScrBase screenBase, GXBGCharBase charBase, GXBGExtPltt bgExtPltt);
 
+
 static void G2_SetBG1Control(GXBGScrSizeText screenSize,
                              GXBGColorMode colorMode,
                              GXBGScrBase screenBase, GXBGCharBase charBase, GXBGExtPltt bgExtPltt);
+
 
 static void G2_SetBG2ControlText(GXBGScrSizeText screenSize,
                                  GXBGColorMode colorMode,
@@ -311,7 +383,7 @@ static void G2_SetBG2ControlAffine(GXBGScrSizeAffine screenSize,
                                    GXBGAreaOver areaOver,
                                    GXBGScrBase screenBase, GXBGCharBase charBase);
 
-#define G2_SetBG2Control256x16Pltt G2_SetBG2Control256x16Affine
+#define G2_SetBG2Control256x16Pltt    G2_SetBG2Control256x16Affine
 static void G2_SetBG2Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
                                          GXBGAreaOver areaOver,
                                          GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -324,6 +396,7 @@ static void G2_SetBG2ControlDCBmp(GXBGScrSizeDcBmp screenSize,
 
 static void G2_SetBG2ControlLargeBmp(GXBGScrSizeLargeBmp screenSize, GXBGAreaOver areaOver);
 
+
 static void G2_SetBG3ControlText(GXBGScrSizeText screenSize,
                                  GXBGColorMode colorMode,
                                  GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -332,7 +405,7 @@ static void G2_SetBG3ControlAffine(GXBGScrSizeAffine screenSize,
                                    GXBGAreaOver areaOver,
                                    GXBGScrBase screenBase, GXBGCharBase charBase);
 
-#define G2_SetBG3Control256x16Pltt G2_SetBG3Control256x16Affine
+#define G2_SetBG3Control256x16Pltt    G2_SetBG3Control256x16Affine
 static void G2_SetBG3Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
                                          GXBGAreaOver areaOver,
                                          GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -353,23 +426,31 @@ static void G2_BG1Mosaic(BOOL enable);
 static void G2_BG2Mosaic(BOOL enable);
 static void G2_BG3Mosaic(BOOL enable);
 
-void * G2_GetBG0ScrPtr(void);
-void * G2_GetBG1ScrPtr(void);
-void * G2_GetBG2ScrPtr(void);
-void * G2_GetBG3ScrPtr(void);
-void * G2_GetBG0CharPtr(void);
-void * G2_GetBG1CharPtr(void);
-void * G2_GetBG2CharPtr(void);
-void * G2_GetBG3CharPtr(void);
-static void * G2_GetOBJCharPtr(void);
+
+void   *G2_GetBG0ScrPtr(void);
+void   *G2_GetBG1ScrPtr(void);
+void   *G2_GetBG2ScrPtr(void);
+void   *G2_GetBG3ScrPtr(void);
+void   *G2_GetBG0CharPtr(void);
+void   *G2_GetBG1CharPtr(void);
+void   *G2_GetBG2CharPtr(void);
+void   *G2_GetBG3CharPtr(void);
+static void *G2_GetOBJCharPtr(void);   
+
+
+
+
+
 
 static void G2S_SetBG0Control(GXBGScrSizeText screenSize,
                               GXBGColorMode colorMode,
                               GXBGScrBase screenBase, GXBGCharBase charBase, GXBGExtPltt bgExtPltt);
 
+
 static void G2S_SetBG1Control(GXBGScrSizeText screenSize,
                               GXBGColorMode colorMode,
                               GXBGScrBase screenBase, GXBGCharBase charBase, GXBGExtPltt bgExtPltt);
+
 
 static void G2S_SetBG2ControlText(GXBGScrSizeText screenSize,
                                   GXBGColorMode colorMode,
@@ -379,7 +460,7 @@ static void G2S_SetBG2ControlAffine(GXBGScrSizeAffine screenSize,
                                     GXBGAreaOver areaOver,
                                     GXBGScrBase screenBase, GXBGCharBase charBase);
 
-#define G2S_SetBG2Control256x16Pltt G2S_SetBG2Control256x16Affine
+#define G2S_SetBG2Control256x16Pltt   G2S_SetBG2Control256x16Affine
 static void G2S_SetBG2Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
                                           GXBGAreaOver areaOver,
                                           GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -390,6 +471,7 @@ static void G2S_SetBG2Control256Bmp(GXBGScrSize256Bmp screenSize,
 static void G2S_SetBG2ControlDCBmp(GXBGScrSizeDcBmp screenSize,
                                    GXBGAreaOver areaOver, GXBGBmpScrBase screenBase);
 
+
 static void G2S_SetBG3ControlText(GXBGScrSizeText screenSize,
                                   GXBGColorMode colorMode,
                                   GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -398,7 +480,7 @@ static void G2S_SetBG3ControlAffine(GXBGScrSizeAffine screenSize,
                                     GXBGAreaOver areaOver,
                                     GXBGScrBase screenBase, GXBGCharBase charBase);
 
-#define G2S_SetBG3Control256x16Pltt G2S_SetBG3Control256x16Affine
+#define G2S_SetBG3Control256x16Pltt   G2S_SetBG3Control256x16Affine
 static void G2S_SetBG3Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
                                           GXBGAreaOver areaOver,
                                           GXBGScrBase screenBase, GXBGCharBase charBase);
@@ -419,81 +501,88 @@ static void G2S_BG1Mosaic(BOOL enable);
 static void G2S_BG2Mosaic(BOOL enable);
 static void G2S_BG3Mosaic(BOOL enable);
 
-void * G2S_GetBG0ScrPtr(void);
-void * G2S_GetBG1ScrPtr(void);
-void * G2S_GetBG2ScrPtr(void);
-void * G2S_GetBG3ScrPtr(void);
-void * G2S_GetBG0CharPtr(void);
-void * G2S_GetBG1CharPtr(void);
-void * G2S_GetBG2CharPtr(void);
-void * G2S_GetBG3CharPtr(void);
-static void * G2S_GetOBJCharPtr(void);
+
+void   *G2S_GetBG0ScrPtr(void);
+void   *G2S_GetBG1ScrPtr(void);
+void   *G2S_GetBG2ScrPtr(void);
+void   *G2S_GetBG3ScrPtr(void);
+void   *G2S_GetBG0CharPtr(void);
+void   *G2S_GetBG1CharPtr(void);
+void   *G2S_GetBG2CharPtr(void);
+void   *G2S_GetBG3CharPtr(void);
+static void *G2S_GetOBJCharPtr(void);  
+
+
+
+
+
 
 #define GX_BG0_2D_CHECK_WARNING                                  \
     SDK_WARNING(!(reg_GX_DISPCNT & REG_GX_DISPCNT_BG02D3D_MASK), \
                 "G2_SetBG0Control: BG #0 assigned to 3D now.")
 #ifdef SDK_DEBUG
 #define GX_BGMODE_WARNING1(name, mode1)                                                            \
-    do {                                                                                               \
-        u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1,                                                                     \
-                    #name ## ": BG mode should be %d", mode1);                                         \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp ==  mode1,                                                                     \
+                #name ## ": BG mode should be %d", mode1);                                         \
+    (void)0;                                                                                       \
+} while(0)
 
 #define GX_BGMODE_WARNING2(name, mode1, mode2)                                                     \
-    do {                                                                                               \
-        u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1 || tmp == mode2,                                                     \
-                    #name ## ": BG mode should be %d or %d", mode1, mode2);                            \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp ==  mode1 || tmp == mode2,                                                     \
+                #name ## ": BG mode should be %d or %d", mode1, mode2);                            \
+    (void)0;                                                                                       \
+} while(0)
 
 #define GX_BGMODE_WARNING3(name, mode1, mode2, mode3)                                              \
-    do {                                                                                               \
-        u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1 || tmp == mode2 || tmp == mode3,                                      \
-                    #name ## ": BG mode should be %d, %d, or %d", mode1, mode2, mode3);                \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GX_DISPCNT & REG_GX_DISPCNT_BGMODE_MASK) >> REG_GX_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp == mode1 || tmp == mode2 || tmp == mode3,                                      \
+                #name ## ": BG mode should be %d, %d, or %d", mode1, mode2, mode3);                \
+    (void)0;                                                                                       \
+} while(0)
 
 #define GXS_BGMODE_WARNING1(name, mode1)                                                           \
-    do {                                                                                               \
-        u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1,                                                                     \
-                    #name ## ": BG mode should be %d", mode1);                                         \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp ==  mode1,                                                                     \
+                #name ## ": BG mode should be %d", mode1);                                         \
+    (void)0;                                                                                       \
+} while(0)
 
 #define GXS_BGMODE_WARNING2(name, mode1, mode2)                                                    \
-    do {                                                                                               \
-        u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1 || tmp == mode2,                                                     \
-                    #name ## ": BG mode should be %d or %d", mode1, mode2);                            \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp ==  mode1 || tmp == mode2,                                                     \
+                #name ## ": BG mode should be %d or %d", mode1, mode2);                            \
+    (void)0;                                                                                       \
+} while(0)
 
 #define GXS_BGMODE_WARNING3(name, mode1, mode2, mode3)                                             \
-    do {                                                                                               \
-        u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
-        SDK_WARNING(tmp == mode1 || tmp == mode2 || tmp == mode3,                                      \
-                    #name ## ": BG mode should be %d, %d, or %d", mode1, mode2, mode3);                \
-        (void)0;                                                                                       \
-    } while (0)
+do {                                                                                               \
+    u32 tmp = (reg_GXS_DB_DISPCNT & REG_GXS_DB_DISPCNT_BGMODE_MASK) >> REG_GXS_DB_DISPCNT_BGMODE_SHIFT;        \
+    SDK_WARNING(tmp == mode1 || tmp == mode2 || tmp == mode3,                                      \
+                #name ## ": BG mode should be %d, %d, or %d", mode1, mode2, mode3);                \
+    (void)0;                                                                                       \
+} while(0)
 
 #else
-#define GX_BGMODE_WARNING1(name, mode1) ((void)0)
-#define GX_BGMODE_WARNING2(name, mode1, mode2) ((void)0)
-#define GX_BGMODE_WARNING3(name, mode1, mode2, mode3) ((void)0)
-#define GXS_BGMODE_WARNING1(name, mode1) ((void)0)
-#define GXS_BGMODE_WARNING2(name, mode1, mode2) ((void)0)
-#define GXS_BGMODE_WARNING3(name, mode1, mode2, mode3) ((void)0)
+#define GX_BGMODE_WARNING1(name, mode1)                  ((void) 0)
+#define GX_BGMODE_WARNING2(name, mode1, mode2)           ((void) 0)
+#define GX_BGMODE_WARNING3(name, mode1, mode2, mode3)    ((void) 0)
+#define GXS_BGMODE_WARNING1(name, mode1)                 ((void) 0)
+#define GXS_BGMODE_WARNING2(name, mode1, mode2)          ((void) 0)
+#define GXS_BGMODE_WARNING3(name, mode1, mode2, mode3)   ((void) 0)
 #endif
 
-static inline void G2_SetBG0Control (GXBGScrSizeText screenSize,
-                                     GXBGColorMode colorMode,
-                                     GXBGScrBase screenBase,
-                                     GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
+
+static inline void G2_SetBG0Control(GXBGScrSizeText screenSize,
+                                    GXBGColorMode colorMode,
+                                    GXBGScrBase screenBase,
+                                    GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -511,17 +600,21 @@ static inline void G2_SetBG0Control (GXBGScrSizeText screenSize,
               (bgExtPltt << REG_G2_BG0CNT_BGPLTTSLOT_SHIFT));
 }
 
-static inline GXBg01Control G2_GetBG0Control (void)
+
+
+static inline GXBg01Control G2_GetBG0Control(void)
 {
     GX_BG0_2D_CHECK_WARNING;
 
     return *(volatile GXBg01Control *)REG_BG0CNT_ADDR;
 }
 
-static inline void G2S_SetBG0Control (GXBGScrSizeText screenSize,
-                                      GXBGColorMode colorMode,
-                                      GXBGScrBase screenBase,
-                                      GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
+
+
+static inline void G2S_SetBG0Control(GXBGScrSizeText screenSize,
+                                     GXBGColorMode colorMode,
+                                     GXBGScrBase screenBase,
+                                     GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -539,15 +632,18 @@ static inline void G2S_SetBG0Control (GXBGScrSizeText screenSize,
                                                                   REG_G2S_DB_BG0CNT_BGPLTTSLOT_SHIFT));
 }
 
-static inline GXBg01Control G2S_GetBG0Control (void)
+
+static inline GXBg01Control G2S_GetBG0Control(void)
 {
     return *(volatile GXBg01Control *)REG_DB_BG0CNT_ADDR;
 }
 
-static inline void G2_SetBG1Control (GXBGScrSizeText screenSize,
-                                     GXBGColorMode colorMode,
-                                     GXBGScrBase screenBase,
-                                     GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
+
+
+static inline void G2_SetBG1Control(GXBGScrSizeText screenSize,
+                                    GXBGColorMode colorMode,
+                                    GXBGScrBase screenBase,
+                                    GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -564,15 +660,19 @@ static inline void G2_SetBG1Control (GXBGScrSizeText screenSize,
               (bgExtPltt << REG_G2_BG1CNT_BGPLTTSLOT_SHIFT));
 }
 
-static inline GXBg01Control G2_GetBG1Control (void)
+
+
+static inline GXBg01Control G2_GetBG1Control(void)
 {
     return *(volatile GXBg01Control *)REG_BG1CNT_ADDR;
 }
 
-static inline void G2S_SetBG1Control (GXBGScrSizeText screenSize,
-                                      GXBGColorMode colorMode,
-                                      GXBGScrBase screenBase,
-                                      GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
+
+
+static inline void G2S_SetBG1Control(GXBGScrSizeText screenSize,
+                                     GXBGColorMode colorMode,
+                                     GXBGScrBase screenBase,
+                                     GXBGCharBase charBase, GXBGExtPltt bgExtPltt)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -590,32 +690,43 @@ static inline void G2S_SetBG1Control (GXBGScrSizeText screenSize,
                                                                   REG_G2S_DB_BG1CNT_BGPLTTSLOT_SHIFT));
 }
 
-static inline GXBg01Control G2S_GetBG1Control (void)
+
+
+static inline GXBg01Control G2S_GetBG1Control(void)
 {
     return *(volatile GXBg01Control *)REG_DB_BG1CNT_ADDR;
 }
 
-static inline GXBGExtMode G2_GetBG2ExtMode (void)
+
+
+static inline GXBGExtMode G2_GetBG2ExtMode(void)
 {
     GX_BGMODE_WARNING1(G2_GetBG2ExtMode, 5);
 
+    
+    
     return (GXBGExtMode)(reg_G2_BG2CNT &
                          (((reg_G2_BG2CNT & REG_G2_BG2CNT_COLORMODE_MASK) >> 5) |
                           REG_G2_BG2CNT_COLORMODE_MASK));
 }
 
-static inline GXBGExtMode G2S_GetBG2ExtMode (void)
+
+static inline GXBGExtMode G2S_GetBG2ExtMode(void)
 {
     GXS_BGMODE_WARNING1(G2S_GetBG2ExtMode, 5);
 
+    
+    
     return (GXBGExtMode)(reg_G2S_DB_BG2CNT &
                          (((reg_G2S_DB_BG2CNT & REG_G2S_DB_BG2CNT_COLORMODE_MASK) >> 5) |
                           REG_G2S_DB_BG2CNT_COLORMODE_MASK));
 }
 
-static inline void G2_SetBG2ControlText (GXBGScrSizeText screenSize,
-                                         GXBGColorMode colorMode,
-                                         GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG2ControlText(GXBGScrSizeText screenSize,
+                                        GXBGColorMode colorMode,
+                                        GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -631,16 +742,20 @@ static inline void G2_SetBG2ControlText (GXBGScrSizeText screenSize,
                                                                 REG_G2_BG2CNT_CHARBASE_SHIFT));
 }
 
-static inline GXBg23ControlText G2_GetBG2ControlText (void)
+
+
+static inline GXBg23ControlText G2_GetBG2ControlText(void)
 {
     GX_BGMODE_WARNING3(G2_GetBG2ControlText, 0, 1, 3);
 
     return *(volatile GXBg23ControlText *)REG_BG2CNT_ADDR;
 }
 
-static inline void G2S_SetBG2ControlText (GXBGScrSizeText screenSize,
-                                          GXBGColorMode colorMode,
-                                          GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG2ControlText(GXBGScrSizeText screenSize,
+                                         GXBGColorMode colorMode,
+                                         GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -657,16 +772,20 @@ static inline void G2S_SetBG2ControlText (GXBGScrSizeText screenSize,
               | (charBase << REG_G2S_DB_BG2CNT_CHARBASE_SHIFT));
 }
 
-static inline GXBg23ControlText G2S_GetBG2ControlText (void)
+
+
+static inline GXBg23ControlText G2S_GetBG2ControlText(void)
 {
     GXS_BGMODE_WARNING3(G2S_GetBG2ControlText, 0, 1, 3);
 
     return *(volatile GXBg23ControlText *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline void G2_SetBG2ControlAffine (GXBGScrSizeAffine screenSize,
-                                           GXBGAreaOver areaOver,
-                                           GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG2ControlAffine(GXBGScrSizeAffine screenSize,
+                                          GXBGAreaOver areaOver,
+                                          GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_AFFINE_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -682,16 +801,20 @@ static inline void G2_SetBG2ControlAffine (GXBGScrSizeAffine screenSize,
                                                             REG_G2_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlAffine G2_GetBG2ControlAffine (void)
+
+
+static inline GXBg23ControlAffine G2_GetBG2ControlAffine(void)
 {
     GX_BGMODE_WARNING2(G2_GetBG2ControlAffine, 2, 4);
 
     return *(volatile GXBg23ControlAffine *)REG_BG2CNT_ADDR;
 }
 
-static inline void G2S_SetBG2ControlAffine (GXBGScrSizeAffine screenSize,
-                                            GXBGAreaOver areaOver,
-                                            GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG2ControlAffine(GXBGScrSizeAffine screenSize,
+                                           GXBGAreaOver areaOver,
+                                           GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_AFFINE_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -708,16 +831,20 @@ static inline void G2S_SetBG2ControlAffine (GXBGScrSizeAffine screenSize,
               | (areaOver << REG_G2S_DB_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlAffine G2S_GetBG2ControlAffine (void)
+
+
+static inline GXBg23ControlAffine G2S_GetBG2ControlAffine(void)
 {
     GXS_BGMODE_WARNING2(G2S_GetBG2ControlAffine, 2, 4);
 
     return *(volatile GXBg23ControlAffine *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline void G2_SetBG2Control256x16Affine (GXBGScrSize256x16Pltt screenSize,
-                                                 GXBGAreaOver areaOver,
-                                                 GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG2Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
+                                                GXBGAreaOver areaOver,
+                                                GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_256x16PLTT_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -734,23 +861,28 @@ static inline void G2_SetBG2Control256x16Affine (GXBGScrSize256x16Pltt screenSiz
                                                                                            REG_G2_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256x16Pltt G2_GetBG2Control256x16Pltt (void)
+
+
+static inline GXBg23Control256x16Pltt G2_GetBG2Control256x16Pltt(void)
 {
     GX_BGMODE_WARNING1(G2_GetBG2Control256x16Pltt, 5);
 
     return *(volatile GXBg23Control256x16Pltt *)REG_BG2CNT_ADDR;
 }
 
-static inline GXBg23Control256x16Affine G2_GetBG2Control256x16Affine (void)
+
+static inline GXBg23Control256x16Affine G2_GetBG2Control256x16Affine(void)
 {
     GX_BGMODE_WARNING1(G2_GetBG2Control256x16Affine, 5);
 
     return *(volatile GXBg23Control256x16Affine *)REG_BG2CNT_ADDR;
 }
 
-static inline void G2S_SetBG2Control256x16Affine (GXBGScrSize256x16Pltt screenSize,
-                                                  GXBGAreaOver areaOver,
-                                                  GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG2Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
+                                                 GXBGAreaOver areaOver,
+                                                 GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_256x16PLTT_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -767,22 +899,27 @@ static inline void G2S_SetBG2Control256x16Affine (GXBGScrSize256x16Pltt screenSi
                                                                     REG_G2S_DB_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256x16Pltt G2S_GetBG2Control256x16Pltt (void)
+
+
+static inline GXBg23Control256x16Pltt G2S_GetBG2Control256x16Pltt(void)
 {
     GXS_BGMODE_WARNING1(G2S_GetBG2Control256x16Pltt, 5);
 
     return *(volatile GXBg23Control256x16Pltt *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline GXBg23Control256x16Affine G2S_GetBG2Control256x16Affine (void)
+
+static inline GXBg23Control256x16Affine G2S_GetBG2Control256x16Affine(void)
 {
     GXS_BGMODE_WARNING1(G2S_GetBG2Control256x16Affine, 5);
 
     return *(volatile GXBg23Control256x16Affine *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline void G2_SetBG2Control256Bmp (GXBGScrSize256Bmp screenSize,
-                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2_SetBG2Control256Bmp(GXBGScrSize256Bmp screenSize,
+                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_256BMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -797,15 +934,19 @@ static inline void G2_SetBG2Control256Bmp (GXBGScrSize256Bmp screenSize,
               | (areaOver << REG_G2_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256Bmp G2_GetBG2Control256Bmp (void)
+
+
+static inline GXBg23Control256Bmp G2_GetBG2Control256Bmp(void)
 {
     GX_BGMODE_WARNING1(G2_GetBG2Control256Bmp, 5);
 
     return *(volatile GXBg23Control256Bmp *)REG_BG2CNT_ADDR;
 }
 
-static inline void G2S_SetBG2Control256Bmp (GXBGScrSize256Bmp screenSize,
-                                            GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2S_SetBG2Control256Bmp(GXBGScrSize256Bmp screenSize,
+                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_256BMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -822,15 +963,19 @@ static inline void G2S_SetBG2Control256Bmp (GXBGScrSize256Bmp screenSize,
               (areaOver << REG_G2S_DB_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256Bmp G2S_GetBG2Control256Bmp (void)
+
+
+static inline GXBg23Control256Bmp G2S_GetBG2Control256Bmp(void)
 {
     GXS_BGMODE_WARNING1(G2S_GetBG2Control256Bmp, 5);
 
     return *(volatile GXBg23Control256Bmp *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline void G2_SetBG2ControlDCBmp (GXBGScrSizeDcBmp screenSize,
-                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2_SetBG2ControlDCBmp(GXBGScrSizeDcBmp screenSize,
+                                         GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_DCBMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -845,15 +990,19 @@ static inline void G2_SetBG2ControlDCBmp (GXBGScrSizeDcBmp screenSize,
               | (areaOver << REG_G2_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlDCBmp G2_GetBG2ControlDCBmp (void)
+
+
+static inline GXBg23ControlDCBmp G2_GetBG2ControlDCBmp(void)
 {
     GX_BGMODE_WARNING1(G2_SetBG2ControlDCBmp, 5);
 
     return *(volatile GXBg23ControlDCBmp *)REG_BG2CNT_ADDR;
 }
 
-static inline void G2S_SetBG2ControlDCBmp (GXBGScrSizeDcBmp screenSize,
-                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2S_SetBG2ControlDCBmp(GXBGScrSizeDcBmp screenSize,
+                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_DCBMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -872,14 +1021,18 @@ static inline void G2S_SetBG2ControlDCBmp (GXBGScrSizeDcBmp screenSize,
               (areaOver << REG_G2S_DB_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlDCBmp G2S_GetBG2ControlDCBmp (void)
+
+
+static inline GXBg23ControlDCBmp G2S_GetBG2ControlDCBmp(void)
 {
     GXS_BGMODE_WARNING1(G2S_GetBG2ControlDCBmp, 5);
 
     return *(volatile GXBg23ControlDCBmp *)REG_DB_BG2CNT_ADDR;
 }
 
-static inline void G2_SetBG2ControlLargeBmp (GXBGScrSizeLargeBmp screenSize, GXBGAreaOver areaOver)
+
+
+static inline void G2_SetBG2ControlLargeBmp(GXBGScrSizeLargeBmp screenSize, GXBGAreaOver areaOver)
 {
     GX_BG_SCRSIZE_LARGEBMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -891,34 +1044,46 @@ static inline void G2_SetBG2ControlLargeBmp (GXBGScrSizeLargeBmp screenSize, GXB
                                                                 REG_G2_BG2CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg2ControlLargeBmp G2_GetBG2ControlLargeBmp (void)
+
+
+static inline GXBg2ControlLargeBmp G2_GetBG2ControlLargeBmp(void)
 {
     GX_BGMODE_WARNING1(G2_GetBG2ControlLargeBmp, 6);
 
     return *(volatile GXBg2ControlLargeBmp *)REG_BG2CNT_ADDR;
 }
 
-static inline GXBGExtMode G2_GetBG3ExtMode (void)
+
+
+static inline GXBGExtMode G2_GetBG3ExtMode(void)
 {
     GX_BGMODE_WARNING3(G2_GetBG3ExtMode, 3, 4, 5);
 
+    
+    
     return (GXBGExtMode)(reg_G2_BG3CNT &
                          (((reg_G2_BG3CNT & REG_G2_BG3CNT_COLORMODE_MASK) >> 5) |
                           REG_G2_BG3CNT_COLORMODE_MASK));
 }
 
-static inline GXBGExtMode G2S_GetBG3ExtMode (void)
+
+
+static inline GXBGExtMode G2S_GetBG3ExtMode(void)
 {
     GXS_BGMODE_WARNING3(G2S_GetBG3ExtMode, 3, 4, 5);
 
+    
+    
     return (GXBGExtMode)(reg_G2S_DB_BG3CNT &
                          (((reg_G2S_DB_BG3CNT & REG_G2S_DB_BG3CNT_COLORMODE_MASK) >> 5) |
                           REG_G2S_DB_BG3CNT_COLORMODE_MASK));
 }
 
-static inline void G2_SetBG3ControlText (GXBGScrSizeText screenSize,
-                                         GXBGColorMode colorMode,
-                                         GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG3ControlText(GXBGScrSizeText screenSize,
+                                        GXBGColorMode colorMode,
+                                        GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -934,14 +1099,18 @@ static inline void G2_SetBG3ControlText (GXBGScrSizeText screenSize,
                                                                 REG_G2_BG3CNT_CHARBASE_SHIFT));
 }
 
-static inline GXBg23ControlText G2_GetBG3ControlText (void)
+
+
+static inline GXBg23ControlText G2_GetBG3ControlText(void)
 {
     return *(volatile GXBg23ControlText *)REG_BG3CNT_ADDR;
 }
 
-static inline void G2S_SetBG3ControlText (GXBGScrSizeText screenSize,
-                                          GXBGColorMode colorMode,
-                                          GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG3ControlText(GXBGScrSizeText screenSize,
+                                         GXBGColorMode colorMode,
+                                         GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_TEXT_ASSERT(screenSize);
     GX_BG_COLORMODE_ASSERT(colorMode);
@@ -958,14 +1127,18 @@ static inline void G2S_SetBG3ControlText (GXBGScrSizeText screenSize,
               | (charBase << REG_G2S_DB_BG3CNT_CHARBASE_SHIFT));
 }
 
-static inline GXBg23ControlText G2S_GetBG3ControlText (void)
+
+
+static inline GXBg23ControlText G2S_GetBG3ControlText(void)
 {
     return *(volatile GXBg23ControlText *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline void G2_SetBG3ControlAffine (GXBGScrSizeAffine screenSize,
-                                           GXBGAreaOver areaOver,
-                                           GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG3ControlAffine(GXBGScrSizeAffine screenSize,
+                                          GXBGAreaOver areaOver,
+                                          GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_AFFINE_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -981,14 +1154,18 @@ static inline void G2_SetBG3ControlAffine (GXBGScrSizeAffine screenSize,
                                                             REG_G2_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlAffine G2_GetBG3ControlAffine (void)
+
+
+static inline GXBg23ControlAffine G2_GetBG3ControlAffine(void)
 {
     return *(volatile GXBg23ControlAffine *)REG_BG3CNT_ADDR;
 }
 
-static inline void G2S_SetBG3ControlAffine (GXBGScrSizeAffine screenSize,
-                                            GXBGAreaOver areaOver,
-                                            GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG3ControlAffine(GXBGScrSizeAffine screenSize,
+                                           GXBGAreaOver areaOver,
+                                           GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_AFFINE_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1005,14 +1182,18 @@ static inline void G2S_SetBG3ControlAffine (GXBGScrSizeAffine screenSize,
               | (areaOver << REG_G2S_DB_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlAffine G2S_GetBG3ControlAffine (void)
+
+
+static inline GXBg23ControlAffine G2S_GetBG3ControlAffine(void)
 {
     return *(volatile GXBg23ControlAffine *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline void G2_SetBG3Control256x16Affine (GXBGScrSize256x16Pltt screenSize,
-                                                 GXBGAreaOver areaOver,
-                                                 GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2_SetBG3Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
+                                                GXBGAreaOver areaOver,
+                                                GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_256x16PLTT_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1029,19 +1210,24 @@ static inline void G2_SetBG3Control256x16Affine (GXBGScrSize256x16Pltt screenSiz
                                                                                            REG_G2_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256x16Pltt G2_GetBG3Control256x16Pltt (void)
+
+
+static inline GXBg23Control256x16Pltt G2_GetBG3Control256x16Pltt(void)
 {
     return *(volatile GXBg23Control256x16Pltt *)REG_BG3CNT_ADDR;
 }
 
-static inline GXBg23Control256x16Affine G2_GetBG3Control256x16Affine (void)
+
+static inline GXBg23Control256x16Affine G2_GetBG3Control256x16Affine(void)
 {
     return *(volatile GXBg23Control256x16Affine *)REG_BG3CNT_ADDR;
 }
 
-static inline void G2S_SetBG3Control256x16Affine (GXBGScrSize256x16Pltt screenSize,
-                                                  GXBGAreaOver areaOver,
-                                                  GXBGScrBase screenBase, GXBGCharBase charBase)
+
+
+static inline void G2S_SetBG3Control256x16Affine(GXBGScrSize256x16Pltt screenSize,
+                                                 GXBGAreaOver areaOver,
+                                                 GXBGScrBase screenBase, GXBGCharBase charBase)
 {
     GX_BG_SCRSIZE_256x16PLTT_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1058,18 +1244,23 @@ static inline void G2S_SetBG3Control256x16Affine (GXBGScrSize256x16Pltt screenSi
                                                                     REG_G2S_DB_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256x16Pltt G2S_GetBG3Control256x16Pltt (void)
+
+
+static inline GXBg23Control256x16Pltt G2S_GetBG3Control256x16Pltt(void)
 {
     return *(volatile GXBg23Control256x16Pltt *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline GXBg23Control256x16Affine G2S_GetBG3Control256x16Affine (void)
+
+static inline GXBg23Control256x16Affine G2S_GetBG3Control256x16Affine(void)
 {
     return *(volatile GXBg23Control256x16Affine *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline void G2_SetBG3Control256Bmp (GXBGScrSize256Bmp screenSize,
-                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2_SetBG3Control256Bmp(GXBGScrSize256Bmp screenSize,
+                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_256BMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1084,13 +1275,17 @@ static inline void G2_SetBG3Control256Bmp (GXBGScrSize256Bmp screenSize,
               | (areaOver << REG_G2_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256Bmp G2_GetBG3Control256Bmp (void)
+
+
+static inline GXBg23Control256Bmp G2_GetBG3Control256Bmp(void)
 {
     return *(volatile GXBg23Control256Bmp *)REG_BG3CNT_ADDR;
 }
 
-static inline void G2S_SetBG3Control256Bmp (GXBGScrSize256Bmp screenSize,
-                                            GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2S_SetBG3Control256Bmp(GXBGScrSize256Bmp screenSize,
+                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_256BMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1107,13 +1302,17 @@ static inline void G2S_SetBG3Control256Bmp (GXBGScrSize256Bmp screenSize,
               (areaOver << REG_G2S_DB_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23Control256Bmp G2S_GetBG3Control256Bmp (void)
+
+
+static inline GXBg23Control256Bmp G2S_GetBG3Control256Bmp(void)
 {
     return *(volatile GXBg23Control256Bmp *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline void G2_SetBG3ControlDCBmp (GXBGScrSizeDcBmp screenSize,
-                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+static inline void G2_SetBG3ControlDCBmp(GXBGScrSizeDcBmp screenSize,
+                                         GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_DCBMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1128,13 +1327,19 @@ static inline void G2_SetBG3ControlDCBmp (GXBGScrSizeDcBmp screenSize,
               | (areaOver << REG_G2_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlDCBmp G2_GetBG3ControlDCBmp (void)
+
+
+static inline GXBg23ControlDCBmp G2_GetBG3ControlDCBmp(void)
 {
     return *(volatile GXBg23ControlDCBmp *)REG_BG3CNT_ADDR;
 }
 
-static inline void G2S_SetBG3ControlDCBmp (GXBGScrSizeDcBmp screenSize,
-                                           GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
+
+
+
+
+static inline void G2S_SetBG3ControlDCBmp(GXBGScrSizeDcBmp screenSize,
+                                          GXBGAreaOver areaOver, GXBGBmpScrBase screenBase)
 {
     GX_BG_SCRSIZE_DCBMP_ASSERT(screenSize);
     GX_BG_AREAOVER_ASSERT(areaOver);
@@ -1149,84 +1354,128 @@ static inline void G2S_SetBG3ControlDCBmp (GXBGScrSizeDcBmp screenSize,
               (areaOver << REG_G2S_DB_BG3CNT_AREAOVER_SHIFT));
 }
 
-static inline GXBg23ControlDCBmp G2S_GetBG3ControlDCBmp (void)
+
+
+static inline GXBg23ControlDCBmp G2S_GetBG3ControlDCBmp(void)
 {
     return *(volatile GXBg23ControlDCBmp *)REG_DB_BG3CNT_ADDR;
 }
 
-static inline void G2_BG0Mosaic (BOOL enable)
+
+
+static inline void G2_BG0Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2_BG0CNT |= REG_G2_BG0CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2_BG0CNT &= ~REG_G2_BG0CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2S_BG0Mosaic (BOOL enable)
+
+
+static inline void G2S_BG0Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2S_DB_BG0CNT |= REG_G2S_DB_BG0CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2S_DB_BG0CNT &= ~REG_G2S_DB_BG0CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2_BG1Mosaic (BOOL enable)
+
+
+static inline void G2_BG1Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2_BG1CNT |= REG_G2_BG1CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2_BG1CNT &= ~REG_G2_BG1CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2S_BG1Mosaic (BOOL enable)
+
+
+static inline void G2S_BG1Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2S_DB_BG1CNT |= REG_G2S_DB_BG1CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2S_DB_BG1CNT &= ~REG_G2S_DB_BG1CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2_BG2Mosaic (BOOL enable)
+
+
+static inline void G2_BG2Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2_BG2CNT |= REG_G2_BG2CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2_BG2CNT &= ~REG_G2_BG2CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2S_BG2Mosaic (BOOL enable)
+
+
+static inline void G2S_BG2Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2S_DB_BG2CNT |= REG_G2S_DB_BG2CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2S_DB_BG2CNT &= ~REG_G2S_DB_BG2CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2_BG3Mosaic (BOOL enable)
+
+
+static inline void G2_BG3Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2_BG3CNT |= REG_G2_BG3CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2_BG3CNT &= ~REG_G2_BG3CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2S_BG3Mosaic (BOOL enable)
+
+
+static inline void G2S_BG3Mosaic(BOOL enable)
 {
-    if (enable) {
+    if (enable)
+    {
         reg_G2S_DB_BG3CNT |= REG_G2S_DB_BG3CNT_MOSAIC_MASK;
-    } else {
+    }
+    else
+    {
         reg_G2S_DB_BG3CNT &= ~REG_G2S_DB_BG3CNT_MOSAIC_MASK;
     }
 }
 
-static inline void G2_SetBG0Priority (int priority)
+
+
+static inline void G2_SetBG0Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1234,7 +1483,9 @@ static inline void G2_SetBG0Priority (int priority)
                           (priority << REG_G2_BG0CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2S_SetBG0Priority (int priority)
+
+
+static inline void G2S_SetBG0Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1242,7 +1493,9 @@ static inline void G2S_SetBG0Priority (int priority)
                               (priority << REG_G2S_DB_BG0CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2_SetBG1Priority (int priority)
+
+
+static inline void G2_SetBG1Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1250,7 +1503,9 @@ static inline void G2_SetBG1Priority (int priority)
                           (priority << REG_G2_BG1CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2S_SetBG1Priority (int priority)
+
+
+static inline void G2S_SetBG1Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1258,7 +1513,9 @@ static inline void G2S_SetBG1Priority (int priority)
                               (priority << REG_G2S_DB_BG1CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2_SetBG2Priority (int priority)
+
+
+static inline void G2_SetBG2Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1266,7 +1523,9 @@ static inline void G2_SetBG2Priority (int priority)
                           (priority << REG_G2_BG2CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2S_SetBG2Priority (int priority)
+
+
+static inline void G2S_SetBG2Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1274,7 +1533,9 @@ static inline void G2S_SetBG2Priority (int priority)
                               (priority << REG_G2S_DB_BG2CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2_SetBG3Priority (int priority)
+
+
+static inline void G2_SetBG3Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1282,7 +1543,9 @@ static inline void G2_SetBG3Priority (int priority)
                           (priority << REG_G2_BG3CNT_PRIORITY_SHIFT));
 }
 
-static inline void G2S_SetBG3Priority (int priority)
+
+
+static inline void G2S_SetBG3Priority(int priority)
 {
     GX_BG_PRIORITY_ASSERT(priority);
 
@@ -1290,17 +1553,22 @@ static inline void G2S_SetBG3Priority (int priority)
                               (priority << REG_G2S_DB_BG3CNT_PRIORITY_SHIFT));
 }
 
-static inline void * G2_GetOBJCharPtr ()
+
+
+static inline void *G2_GetOBJCharPtr()
 {
     return (void *)HW_OBJ_VRAM;
 }
 
-static inline void * G2S_GetOBJCharPtr ()
+
+
+static inline void *G2S_GetOBJCharPtr()
 {
     return (void *)HW_DB_OBJ_VRAM;
 }
 
-#endif
+
+#endif 
 
 #ifdef __cplusplus
 }

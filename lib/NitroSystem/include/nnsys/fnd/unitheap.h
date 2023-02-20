@@ -32,37 +32,18 @@ struct NNSiFndUntHeapHead {
 #define NNS_FndGetMemBlockSizeForUnitHeap(heap) \
     (((const NNSiFndUntHeapHead *)((const u8 *)((const void *)(heap)) + sizeof(NNSiFndHeapHead)))->mBlkSize)
 
-#if !defined(NNS_FINALROM)
-
-void NNSi_FndDumpUnitHeap(
-    NNSFndHeapHandle heap);
-
+#if !defined (NNS_FINALROM)
+    void NNSi_FndDumpUnitHeap(NNSFndHeapHandle heap);
 #endif
 
-NNSFndHeapHandle NNS_FndCreateUnitHeapEx(
-    void * startAddress,
-    u32 heapSize,
-    u32 memBlockSize,
-    int alignment,
-    u16 optFlag);
+NNSFndHeapHandle NNS_FndCreateUnitHeapEx(void * startAddress, u32 heapSize, u32 memBlockSize, int alignment, u16 optFlag);
 
-void NNS_FndDestroyUnitHeap(
-    NNSFndHeapHandle heap);
+void NNS_FndDestroyUnitHeap(NNSFndHeapHandle heap);
+void * NNS_FndAllocFromUnitHeap(NNSFndHeapHandle heap);
+void NNS_FndFreeToUnitHeap(NNSFndHeapHandle heap, void * memBlock);
 
-void * NNS_FndAllocFromUnitHeap(
-    NNSFndHeapHandle heap);
-
-void NNS_FndFreeToUnitHeap(
-    NNSFndHeapHandle heap,
-    void * memBlock);
-
-u32 NNS_FndCountFreeBlockForUnitHeap(
-    NNSFndHeapHandle heap);
-
-u32 NNS_FndCalcHeapSizeForUnitHeap(
-    u32 memBlockSize,
-    u32 memBlockNum,
-    int alignment);
+u32 NNS_FndCountFreeBlockForUnitHeap(NNSFndHeapHandle heap);
+u32 NNS_FndCalcHeapSizeForUnitHeap(u32 memBlockSize, u32 memBlockNum, int alignment);
 
 #ifdef __cplusplus
 }

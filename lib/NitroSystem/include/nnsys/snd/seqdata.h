@@ -11,7 +11,7 @@ extern "C" {
 #define NNS_SND_SEQ_ARC_INVALID_OFFSET 0xffffffff
 
 #ifdef _MSC_VER
-#pragma warning( disable : 4200 )
+    #pragma warning( disable : 4200 )
 #endif
 
 typedef struct NNSSndSeqParam {
@@ -44,14 +44,11 @@ typedef struct NNSSndSeqData {
 } NNSSndSeqData;
 
 #ifdef _MSC_VER
-#pragma warning( default : 4200 )
+    #pragma warning( default : 4200 )
 #endif
 
 u32 NNSi_SndSeqArcGetSeqCount(const struct NNSSndSeqArc * seqArc);
-const NNSSndSeqArcSeqInfo * NNSi_SndSeqArcGetSeqInfo(
-    const struct NNSSndSeqArc * seqArc,
-    int seqNo
-);
+const NNSSndSeqArcSeqInfo * NNSi_SndSeqArcGetSeqInfo(const struct NNSSndSeqArc * seqArc, int seqNo);
 
 #ifdef __cplusplus
 }

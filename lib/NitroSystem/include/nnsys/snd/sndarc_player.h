@@ -11,25 +11,10 @@ extern "C" {
 struct NNSSndHandle;
 
 BOOL NNS_SndArcPlayerSetup(NNSSndHeapHandle heap);
-
 BOOL NNS_SndArcPlayerStartSeq(struct NNSSndHandle * handle, int seqNo);
 BOOL NNS_SndArcPlayerStartSeqArc(struct NNSSndHandle * handle, int seqArcNo, int index);
-
-BOOL NNS_SndArcPlayerStartSeqEx(
-    struct NNSSndHandle * handle,
-    int playerNo,
-    int bankNo,
-    int playerPrio,
-    int seqNo
-);
-BOOL NNS_SndArcPlayerStartSeqArcEx(
-    struct NNSSndHandle * handle,
-    int playerNo,
-    int bankNo,
-    int playerPrio,
-    int seqArcNo,
-    int index
-);
+BOOL NNS_SndArcPlayerStartSeqEx(struct NNSSndHandle * handle, int playerNo, int bankNo, int playerPrio, int seqNo);
+BOOL NNS_SndArcPlayerStartSeqArcEx(struct NNSSndHandle * handle, int playerNo, int bankNo, int playerPrio, int seqArcNo, int index);
 
 #ifdef __cplusplus
 }

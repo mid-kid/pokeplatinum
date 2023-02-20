@@ -1,3 +1,4 @@
+
 #ifndef NITRO_PXI_COMMON_INIT_H_
 #define NITRO_PXI_COMMON_INIT_H_
 
@@ -5,10 +6,11 @@
 extern "C" {
 #endif
 
-void PXI_Init(void);
+
+void    PXI_Init(void);
 
 #ifdef __cplusplus
-}
+} 
 #endif
 
-#endif
+#endif 

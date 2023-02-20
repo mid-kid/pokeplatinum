@@ -1,3 +1,4 @@
+
 #ifndef NITROWIFI_SOCKET_H_
 #define NITROWIFI_SOCKET_H_
 
@@ -15,7 +16,8 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
+
 }
 #endif
 
-#endif
+#endif 

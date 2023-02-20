@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_GX_CAPTURE_H_
 #define NITRO_GX_CAPTURE_H_
 
@@ -8,7 +10,15 @@
 extern "C" {
 #endif
 
-typedef enum {
+
+
+
+
+
+
+
+typedef enum
+{
     GX_CAPTURE_DEST_VRAM_A_0x00000 = 0,
     GX_CAPTURE_DEST_VRAM_B_0x00000 = 1,
     GX_CAPTURE_DEST_VRAM_C_0x00000 = 2,
@@ -28,62 +38,86 @@ typedef enum {
     GX_CAPTURE_DEST_VRAM_B_0x18000 = 13,
     GX_CAPTURE_DEST_VRAM_C_0x18000 = 14,
     GX_CAPTURE_DEST_VRAM_D_0x18000 = 15
-} GXCaptureDest;
+}
+GXCaptureDest;
 
 #define GX_CAPTURE_DEST_ASSERT(x)                         \
     SDK_MINMAX_ASSERT(x, GX_CAPTURE_DEST_VRAM_A_0x00000, GX_CAPTURE_DEST_VRAM_D_0x18000)
 
-typedef enum {
+
+typedef enum
+{
     GX_CAPTURE_SIZE_128x128 = 0,
     GX_CAPTURE_SIZE_256x64 = 1,
     GX_CAPTURE_SIZE_256x128 = 2,
     GX_CAPTURE_SIZE_256x192 = 3
-} GXCaptureSize;
+}
+GXCaptureSize;
 
 #define GX_CAPTURE_SIZE_ASSERT(x)                 \
     SDK_MINMAX_ASSERT(x, GX_CAPTURE_SIZE_128x128, GX_CAPTURE_SIZE_256x192)
 
-typedef enum {
+typedef enum
+{
     GX_CAPTURE_SRCA_2D3D = 0,
     GX_CAPTURE_SRCA_3D = 1
-} GXCaptureSrcA;
+}
+GXCaptureSrcA;
 
 #define GX_CAPTURE_SRCA_ASSERT(x)              \
     SDK_MINMAX_ASSERT(x, GX_CAPTURE_SRCA_2D3D, GX_CAPTURE_SRCA_3D)
 
-typedef enum {
+typedef enum
+{
     GX_CAPTURE_SRCB_VRAM_0x00000 = 0,
     GX_CAPTURE_SRCB_MRAM = 1,
     GX_CAPTURE_SRCB_VRAM_0x08000 = 2,
     GX_CAPTURE_SRCB_VRAM_0x10000 = 4,
     GX_CAPTURE_SRCB_VRAM_0x18000 = 6
-} GXCaptureSrcB;
+}
+GXCaptureSrcB;
 
 #define GX_CAPTURE_SRCB_ASSERT(x)                      \
-    SDK_ASSERT((x) == GX_CAPTURE_SRCB_VRAM_0x00000 || \
-               (x) == GX_CAPTURE_SRCB_MRAM || \
-               (x) == GX_CAPTURE_SRCB_VRAM_0x08000 || \
-               (x) == GX_CAPTURE_SRCB_VRAM_0x10000 || \
-               (x) == GX_CAPTURE_SRCB_VRAM_0x18000)
+    SDK_ASSERT( (x) == GX_CAPTURE_SRCB_VRAM_0x00000 || \
+                (x) == GX_CAPTURE_SRCB_MRAM         || \
+                (x) == GX_CAPTURE_SRCB_VRAM_0x08000 || \
+                (x) == GX_CAPTURE_SRCB_VRAM_0x10000 || \
+                (x) == GX_CAPTURE_SRCB_VRAM_0x18000 )
 
-typedef enum {
+typedef enum
+{
     GX_CAPTURE_MODE_A = 0,
     GX_CAPTURE_MODE_B = 1,
     GX_CAPTURE_MODE_AB = 2
-} GXCaptureMode;
+}
+GXCaptureMode;
 
 #define GX_CAPTURE_MODE_ASSERT(x) SDK_MINMAX_ASSERT(x, GX_CAPTURE_MODE_A, GX_CAPTURE_MODE_AB)
 
+
+
+
 #if !(defined(SDK_WIN32) || defined(SDK_FROM_TOOL))
+
+
+
+
+
 
 static void GX_SetCapture(GXCaptureSize sz,
                           GXCaptureMode mode,
                           GXCaptureSrcA a, GXCaptureSrcB b, GXCaptureDest dest, int eva, int evb);
 
-static inline void GX_SetCapture (GXCaptureSize sz,
-                                  GXCaptureMode mode,
-                                  GXCaptureSrcA a,
-                                  GXCaptureSrcB b, GXCaptureDest dest, int eva, int evb)
+
+
+
+
+
+
+static inline void GX_SetCapture(GXCaptureSize sz,
+                                 GXCaptureMode mode,
+                                 GXCaptureSrcA a,
+                                 GXCaptureSrcB b, GXCaptureDest dest, int eva, int evb)
 {
     GX_CAPTURE_DEST_ASSERT(dest);
     GX_CAPTURE_SIZE_ASSERT(sz);
@@ -103,12 +137,14 @@ static inline void GX_SetCapture (GXCaptureSize sz,
                          (eva << REG_GX_DISPCAPCNT_EVA_SHIFT));
 }
 
-static inline void GX_ResetCapture (void)
+
+static inline void GX_ResetCapture(void)
 {
     reg_GX_DISPCAPCNT &= ~REG_GX_DISPCAPCNT_E_MASK;
 }
 
-#endif
+
+#endif 
 
 #ifdef __cplusplus
 }

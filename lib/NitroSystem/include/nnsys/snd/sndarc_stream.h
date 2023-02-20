@@ -15,14 +15,14 @@
 extern "C" {
 #endif
 
-#define NNS_SND_STRM_PLAYER_NUM 4
-#define NNS_SND_STRM_PLAYER_MIN 0
-#define NNS_SND_STRM_PLAYER_MAX 3
+#define NNS_SND_STRM_PLAYER_NUM           4
+#define NNS_SND_STRM_PLAYER_MIN           0
+#define NNS_SND_STRM_PLAYER_MAX           3
 
-#define NNS_SND_STRM_PLAYER_PRIO_MIN 0
-#define NNS_SND_STRM_PLAYER_PRIO_MAX 127
+#define NNS_SND_STRM_PLAYER_PRIO_MIN      0
+#define NNS_SND_STRM_PLAYER_PRIO_MAX      127
 
-#define NNS_SND_STRM_THREAD_STACK_SIZE 1024
+#define NNS_SND_STRM_THREAD_STACK_SIZE    1024
 
 struct NNSSndStrmPlayer;
 
@@ -40,12 +40,7 @@ typedef struct NNSSndArcStrmCallbackParam {
     u32 offset;
 } NNSSndArcStrmCallbackParam;
 
-typedef BOOL (* NNSSndArcStrmCallback)(
-    NNSSndArcStrmCallbackStatus status,
-    const NNSSndArcStrmCallbackInfo * info,
-    NNSSndArcStrmCallbackParam * param,
-    void * arg
-);
+typedef BOOL (* NNSSndArcStrmCallback)(NNSSndArcStrmCallbackStatus status, const NNSSndArcStrmCallbackInfo * info, NNSSndArcStrmCallbackParam * param, void * arg);
 
 typedef struct NNSSndStrmHandle {
     struct NNSSndStrmPlayer * player;
@@ -53,20 +48,18 @@ typedef struct NNSSndStrmHandle {
 
 typedef struct NNSSndStrmThread {
     OSThread thread;
-    u64 stack[NNS_SND_STRM_THREAD_STACK_SIZE / sizeof(u64)];
+    u64 stack[ NNS_SND_STRM_THREAD_STACK_SIZE / sizeof(u64) ];
     OSThreadQueue threadQ;
 #ifndef SDK_THREAD_INFINITY
-#if OS_SIZEOF_OSTHREADQUEUE == 16
-    u16 padding;
-#endif
+    #if OS_SIZEOF_OSTHREADQUEUE == 16
+        u16 padding;
+    #endif
 #endif
     OSMutex mutex;
-
     NNSFndList commandList;
 } NNSSndStrmThread;
 
-NNS_SND_INLINE BOOL NNS_SndStrmHandleIsValid (const NNSSndStrmHandle * handle)
-{
+NNS_SND_INLINE BOOL NNS_SndStrmHandleIsValid(const NNSSndStrmHandle * handle) {
     NNS_NULL_ASSERT(handle);
     return handle->player != NULL;
 }
@@ -85,28 +78,8 @@ BOOL NNS_SndArcStrmIsPrepared(struct NNSSndStrmHandle * handle);
 
 BOOL NNS_SndArcStrmStartEx(struct NNSSndStrmHandle * handle, int playerNo, int playerPrio, int strmNo, u32 offset);
 BOOL NNS_SndArcStrmPrepareEx(struct NNSSndStrmHandle * handle, int playerNo, int playerPrio, int strmNo, u32 offset);
-BOOL NNS_SndArcStrmStartEx2(
-    struct NNSSndStrmHandle * handle,
-    int playerNo,
-    int playerPrio,
-    int strmNo,
-    u32 offset,
-    NNSSndStrmCallback strmCallback,
-    void * strmCallbackArg,
-    NNSSndArcStrmCallback sndArcStrmCallback,
-    void * sndArcStrmCallbackArg
-);
-BOOL NNS_SndArcStrmPrepareEx2(
-    struct NNSSndStrmHandle * handle,
-    int playerNo,
-    int playerPrio,
-    int strmNo,
-    u32 offset,
-    NNSSndStrmCallback strmCallback,
-    void * strmCallbackArg,
-    NNSSndArcStrmCallback sndArcStrmCallback,
-    void * sndArcStrmCallbackArg
-);
+BOOL NNS_SndArcStrmStartEx2(struct NNSSndStrmHandle * handle, int playerNo, int playerPrio, int strmNo, u32 offset, NNSSndStrmCallback strmCallback, void * strmCallbackArg, NNSSndArcStrmCallback sndArcStrmCallback, void * sndArcStrmCallbackArg);
+BOOL NNS_SndArcStrmPrepareEx2(struct NNSSndStrmHandle * handle, int playerNo, int playerPrio, int strmNo, u32 offset, NNSSndStrmCallback strmCallback, void * strmCallbackArg, NNSSndArcStrmCallback sndArcStrmCallback, void * sndArcStrmCallbackArg);
 
 BOOL NNS_SndArcStrmAllocChannel(int playerNo);
 void NNS_SndArcStrmFreeChannel(int playerNo);
@@ -133,6 +106,6 @@ OSThread * NNSi_SndArcStrmGetThread();
 }
 #endif
 
-#endif
+#endif // SDK_SMALL_BUILD
 
-#endif
+#endif // NNS_SND_SNDARC_STREAM_H_

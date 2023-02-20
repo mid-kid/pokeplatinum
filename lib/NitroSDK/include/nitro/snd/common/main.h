@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_SND_COMMON_MAIN_H_
 #define NITRO_SND_COMMON_MAIN_H_
 
@@ -8,35 +10,41 @@
 extern "C" {
 #endif
 
-#define SND_PROC_INTERVAL 0xAA8
+	
 
-#define SND_MESSAGE_PERIODIC 1
-#define SND_MESSAGE_WAKEUP_THREAD 2
+#define SND_PROC_INTERVAL 0xAA8        
+
+#define SND_MESSAGE_PERIODIC        1
+#define SND_MESSAGE_WAKEUP_THREAD   2
+
+	
 
 #ifdef SDK_ARM9
 
-void SND_Init(void);
+void    SND_Init(void);
 
-#else
+#else  
 
-void SND_Init(u32 threadPrio);
+void    SND_Init(u32 threadPrio);
 
-void SND_CreateThread(u32 threadPrio);
-BOOL SND_SetThreadPriority(u32 prio);
+void    SND_CreateThread(u32 threadPrio);
+BOOL    SND_SetThreadPriority(u32 prio);
 
-void SND_InitIntervalTimer(void);
-void SND_StartIntervalTimer(void);
-void SND_StopIntervalTimer(void);
+void    SND_InitIntervalTimer(void);
+void    SND_StartIntervalTimer(void);
+void    SND_StopIntervalTimer(void);
 OSMessage SND_WaitForIntervalTimer(void);
-BOOL SND_SendWakeupMessage(void);
+BOOL    SND_SendWakeupMessage(void);
 
-#endif
+#endif 
 
-void SNDi_LockMutex(void);
-void SNDi_UnlockMutex(void);
+	
+
+void    SNDi_LockMutex(void);
+void    SNDi_UnlockMutex(void);
 
 #ifdef __cplusplus
-}
+} 
 #endif
 
-#endif
+#endif 

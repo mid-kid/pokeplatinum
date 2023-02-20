@@ -16,21 +16,21 @@
 extern "C" {
 #endif
 
-#define NNS_G2D_BINFILE_SIG_FONTDATA (u32)'NFTR'
+#define NNS_G2D_BINFILE_SIG_FONTDATA          (u32)'NFTR'
 
-#define NNS_G2D_BINBLK_SIG_FINFDATA (u32)'FINF'
-#define NNS_G2D_BINBLK_SIG_CGLPDATA (u32)'CGLP'
-#define NNS_G2D_BINBLK_SIG_TGLPDATA (u32)'TGLP'
-#define NNS_G2D_BINBLK_SIG_TCLPDATA (u32)'TCLP'
-#define NNS_G2D_BINBLK_SIG_CWDHDATA (u32)'CWDH'
-#define NNS_G2D_BINBLK_SIG_CMAPDATA (u32)'CMAP'
+#define NNS_G2D_BINBLK_SIG_FINFDATA           (u32)'FINF'
+#define NNS_G2D_BINBLK_SIG_CGLPDATA           (u32)'CGLP'
+#define NNS_G2D_BINBLK_SIG_TGLPDATA           (u32)'TGLP'
+#define NNS_G2D_BINBLK_SIG_TCLPDATA           (u32)'TCLP'
+#define NNS_G2D_BINBLK_SIG_CWDHDATA           (u32)'CWDH'
+#define NNS_G2D_BINBLK_SIG_CMAPDATA           (u32)'CMAP'
 
-#define NNS_G2D_BINFILE_EXT_FONTDATA "NFTR"
+#define NNS_G2D_BINFILE_EXT_FONTDATA          "NFTR"
 
-#define NNS_G2D_NFTR_MAJOR_VER (u8)1
-#define NNS_G2D_NFTR_MINOR_VER (u8)1
+#define NNS_G2D_NFTR_MAJOR_VER              (u8)1
+#define NNS_G2D_NFTR_MINOR_VER              (u8)1
 
-#define NNS_G2D_NFTR_VER (u16)((NNS_G2D_NFTR_MAJOR_VER << 8) | NNS_G2D_NFTR_MINOR_VER)
+#define NNS_G2D_NFTR_VER        (u16)((NNS_G2D_NFTR_MAJOR_VER << 8) | NNS_G2D_NFTR_MINOR_VER)
 
 typedef enum NNSG2dFontType {
     NNS_G2D_FONTTYPE_GLYPH,
@@ -53,12 +53,12 @@ typedef enum NNSG2dFontMappingMethod {
 } NNSG2dFontMappingMethod;
 
 typedef enum NNSG2dFontGlyphFlag {
-    NNS_G2D_FONT_FLAG_TBRL      = (1 << 0),
-    NNS_G2D_FONT_FLAG_ROT_0     = (0 << 1),
-    NNS_G2D_FONT_FLAG_ROT_90    = (1 << 1),
-    NNS_G2D_FONT_FLAG_ROT_180   = (2 << 1),
-    NNS_G2D_FONT_FLAG_ROT_270   = (3 << 1),
-    NNS_G2D_FONT_FLAG_ROT_MASK  = (3 << 1)
+    NNS_G2D_FONT_FLAG_TBRL = (1 << 0),
+    NNS_G2D_FONT_FLAG_ROT_0 = (0 << 1),
+    NNS_G2D_FONT_FLAG_ROT_90 = (1 << 1),
+    NNS_G2D_FONT_FLAG_ROT_180 = (2 << 1),
+    NNS_G2D_FONT_FLAG_ROT_270 = (3 << 1),
+    NNS_G2D_FONT_FLAG_ROT_MASK = (3 << 1)
 } NNSG2dFontGlyphFlag;
 
 typedef struct NNSG2dCharWidths {
@@ -85,7 +85,6 @@ typedef struct NNSG2dFontGlyph {
     u8 maxCharWidth;
     u8 bpp;
     u8 flags;
-
     u8 glyphTable[];
 } NNSG2dFontGlyph;
 
@@ -137,12 +136,9 @@ typedef struct NNSG2dFontCodeMapBlock {
 } NNSG2dFontCodeMapBlock;
 
 #ifdef NNS_G2D_FONT_USE_OLD_RESOURCE
-
-#define NNS_G2D_NFTR_PREV_MAJOR_VER (u8)1
-#define NNS_G2D_NFTR_PREV_MINOR_VER (u8)0
-
-#define NNS_G2D_NFTR_PREV_VER (u16)((NNS_G2D_NFTR_PREV_MAJOR_VER << 8) | NNS_G2D_NFTR_PREV_MINOR_VER)
-
+    #define NNS_G2D_NFTR_PREV_MAJOR_VER    (u8)1
+    #define NNS_G2D_NFTR_PREV_MINOR_VER    (u8)0
+    #define NNS_G2D_NFTR_PREV_VER          (u16)((NNS_G2D_NFTR_PREV_MAJOR_VER << 8) | NNS_G2D_NFTR_PREV_MINOR_VER)
 #endif
 
 #ifdef __cplusplus

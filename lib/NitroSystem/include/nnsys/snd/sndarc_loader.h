@@ -27,22 +27,14 @@ typedef enum NNSSndArcLoadResult {
 } NNSSndArcLoadResult;
 
 BOOL NNS_SndArcLoadGroup(int groupNo, NNSSndHeapHandle heap);
-
 BOOL NNS_SndArcLoadSeq(int seqNo, NNSSndHeapHandle heap);
 BOOL NNS_SndArcLoadSeqArc(int seqArcNo, NNSSndHeapHandle heap);
 BOOL NNS_SndArcLoadBank(int bankNo, NNSSndHeapHandle heap);
 BOOL NNS_SndArcLoadWaveArc(int waveArcNo, NNSSndHeapHandle heap);
-
 BOOL NNS_SndArcLoadSeqEx(int seqNo, u32 loadFlag, NNSSndHeapHandle heap);
 BOOL NNS_SndArcLoadBankEx(int bankNo, u32 loadFlag, NNSSndHeapHandle heap);
 
-void * NNSi_SndArcLoadFile(
-    u32 fileId,
-    NNSSndHeapDisposeCallback callback,
-    u32 data1,
-    u32 data2,
-    NNSSndHeapHandle heap
-);
+void * NNSi_SndArcLoadFile(u32 fileId, NNSSndHeapDisposeCallback callback, u32 data1, u32 data2, NNSSndHeapHandle heap);
 
 NNSSndArcLoadResult NNSi_SndArcLoadGroup(int groupNo, NNSSndHeapHandle heap);
 NNSSndArcLoadResult NNSi_SndArcLoadSeq(int seqNo, u32 loadFlag, NNSSndHeapHandle heap, BOOL bSetAddr, struct NNSSndSeqData ** pData);

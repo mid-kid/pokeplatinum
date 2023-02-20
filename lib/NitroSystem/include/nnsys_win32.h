@@ -10,4 +10,4 @@
 #include <nnsys/g3d/binres/res_struct.h>
 #include <nnsys/snd.h>
 
-#endif
+#endif // NNSYS_WIN22_H_

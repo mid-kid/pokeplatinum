@@ -1,3 +1,5 @@
+
+
 #ifndef NITRO_PAD_XYBUTTON_H_
 #define NITRO_PAD_XYBUTTON_H_
 
@@ -10,15 +12,21 @@ extern "C" {
 
 extern BOOL PADi_XYButtonAvailable;
 
-BOOL PAD_InitXYButton(void);
 
-static inline BOOL PAD_IsXYButtonAvailable (void)
+
+BOOL    PAD_InitXYButton(void);
+
+
+
+static inline BOOL PAD_IsXYButtonAvailable(void)
 {
     return PADi_XYButtonAvailable;
 }
 
+
 #ifdef __cplusplus
-}
+} 
 #endif
+
 
 #endif
