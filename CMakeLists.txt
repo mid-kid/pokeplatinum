@@ -116,6 +116,7 @@ target_link_libraries(
     dwcauth
     dwcbase
     dwcbm
+    dwcenc
     dwcnd
     dwcnhttp
     dwcutil
@@ -160,7 +161,6 @@ target_link_libraries(
     wbt
     wfs
     wm
-    wvr
 )
 
 add_subdirectory(lib/NitroSystem)
@@ -243,7 +243,7 @@ add_custom_target(
 set_target_properties(main PROPERTIES LINK_DEPENDS main.lcf)
 set_target_properties(main PROPERTIES LINK_DEPENDS main.response)
 
-set(CRT0_OBJ "lib/NitroSDK/CMakeFiles/NitroSDK.dir/src/init/crt0.c.obj")
+set(CRT0_OBJ "lib/NitroSDK/libraries/init/CMakeFiles/crt0.dir/src/crt0.c.obj")
 
 # Pass main.lcf, main.response and crt0.obj to the linker
 target_link_options(main PRIVATE ${MAIN_LCF})

@@ -10,6 +10,6 @@ if(BUILD_BASE)
 
     target_include_directories(${TARGET_LIB} PRIVATE include)
 else()
-    add_library(${TARGET_LIB} INTERFACE)
+    add_library(${TARGET_LIB} INTERFACE GLOBAL)
     target_link_directories(${TARGET_LIB} INTERFACE ${PREBUILT_DIR}/account)
 endif()
