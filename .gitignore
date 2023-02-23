@@ -60,7 +60,6 @@ symbols.csv
 files/**/*.c
 *.o
 *.naix
-*.a
 
 # Utilities
 ntruncompbw
