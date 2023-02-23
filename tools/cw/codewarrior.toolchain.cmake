@@ -4,8 +4,6 @@ set(CMAKE_SYSTEM_NAME Generic)
 # All other non-Windows platforms need wine
 if(UNIX AND NOT DEFINED ENV{WSL_DISTRO_NAME})
     set(WINE "wine")
-else()
-    set(WINE "")
 endif()
 
 set(CW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/cw)
@@ -30,8 +28,10 @@ set(CMAKE_CXX_COMPILER_LAUNCHER ${WINE})
 set(CMAKE_ASM_COMPILE_OBJECT "${WINE} ${CMAKE_ASM_COMPILER} <DEFINES> <INCLUDES> -o <OBJECT> -c <FLAGS> <SOURCE>")
 
 # Configure executable linking behavior
-set(CMAKE_C_LINK_EXECUTABLE "${WINE} ${CMAKE_C_LINKER} <LINK_LIBRARIES> <LINK_FLAGS> -o <TARGET>.nef")
- 
+set(CMAKE_C_LINK_EXECUTABLE "${WINE} ${CMAKE_C_LINKER} <CMAKE_C_LINK_FLAGS> <LINK_LIBRARIES> <LINK_FLAGS> -o <TARGET>.nef")
+
+CMAKE_POLICY( SET CMP0003 OLD )
+
 # Set mwldarm as archiver tool
 #set(CMAKE_AR "${toolchain_dir}/ARM_Tools/mwldarm.exe")
 #set(CMAKE_C_ARCHIVE_CREATE "${WINE} <CMAKE_AR> -msgstyle std -w on -nostdlib -library <OBJECTS> -o <TARGET>")

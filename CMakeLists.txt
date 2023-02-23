@@ -1,13 +1,14 @@
 # ===================== PROJECT INFO ======================
 
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.0)
 project(pokeplatinum C CXX ASM)
 
 # Import ExternalProject module for superbuilds
 include(ExternalProject)
 
 # Output sbin files to build/main
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/main)
+set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/main)
+set(LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/extern)
 
 # ==================== COMPILER FLAGS =====================
 
@@ -110,90 +111,90 @@ target_link_libraries(
 add_subdirectory(lib/NitroDWC)
 target_link_libraries(
     main PUBLIC
-    libdwcac
-    libdwcaccount
-    libdwcauth
-    libdwcbase
-    libdwcbm
-    libdwcnd
-    libdwcnhttp
-    libdwcutil
-    libdwcgschat
-    libdwcgscommon
-    libdwcgsghttp
-    libdwcgsgp
-    libdwcgsgstats
-    libdwcgsgt2
-    libdwcgsnatneg
-    libdwcgspinger
-    libdwcgspt
-    libdwcgsqr2
-    libdwcgsserverbrowsing
+    dwcac
+    dwcaccount
+    dwcauth
+    dwcbase
+    dwcbm
+    dwcnd
+    dwcnhttp
+    dwcutil
+    dwcgschat
+    dwcgscommon
+    dwcgsghttp
+    dwcgsgp
+    dwcgsgstats
+    dwcgsgt2
+    dwcgsnatneg
+    dwcgspinger
+    dwcgspt
+    dwcgsqr2
+    dwcgsserverbrowsing
 )
 
 add_subdirectory(lib/NitroSDK)
 target_link_libraries(
     main PUBLIC
-    libcard
-    libcp
-    libctrdg
-    libdgt
-    libe3s
-    libenv
-    libext
-    libfs
-    libfx
-    libgx
-    libmath
-    libmb
-    libmi
-    libos
-    libprc
-    libpxi
-    librtc
-    libsnd
-    libspi
-    libstd
-    libstubscw
-    libutest
-    libwbt
-    libwfs
-    libwm
-    libwvr
+    card
+    cp
+    ctrdg
+    dgt
+    e3s
+    env
+    ext
+    fs
+    fx
+    gx
+    math
+    mb
+    mi
+    os
+    prc
+    pxi
+    rtc
+    snd
+    spi
+    std
+    stubscw
+    utest
+    wbt
+    wfs
+    wm
+    wvr
 )
 
 add_subdirectory(lib/NitroSystem)
 target_link_libraries(
     main PUBLIC
-	libnnsfnd
-	libnnsgfd
-	libnnsg2d
-	libnnsg3d
-	libnnssnd
-	libnnsmcs
+	nnsfnd
+	nnsgfd
+	nnsg2d
+	nnsg3d
+	nnssnd
+	nnsmcs
 )
 
 add_subdirectory(lib/NitroWiFi)
 target_link_libraries(
     main PUBLIC
-	libsoc
-	libcps
-	libssl
-	libwcm
-	libstubsmd5
+	soc
+	cps
+	ssl
+	wcm
+	stubsmd5
 )
 
 add_subdirectory(lib/syscall)
-target_link_libraries(main PUBLIC libsyscall.a)
+target_link_libraries(main PUBLIC syscall)
 
 add_subdirectory(lib/crypto)
-target_link_libraries(main PUBLIC libcrypto.a)
+target_link_libraries(main PUBLIC libcrypto)
 
 add_subdirectory(lib/ilobby)
-target_link_libraries(main PUBLIC libdwcilobby.a)
+target_link_libraries(main PUBLIC dwcilobby)
 
 add_subdirectory(lib/ppwlobby)
-target_link_libraries(main PUBLIC libdwcpplobby.a)
+target_link_libraries(main PUBLIC dwcppwlobby)
 
 # ================== TOOLS ========================
 
@@ -202,8 +203,6 @@ ExternalProject_Add(pokeplatinum_tools
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/tools
     BINARY_DIR ${CMAKE_SOURCE_DIR}/tools/bin
     CMAKE_GENERATOR Ninja
-    CMAKE_ARGS
-        -DCMAKE_C_COMPILER=gcc
     INSTALL_COMMAND true
     BUILD_ALWAYS ON
 )
@@ -241,15 +240,15 @@ add_custom_target(
 )
 
 # Set main.lcf and main.response as dependencies for the 'main' executable
-set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.lcf)
-set_target_properties(${TARGET_NAME} PROPERTIES LINK_DEPENDS main.response)
+set_target_properties(main PROPERTIES LINK_DEPENDS main.lcf)
+set_target_properties(main PROPERTIES LINK_DEPENDS main.response)
 
 set(CRT0_OBJ "lib/NitroSDK/CMakeFiles/NitroSDK.dir/src/init/crt0.c.obj")
 
 # Pass main.lcf, main.response and crt0.obj to the linker
-target_link_options(main PUBLIC ${MAIN_LCF})
-target_link_options(main PUBLIC @${MAIN_RESPONSE})
-target_link_options(main PUBLIC ${CRT0_OBJ})
+target_link_options(main PRIVATE ${MAIN_LCF})
+target_link_options(main PRIVATE @${MAIN_RESPONSE})
+target_link_options(main PRIVATE ${CRT0_OBJ})
 
 # Run ntr_merge_elf.sh
 #add_custom_target(

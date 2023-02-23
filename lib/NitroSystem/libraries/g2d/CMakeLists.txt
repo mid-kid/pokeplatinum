@@ -41,7 +41,7 @@ if(BUILD_G2D)
 
     target_include_directories(${TARGET_LIB} PRIVATE include)
 else()
-    add_library(${TARGET_LIB} STATIC IMPORTED)
+    add_library(${TARGET_LIB} STATIC IMPORTED GLOBAL)
     set_property(TARGET ${TARGET_LIB} PROPERTY IMPORTED_LOCATION "${PREBUILT_DIR}/g2d/lib${TARGET_LIB}.a")
     message(STATUS "Using pre-built lib${TARGET_LIB}.a")
 endif()

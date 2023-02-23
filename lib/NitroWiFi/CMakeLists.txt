@@ -25,7 +25,7 @@ option(BUILD_STUBSOC     "Build libstubsoc.a"    ON)
 option(BUILD_STUBSSSL    "Build libstubsssl.a"   ON)
 option(BUILD_WCM         "Build libwcm.a"        ON)
 
-set(PREBUILT_DIR ${CMAKE_SOURCE_DIR}/prebuilt)
+set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
 
 # ================== DEPENDENCY PATHS =====================
 

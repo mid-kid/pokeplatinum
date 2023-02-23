@@ -1,2 +1,2 @@
-add_library(libvct STATIC IMPORTED)
-set_property(TARGET libvct PROPERTY IMPORTED_LOCATION "lib/ARM9-TS/Rom/libvct.a")
+add_library(libvct STATIC IMPORTED GLOBAL)
+set_property(TARGET libvct PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/lib/ARM9-TS/Rom/libvct.a")

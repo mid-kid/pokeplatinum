@@ -22,6 +22,8 @@ endif()
 option(BUILD_ACCOUNT "Build libdwcaccount.a from source" ON)
 option(BUILD_BASE    "Build libdwcbase.a from source"    ON)
 
+set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
+
 # ================== DEPENDENCY PATHS =====================
 
 cmake_path(GET CMAKE_CURRENT_SOURCE_DIR PARENT_PATH PARENT_DIR)

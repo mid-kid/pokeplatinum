@@ -47,7 +47,7 @@ option(BUILD_WFS             "Build libwfs.a from source"             ON)
 option(BUILD_WM              "Build libwm.a from source"              ON)
 option(BUILD_WVR             "Build libwvr.a from source"             ON)
 
-set(PREBUILT_DIR ${CMAKE_SOURCE_DIR}/prebuilt)
+set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
 
 # ==================== DEPENDENCIES =======================
 

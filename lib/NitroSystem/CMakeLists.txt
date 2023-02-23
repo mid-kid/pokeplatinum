@@ -26,7 +26,7 @@ option(BUILD_GFD "Build libnnsgfd from source" ON)
 option(BUILD_MCS "Build libnnsmcs from source" ON)
 option(BUILD_SND "Build libnnssnd from source" ON)
 
-set(PREBUILT_DIR ${CMAKE_SOURCE_DIR}/prebuilt)
+set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
 
 # ================== DEPENDENCY PATHS =====================
 
