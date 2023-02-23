@@ -268,7 +268,7 @@ asm PPW_LOBBY_ERROR ov66_022326DC (void)
     bl PPW_LobbyGetLastError
     pop {r3, pc}
  _022326FC:
-    bl ov66_02237134
+    bl PPW_LobbyGetLastError
     pop {r3, pc}
     nop
 }

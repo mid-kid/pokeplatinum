@@ -373,7 +373,7 @@ Static main
 	Object CMakeFiles/main.dir/asm/unk_020A2354.s.obj
 	Library libwvr.a
 	Library libdwcbm.a
-	Library libdwcaccount
+	Library libdwcaccount.a
 	Library libcrypto.a
 	Library libnnsfnd.a
 	Library libnnsgfd.a

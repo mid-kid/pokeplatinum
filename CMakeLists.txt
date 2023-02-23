@@ -1,6 +1,6 @@
 # ===================== PROJECT INFO ======================
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 project(pokeplatinum C CXX ASM)
 
 # Import ExternalProject module for superbuilds
@@ -60,7 +60,6 @@ include_directories(
     lib/NitroWiFi/include
     lib/libVCT/include
     lib/ppwlobby/include
-    lib/ilobby/include
 )
 
 # ================== MAIN EXECUTABLE ========================
@@ -87,8 +86,7 @@ target_link_options(
     PUBLIC -m _start
 )
 
-set(FORCE_ACTIVE_SYMBOLS "DGTi_hash2_arm4_small, Unk_02101B00, Unk_02101CE4")
-target_link_options(main PUBLIC -force_active ${FORCE_ACTIVE_SYMBOLS})
+target_link_options(main PUBLIC -force_active "DGTi_hash2_arm4_small")
 
 # ================== SUBDIRECTORIES ======================
 
@@ -117,7 +115,6 @@ target_link_libraries(
     dwcbase
     dwcbm
     dwcenc
-    dwcnd
     dwcnhttp
     dwcutil
     dwcgschat
@@ -161,6 +158,7 @@ target_link_libraries(
     wbt
     wfs
     wm
+    wvr
 )
 
 add_subdirectory(lib/NitroSystem)
@@ -190,11 +188,8 @@ target_link_libraries(main PUBLIC syscall)
 add_subdirectory(lib/crypto)
 target_link_libraries(main PUBLIC libcrypto)
 
-add_subdirectory(lib/ilobby)
-target_link_libraries(main PUBLIC dwcilobby)
-
 add_subdirectory(lib/ppwlobby)
-target_link_libraries(main PUBLIC dwcppwlobby)
+target_link_libraries(main PUBLIC ilobby dwcppwlobby dwcnd)
 
 # ================== TOOLS ========================
 
@@ -267,7 +262,7 @@ set(POKEPLATINUM_NDS ${CMAKE_CURRENT_BINARY_DIR}/pokeplatinum.us.nds)
 # Run makerom.exe
 add_custom_target(
     pokeplatinum.us.nds ALL
-    cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH ${LIB_FLAGS} -DBUILD_DIR=build/main -DNITROFS_FILES=${NITROFS_FILES} -DTITLE_NAME=\"POKEMON;PL\" -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
+    cd ${CMAKE_CURRENT_SOURCE_DIR} && ${WINE} tools/maketools/makerom.exe -DGAME_VERSION=PLATINUM -DGAME_LANGUAGE=ENGLISH ${LIB_FLAGS} -DBUILD_DIR=build -DNITROFS_FILES=${NITROFS_FILES} -DTITLE_NAME=\"POKEMON;PL\" -DBNR=${PLATINUM_US_DIR}/banner.bnr -DHEADER_TEMPLATE=${PLATINUM_US_DIR}/rom_header_template.sbin ${ROM_RSF} build/pokeplatinum.us.nds
     DEPENDS main
     COMMENT "Building ROM image"
 )

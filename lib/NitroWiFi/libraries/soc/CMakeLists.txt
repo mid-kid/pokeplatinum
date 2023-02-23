@@ -19,6 +19,7 @@ if(BUILD_SOC)
         src/socl_misc.c
         src/socl_list.c
         src/soc.c
+        src/socl_ssl.c
     )
 
     target_include_directories(soc PRIVATE include)
