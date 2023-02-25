@@ -19,7 +19,7 @@ set(PROC_S  "arm5TE")
 
 set(
     C_FLAGS
-    "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath"
+    "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath"
 )
 
 set(
@@ -100,12 +100,6 @@ target_link_libraries(
 	NITRO_Runtime_Ai_LE
 )
 
-add_subdirectory(lib/libVCT)
-target_link_libraries(
-    main PUBLIC
-    libvct
-)
-
 add_subdirectory(lib/NitroDWC)
 target_link_libraries(
     main PUBLIC
@@ -130,10 +124,18 @@ target_link_libraries(
     dwcgsserverbrowsing
 )
 
+set(CMAKE_PROJECT_NitroSDK_INCLUDE_BEFORE ${CMAKE_CURRENT_LIST_DIR}/tools/cw/codewarrior.toolchain_sp2.cmake)
 add_subdirectory(lib/NitroSDK)
+target_link_libraries(main PUBLIC card)
+
+add_subdirectory(lib/libVCT)
 target_link_libraries(
     main PUBLIC
-    card
+    libvct
+)
+
+target_link_libraries(
+    main PUBLIC
     cp
     ctrdg
     dgt
@@ -238,7 +240,7 @@ add_custom_target(
 set_target_properties(main PROPERTIES LINK_DEPENDS main.lcf)
 set_target_properties(main PROPERTIES LINK_DEPENDS main.response)
 
-set(CRT0_OBJ "lib/NitroSDK/libraries/init/CMakeFiles/crt0.dir/src/crt0.c.obj")
+set(CRT0_OBJ "${CMAKE_CURRENT_SOURCE_DIR}/lib/NitroSDK/prebuilt/init/crt0.c.obj")
 
 # Pass main.lcf, main.response and crt0.obj to the linker
 target_link_options(main PRIVATE ${MAIN_LCF})

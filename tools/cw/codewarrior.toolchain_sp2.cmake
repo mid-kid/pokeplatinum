@@ -10,8 +10,8 @@ set(CW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/cw)
 set(toolchain_dir ${CMAKE_CURRENT_LIST_DIR})
 
 # Set mwccarm as the compiler and mwasmarm as the assembler
-set(CMAKE_C_COMPILER "${toolchain_dir}/mwccarm.exe")
-set(CMAKE_CXX_COMPILER "${toolchain_dir}/mwccarm.exe")
+set(CMAKE_C_COMPILER "${toolchain_dir}/mwccarm_sp2.exe")
+set(CMAKE_CXX_COMPILER "${toolchain_dir}/mwccarm_sp2.exe")
 set(CMAKE_ASM_COMPILER "${toolchain_dir}/mwasmarm.exe") 
 set(CMAKE_C_LINKER "${toolchain_dir}/mwldarm.exe")
 

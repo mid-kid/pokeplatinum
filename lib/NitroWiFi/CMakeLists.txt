@@ -19,11 +19,11 @@ endif()
 
 # OPTION: Build libraries from source instead
 # of using the prebuilt versions from 'prebuilt'
-option(BUILD_SOC         "Build libsoc.a"        ON)
-option(BUILD_STUBSMD5    "Build libdstubsmd5.a"  ON)
-option(BUILD_STUBSOC     "Build libstubsoc.a"    ON)
-option(BUILD_STUBSSSL    "Build libstubsssl.a"   ON)
-option(BUILD_WCM         "Build libwcm.a"        ON)
+option(BUILD_SOC         "Build libsoc.a"        OFF)
+option(BUILD_STUBSMD5    "Build libdstubsmd5.a"  OFF)
+option(BUILD_STUBSOC     "Build libstubsoc.a"    OFF)
+option(BUILD_STUBSSSL    "Build libstubsssl.a"   OFF)
+option(BUILD_WCM         "Build libwcm.a"        OFF)
 
 set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
 
@@ -57,7 +57,7 @@ include_directories(${NITROSDK_DIR}/include)
 set(OPT_FLAGS "-O4,p")
 set(PROC "arm946e")
 
-set(C_FLAGS "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath")
+set(C_FLAGS "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath -prefix nitro.mch")
 
 ## SDK-specific flags
 set(GF_FLAGS "-DPM_KEEP_ASSERTS -DSDK_CW_FORCE_EXPORT_SUPPORT -DSDK_TS -DSDK_4M -DSDK_ARM9 -DSDK_CW -DSDK_FINALROM -DNNS_FINALROM -D_NITRO")

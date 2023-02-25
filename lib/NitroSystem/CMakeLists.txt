@@ -19,12 +19,12 @@ endif()
 
 # OPTION: Build libraries from source instead
 # of using the prebuilt versions from 'prebuilt'
-option(BUILD_FND "Build libnnsfnd from source" ON)
-option(BUILD_G2D "Build libnnsg2d from source" ON)
-option(BUILD_G3D "Build libnnsg3d from source" ON)
-option(BUILD_GFD "Build libnnsgfd from source" ON)
-option(BUILD_MCS "Build libnnsmcs from source" ON)
-option(BUILD_SND "Build libnnssnd from source" ON)
+option(BUILD_FND "Build libnnsfnd from source" OFF)
+option(BUILD_G2D "Build libnnsg2d from source" OFF)
+option(BUILD_G3D "Build libnnsg3d from source" OFF)
+option(BUILD_GFD "Build libnnsgfd from source" OFF)
+option(BUILD_MCS "Build libnnsmcs from source" OFF)
+option(BUILD_SND "Build libnnssnd from source" OFF)
 
 set(PREBUILT_DIR ${CMAKE_CURRENT_LIST_DIR}/prebuilt)
 
@@ -56,7 +56,7 @@ include_directories(${NITROSDK_DIR}/include)
 # C flags
 set(OPT_FLAGS "-O4,p")
 set(PROC "arm946e")
-set(C_FLAGS "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath")
+set(C_FLAGS "${OPT_FLAGS} -proc ${PROC} -enum int -lang c99 -Cpp_exceptions off -gccext,on -msgstyle gcc -gccinc -ipa file -interworking -inline on,noauto -char signed -nosyspath -prefix nitro.mch")
 
 # SDK-specific flags
 set(GF_FLAGS "-DPM_KEEP_ASSERTS -DSDK_CW_FORCE_EXPORT_SUPPORT -DSDK_TS -DSDK_4M -DSDK_ARM9 -DSDK_CW -DSDK_FINALROM -DNNS_FINALROM -D_NITRO")
