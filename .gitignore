@@ -33,9 +33,7 @@ cmake-build-debug/
 # For decomp.me
 ctx.c
 
-*.lcf.template
 *.lcf
-*.response.template
 *.response
 
 # Working files
