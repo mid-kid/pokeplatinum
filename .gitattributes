@@ -15,9 +15,12 @@ Makefile text eol=lf
 *.lsf text eol=lf
 *.yml text eol=lf
 *.template text eol=lf
+*.csv text eol=lf
+CMakeLists.txt text eol=lf
 lib/msl/include/MSL_C/* text eol=lf
 
 *.bin binary
 
 *.h linguist-language=C
 *.inc linguist-language=Assembly
+CMakeLists.txt linguist-language=cmake
