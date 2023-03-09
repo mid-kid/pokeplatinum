@@ -1,12 +1,6 @@
 # Object files
 *.nds
 
-# Compilers
-tools/mwccarm/**
-
-# SDK
-tools/bin/**
-
 # Build folder
 build/**
 sub/build/**
@@ -20,6 +14,8 @@ cmake-build-debug/
 
 # Tool executables
 *.exe
+!tools/cw/**
+!tools/maketools/**
 
 # Generated files
 *.4bpp
